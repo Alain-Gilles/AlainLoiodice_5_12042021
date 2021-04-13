@@ -1,0 +1,36 @@
+/**,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    background: $color-fondblanc;
+    max-width: 1590px;
+    min-width: 299px;
+    width:100%;
+    margin:auto;
+}
+
+.wrapper {
+    width:100%;
+    margin:0 auto;
+}*/
+/*img {
+    max-width: 100%;
+    height: auto;
+}*/
+.logo {
+  width: 20%;
+}
+
+/*       */
+
+/*# sourceMappingURL=style.css.map */
