@@ -1,7 +1,12 @@
+//
+// Fonction de creation de noeud
+//
 function createNode(element) {
     return document.createElement(element);
 }
-
+//
+// Ajout d'un enfant a parent
+//
 function append(parent, el) {
   return parent.appendChild(el);
 }
@@ -36,6 +41,9 @@ request.onreadystatechange = function() {
               let divcardbody = createNode('div')
               divcardbody.classList.add("card-body")
               append(divcol7, divcardbody)
+              let _id = produit._id
+              console.log(_id)
+              console.log(produit.name)
               let h5cardtitle = createNode('h5')
               h5cardtitle.classList.add("card-title")
               h5cardtitle.textContent += produit.name
@@ -45,19 +53,24 @@ request.onreadystatechange = function() {
               pcardtexte.textContent += produit.description
               append(divcardbody, pcardtexte)
               let prix = parseFloat(produit.price);
-              console.log(prix)
               prix = prix / 100
-              console.log(prix)
               let alien = createNode('a')
-              alien.classList.add("btn", "btn-primary", "stretched-link")
+              // creation de l'adresse du lien incluant le passge de parametre dans l'url 
+              // chaque parametre est constitué d'un couple constitué d'un nom et d'une clé
+              // apres adresse on rajoute un ? suivit des parametres
+              // s'il y a plusieurs parametres il faut les séparer par &
+              let appelclick = 'produit.html?_id='+_id+'&'+'name='+produit.name
+              alien.href = appelclick
+              alien.classList.add("btn", "btn-primary", "stretched-link", "btnlienart")
               alien.textContent += "Lien vers...." 
               append(divcardbody, alien)
-              })
-        
+            }
+        )
     }
 };
 request.open("GET", url);
 request.send();
+
 
 // version avec utilisation de Fetch
 //
