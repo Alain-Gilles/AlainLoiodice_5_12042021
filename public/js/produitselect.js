@@ -225,8 +225,8 @@ request.onreadystatechange = function() {
                 //
                 // vérification de la présence de la clé "article" dans local storage
                 // si la clé article est presente dans le local storage alors
-                //    on creait un tableau storage_article qui va contenir le tableau des articles présent dans le
-                //    localstorage JSON.parse tranform en JS le contenu récupéré dans le local storage
+                //    on creait un tableau storage_article qui va contenir les articles présents dans le
+                //    localstorage (JSON.parse tranforme les données en données JS) 
                 //    on récupère l'indice du tableau (sachant que le tableau commence à index 0, on aura pas besoin
                 //    d'incrémenter l'index pour créer un nouvel élément dans le tableau)
                 //    Création du nouvel article par appel de la fonction const_article
@@ -254,6 +254,7 @@ request.onreadystatechange = function() {
                     storage_article[indice_article]= newarticle;
                     localStorage.setItem("article",JSON.stringify(storage_article));
                 }
+                alert("L'article a été ajouté")
                 //localStorage.setItem("article",JSON.stringify(storage_article));
                 // const prodselection = {
                 //     idart: _id,
