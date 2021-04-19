@@ -63,7 +63,6 @@ request.onreadystatechange = function() {
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
         var response = JSON.parse(this.responseText);
         let listproduits = response;
-        console.log(listproduits);
         //
         // methode map() pour chaque indice du tableau listproduit, execution de la fonction avec en parametre le contenu indicé du tableau
         // produit.name produit.imageUrl produit.price ...
@@ -114,8 +113,6 @@ request.onreadystatechange = function() {
               // recuperation de id produit (cle du produit)
               //
               let _id = produit._id;
-              console.log(_id);
-              console.log(produit.name);
               //
               // <h5 class="card-title">produit.name</h5>
               //
