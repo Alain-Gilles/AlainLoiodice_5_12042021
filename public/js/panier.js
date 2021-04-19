@@ -9,6 +9,22 @@ function append(parent, el) {
 
 const section = document.getElementById('lpanier');
 
+document.getElementById("razbtn").addEventListener("click", function() {    
+    if ("article" in localStorage) {
+        //
+        // supression de la cle dans le local storage
+        //
+         localStorage.removeItem("article");
+        //
+        // supression des enfants de section id lpanier dans le code html (supression des cartes de produit affichées)
+        //
+        var element = document.getElementById("lpanier");
+        while (element.parentNode) {
+            this.nodeName.parentNode.removeChild(node);
+        }
+    }
+});
+
 if ("article" in localStorage) {
     var storage_article=new Array();
     storage_article=JSON.parse(localStorage.getItem('article'));
@@ -98,7 +114,6 @@ if ("article" in localStorage) {
         //
         //
     }
-//
 } else {
     let carddiv = createNode('div');
     append(section, carddiv);
