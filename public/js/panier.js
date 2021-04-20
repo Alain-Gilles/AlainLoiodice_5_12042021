@@ -8,7 +8,15 @@ function append(parent, el) {
 }
 
 const section = document.getElementById('lpanier');
-
+//
+// Si clic sur le bouton suppression du panier
+// vérificaction qu'il y a une cle article dans la local storage
+// si c'est le cas on supprime la clé
+// et on supprime le contenu de la page html compris entre les balises <section id=lpanier></section>
+// Suppression de tous les enfants d'un élément en locurence tous les enfants de section lpanier
+// Dans tous les cas appel de la fonction majpagehtml qui créera le code html pour afficher
+// le message Il n'y a pas d'articles dans le panier
+//
 document.getElementById("razbtn").addEventListener("click", function() {    
     if ("article" in localStorage) {
         //
@@ -19,12 +27,29 @@ document.getElementById("razbtn").addEventListener("click", function() {
         // supression des enfants de section id lpanier dans le code html (supression des cartes de produit affichées)
         //
         var element = document.getElementById("lpanier");
-        while (element.parentNode) {
-            this.nodeName.parentNode.removeChild(node);
-        }
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
     }
+    //
+    // appel de la fonction majpagehtml qui créera le code html pour afficher
+    // le message Il n'y a pas d'articles dans le panier
+    //
+    majpagehtml()
 });
 
+function majpagehtml() {
+//
+// Test s'il y a une clé article dans la local storage
+//
+// Si c'est le cas on creait une nouveau tableu vide dans storage_article
+// et ce tableau est rempli avec le contenu du tableau article de la local storage (ce contenu est transformé en code JS 
+// grace à la fonction JSON.parse)
+//
+// Ensuite on fait une boucle de lecture du tableau localStorage (la valeur de l'indice du tableau est récupérée par
+// storage_article.length)
+// Pour chaque élément on créait les élement html dans le DOM en utilisant les fonctions createNode et append
+//
 if ("article" in localStorage) {
     var storage_article=new Array();
     storage_article=JSON.parse(localStorage.getItem('article'));
@@ -114,6 +139,10 @@ if ("article" in localStorage) {
         //
         //
     }
+//
+// Il n'y avait pas de cle article dans la local storage
+// on créait dans le dom html le message il n'y a pas d'articles dans le panier
+//    
 } else {
     let carddiv = createNode('div');
     append(section, carddiv);
@@ -124,3 +153,14 @@ if ("article" in localStorage) {
 
    
 }
+
+}
+
+//
+//
+// appel de la fonction pour mettre à jour le code html
+// soit avec les cartes produits presentes dans la local storage
+// soit avec le message Il n'y a pas d'articles dans le panier
+//
+
+majpagehtml()
