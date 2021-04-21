@@ -63,6 +63,7 @@ request.onreadystatechange = function() {
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
         var response = JSON.parse(this.responseText);
         let listproduits = response;
+        console.log(listproduits);
         //
         // methode map() pour chaque indice du tableau listproduit, execution de la fonction avec en parametre le contenu indicé du tableau
         // produit.name produit.imageUrl produit.price ...
@@ -141,6 +142,7 @@ request.onreadystatechange = function() {
               // apres adresse on rajoute un ? suivit des parametres
               // s'il y a plusieurs parametres il faut les séparer par &
               let appelclick = 'produit.html?_id='+_id+'&'+'name='+produit.name;
+              console.log(appelclick);
               alien.href = appelclick;
               alien.classList.add("btn", "btn-primary", "stretched-link", "btnlienart");
               alien.textContent += "Lien vers...."; 

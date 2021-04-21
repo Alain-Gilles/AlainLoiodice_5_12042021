@@ -47,7 +47,7 @@ let nomproduit = params.get('name');
 //
 const url = 'http://localhost:3000/api/furniture'+'/'+idproduit;
 const section = document.getElementById('ficheproduits');
-
+console.log(url);
 //
 //
 var request = new XMLHttpRequest();
@@ -190,7 +190,7 @@ request.onreadystatechange = function() {
                 append(createcard, cardoption); 
             }
             //
-            // si click sur selection
+            // si click sur selection couleur récupéartion de l'option choisie par défaut option = listprodopt[0]
             //
             let _opt;
             _opt=liste;
@@ -198,10 +198,51 @@ request.onreadystatechange = function() {
                 liste=document.getElementById("optionform");
                 texte=liste.options[optionform.selectedIndex].text;
                 _opt=texte;
+                console.log(_opt);
             });
+            //
+            // creation de la liste de choix pour la qte produit
+            //
+            //
+            // <form></form>
+            //
+            let cardformqte = createNode('form');
+            append(divcardbody, cardformqte);
+            //
+            // <label for="optionqte" class="mr-2">Choisir une quantité : </label>
+            //
+            let cardlabelqte = createNode('label');
+            cardlabelqte.htmlFor +='optionqte';
+            cardlabelqte.textContent='Choisir une quantité : ';
+            cardlabelqte.classList.add("mr-2"); 
+            append(cardformqte, cardlabelqte);
 
-
-
+            //
+            // <select name="optionform" id="optionform" size="1"></select>
+            //
+            let cardselectqte = createNode('select');
+            createcardqte = cardselectqte;
+            cardselectqte.name += 'optionqte';
+            cardselectqte.id +='optionqte';
+            cardselectqte.size += '1';
+            append(cardformqte, cardselectqte);
+            for (let pas = 0; pas < 9; pas++){ 
+                let cardoptionqte = createNode('option');
+                cardoptionqte.textContent += pas+1;
+                append(createcardqte, cardoptionqte); 
+            }
+             //
+            // si click sur selection qte récupération de l'option choisie par défaut qte = 1
+            //
+            let _optqte;
+            _optqte=1;
+            document.getElementById("optionqte").addEventListener("click", function() {
+                listeqte=document.getElementById("optionqte");
+                texteqte=listeqte.options[optionqte.selectedIndex].text;
+                _optqte=texteqte;
+                _optqte=parseInt(_optqte);
+                console.log(_optqte);
+            });
             //
             // Creation du bouton ajouter au panier
             // <button id="btn-panier" type="submit" name="btn-panier" class="mt-5">Ajouter au panier</button>
@@ -238,7 +279,7 @@ request.onreadystatechange = function() {
                      var storage_article=new Array();
                      storage_article=JSON.parse(localStorage.getItem('article'));
                      indice_article=storage_article.length;
-                     newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,"1");
+                     newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,_optqte);
                      storage_article[indice_article]= newarticle;
                      localStorage.setItem("article",JSON.stringify(storage_article));
                 //
@@ -250,10 +291,12 @@ request.onreadystatechange = function() {
                 } else {
                     indice_article=0;
                     var storage_article=new Array();
-                    var newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,1);
+                    var newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,_optqte);
                     storage_article[indice_article]= newarticle;
                     localStorage.setItem("article",JSON.stringify(storage_article));
                 }
+                console.log(newarticle);
+                console.log(indice_article);
                 alert("L'article a été ajouté")
                 //localStorage.setItem("article",JSON.stringify(storage_article));
                 // const prodselection = {
