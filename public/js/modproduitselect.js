@@ -190,7 +190,7 @@ request.onreadystatechange = function() {
                 append(createcard, cardoption); 
             }
             //
-            // si click sur selection couleur récupéartion de l'option choisie par défaut option = listprodopt[0]
+            // si click sur selection couleur récupération de l'option choisie par défaut option = listprodopt[0]
             //
             let _opt;
             _opt=liste;
@@ -276,47 +276,59 @@ request.onreadystatechange = function() {
                 //    
                 //
                 if ("article" in localStorage) {
-                    console.log("article dans local storage");
                      var storage_article=new Array();
-                     var creation = true;
                      storage_article=JSON.parse(localStorage.getItem('article'));
-                     indice_article=storage_article.length;
-                     console.log(indice_article);
-
-                    //
-                    for (var i =0; i < indice_article; i++) {
-                        console.log("storage_article[i].id",storage_article[i].id,"id",_id)
-                        if (storage_article[i].id == _id) {
-                            console.log("article existant maj qte");
-                            storage_article[i].qte = storage_article[i].qte + _optqte;
-                            creation=false;
-                            localStorage.setItem("article",JSON.stringify(storage_article));
-                            break
-                        }
-                    }
-                    //
-                    console.log("creation:",creation);
-                    if (creation) { 
-                        console.log("article dans local storage mais id inexistant => creation article");
+                     //
+                     // si l'id du produit existe deja dans la localstorage, il faut ajouter la qua,tité saisie à la qte présente 
+                     // sinon on creait l'article
+                     //
+                     if (storage_article[_id]) {
+                         let qtecal = parsInt(storage_article[_id].qte);
+                         qtecal = qtecal + parsInt(_optqte);
+                         storage_article[_id].qte=qtecal;
+                         localStorage.setItem("article",JSON.stringify(storage_article));
+                     } 
+                     else {
                         newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,_optqte);
-                        storage_article[indice_article]= newarticle;
+                        storage_article[_id]=newarticle;
                         localStorage.setItem("article",JSON.stringify(storage_article));
-                    }
-                    //
-                    // s'il n'y a pas de clé "article" dans le localStorage alors création de la clé avec comme index 0
-                    // creation de l'article newarticle par appel de la fonctionconst_article
-                    // mise à jour du tableau storage_article pour l'index 0 avec l'article que l'on vient de créer
-                    // mise à jour de la localStorage
-                    //
-                    } else {
-                        indice_article=0;
-                        var storage_article=new Array();
-                        var newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,_optqte);
-                        storage_article[indice_article]= newarticle;
-                        localStorage.setItem("article",JSON.stringify(storage_article));
-                    }
-                console.log(newarticle);
-                console.log(indice_article);
+                     };
+
+
+                    //  console.log(storage_article);
+                    //  indice_article=storage_article.length;
+                    //  newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,_optqte);
+                    //  storage_article[indice_article]= newarticle;
+                    //  localStorage.setItem("article",JSON.stringify(storage_article));
+
+                //
+                // s'il n'y a pas de clé "article" dans le localStorage alors création de la clé avec comme index 0
+                // creation de l'article newarticle par appel de la fonctionconst_article
+                // mise à jour du tableau storage_article pour l'index 0 avec l'article que l'on vient de créer
+                // mise à jour de la localStorage
+                //
+                } else {
+
+                    var storage_article=new Array();
+                    var newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,_optqte);
+                    storage_article[_id]=newarticle;
+                    console.log(newarticle);
+                    console.log( storage_article[_id]);
+                    console.log(storage_article);
+                    var aa = JSON.stringify(storage_article);
+                    console.log(aa);
+
+                    // indice_article=0;
+                    // var storage_article=new Array();
+                    // var newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,_optqte);
+                    // storage_article[indice_article]= newarticle;
+                    // localStorage.setItem("article",JSON.stringify(storage_article));
+                    localStorage.setItem("article",JSON.stringify(storage_article));
+                    storage_article=JSON.parse(localStorage.getItem('article'));
+                    console.log(storage_article);
+                    
+                }
+               
                 alert("L'article a été ajouté")
                 //localStorage.setItem("article",JSON.stringify(storage_article));
                 // const prodselection = {
@@ -329,7 +341,7 @@ request.onreadystatechange = function() {
                 // }
                 // console.log(prodselection);
                 // localStorage.setItem("article",JSON.stringify(prodselection));
-            });
+              });
         }      
     }
 

@@ -96,7 +96,8 @@ request.onreadystatechange = function() {
               //
               let image = createNode('img');  
               image.src = produit.imageUrl;
-              image.classList.add("card-img-top", "h-100");
+              //image.classList.add("card-img-top", "h-100");//
+              image.classList.add("card-img-top","h-100");
               append(divcol5, image);    
               //
               // <div class="col-md-7"></div>
