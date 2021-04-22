@@ -90,28 +90,8 @@ async function loadParamApi (url) {
 // la réussite de l'appel et la méthode catch pour gérer l'échec.
 // 
 loadParamApi(url).then(reponse => {
-    //
     // On reçoit une réponse
-    // 
-    // La réponse est un array contenant cinq éléments
-    // 0: {varnish: Array(4), _id: "5be9cc611c9d440000c1421e", name: "Cross Table", price: 59900, description: "Lorem ipsum dolor ...", …}
-    // 1: {varnish: Array(2), _id: "5beaadda1c9d440000a57d98", name: "Coffee Table", price: 89900, description: "Lorem ipsum dolor ...", …}
-    // 2: {varnish: Array(3), _id: "5beaae361c9d440000a57d99", name: "Dining Table (extendable)", price: 109900, imageUrl: "http://localhost:3000/images/oak_3.jpg", …}
-    // 3: {varnish: Array(2), _id: "5beaaf2e1c9d440000a57d9a", name: "Bench", price: 39900, description: "Lorem ipsum dolor sit amet, consectetur adipisicin…mpor ...", …}
-    // 4: {varnish: Array(2), _id: "5beab2061c9d440000a57d9b", name: "Vintage Chair", price: 79900, description: "Lorem ipsum dolor sit amet, consectetur adipisicin….", …}
-    //
-    // Exemple détail élément 0
-    // description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    // imageUrl: "http://localhost:3000/images/oak_1.jpg"
-    // name: "Cross Table"
-    // price: 59900
-    // varnish: (4) ["Tan", "Chocolate", "Black", "White"]
-    // _id: "5be9cc611c9d440000c1421e"
-    //
-    // La méthode JSON.parse() analyse une chaîne de caractères JSON et construit
-    // la valeur JavaScript ou l'objet décrit par cette chaîne.
-    // on met la reponse parse dans listproduit et on traite la réponse 
-    //
+    //let listparam = JSON.parse(reponse)
     console.log('url :', url);
     console.info('url chargée !');
     console.log(reponse);
@@ -203,6 +183,9 @@ loadParamApi(url).then(reponse => {
 
     //////////////////////////////////////////
     /////////////////////////////////////////
+
+
+
 })
 .catch(erreur => {
     // On traite l'erreur
