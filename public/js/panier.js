@@ -137,6 +137,12 @@ if ("article" in localStorage) {
         pcardqte.textContent += 'Qte : '+qte;
         append(divcardbody, pcardqte);
         //
+        // On affiche le bouton vider le panier
+        //
+        let PositDivBtnPanier = document.getElementById("BtnVidePanier");
+        PositDivBtnPanier.classList.remove("d-none");
+        PositDivBtnPanier.classList.add("d-flex");
+         
         //
     }
 //
@@ -150,7 +156,13 @@ if ("article" in localStorage) {
     cardp.classList.add("text-center", "font-weight-bold", "text-warning");
     cardp.textContent += "Il n'y a pas d'articles dans le panier";
     append(carddiv, cardp);
-
+    //
+    // On cache le bouton vider le panier
+    //
+    PositDivBtnPanier = document.getElementById("BtnVidePanier");
+    PositDivBtnPanier.classList.remove("d-flex");
+    PositDivBtnPanier.classList.add("d-none");
+     
    
 }
 
