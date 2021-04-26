@@ -50,14 +50,14 @@ async function loadParamApi (url) {
                 //
                 if(request.status == 200){
                     //
-                    // On résoud la promesse et on renvoie la réponse
+                    // On résous la promesse et on renvoie la réponse
                     //
                     //var reponse = JSON.parse(this.responseText);
                     //console.log(reponse);
                     resolve(request.responseText);
                 }else{
                     //
-                    // On résoud la promesse et on envoie l'erreur
+                    // On résous la promesse et on envoie l'erreur
                     //
                     reject(request);
                 }
