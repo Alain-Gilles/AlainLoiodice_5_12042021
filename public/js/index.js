@@ -197,7 +197,7 @@ loadParamApi(url).then(reponse => {
         console.log(appelclick);
         alien.href = appelclick;
         alien.classList.add("btn", "btn-primary", "stretched-link", "btnlienart");
-        alien.textContent += "Lien vers...."; 
+        alien.textContent += "Détail produit...."; 
         append(divcardbody, alien);
       })
 
