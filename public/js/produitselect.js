@@ -9,7 +9,7 @@ let premier = true;
 let createcard;
 let liste, texte;
 //
-// fonction qui construit un article
+// fonction qui construit un objet article
 //
 function const_article(a_id,a_nom,a_descriptif,a_prix,a_img,a_opt,a_qte) {
     this.id=a_id;
@@ -51,6 +51,7 @@ let nomproduit = params.get('name');
 // constitution de l'adresse url contenant en parametre l'id du produit
 //
 const url = 'http://localhost:3000/api/furniture'+'/'+idproduit;
+// constante section point ancrage dans le DOM du code qui sera généré <section id="ficheproduits">.......</section>
 const section = document.getElementById('ficheproduits');
 //
 // cette fonction effectue un appel Ajax vers une URL d'une API
@@ -135,6 +136,76 @@ loadParamApi(url).then(reponse => {
     let selectproduit = JSON.parse(reponse);
     console.log('selectproduit',selectproduit);
     //
+    // On génère dans le DOM le code suivant
+    //
+    // <div class="card w-75 mx-auto mt-5">  (card boostrap)  (width 75% de son parent)  (marge mx-auto permet de centrer horizontalement) (mt-5 margin top 5 ) 
+    //   <div class="row no-gutters">        (création d'une ligne row sans goutières)
+    //     <div class="col-md-5">            (création d'une colonne md-5 de largeur 5 sur 12 colonnes possibles pour les écrans Médium dont la largeur est >= 768px )
+    //       <img src="http://localhost:3000/images/oak_1.jpg" class="card-img-top h-100">  (ajout d'une image placée image en haut de la carte image avec height 100% )
+    //     </div>
+    //     <div class="col-md-7">            (création d'une colonne md-7 de largeur 7 sur 12 colonnes possibles pour les écrans Médium dont la largeur est >= 768px )
+    //                                       l'affichage des 12 colonnes 5+7 se faira sur une ligne à partir écran de 768px sinon col5 sera sur une ligne et col7 sur une autre ligne
+    //        <div class="card-body">        création du corps de la card
+    //            <h5 class="card-title">CrossTable</h5>    (création du titre de la carte)  
+    //            <p class="card-text"> 
+    //                 "Lorem ipsum dolor sit amet, consectetur....."
+    //            </p>
+    //            <p class="card-text">Prix : 599€</p>
+    //            <form>
+    //              <label for="optionform" class="mr-2">Choisir une option : </label>         (mr margin right)
+    //              <select name="optionform" id="optionform" size="1">
+    //                 <option>Tan</option>
+    //                 <option>Chocolate</option>
+    //                 <option>Black</option>
+    //                 <option>White</option>
+    //              </select>
+    //            </form>
+    //            <form>
+    //              <label for="optionqte" class="mr-2">Choisir une quantité : </label>
+    //              <select name="optionqte" id="optionqte" size="1">   (size="1" affiche une fenetre avec un attribut et selection des autres attributs en appuyant sur la fleche de selection)
+    //                 <option>1</option>
+    //                 <option>2</option>
+    //                 <option>3</option>
+    //                 <option>4</option>
+    //                 <option>5</option>
+    //                 <option>6</option>
+    //                 <option>7</option>
+    //                 <option>8</option>
+    //                 <option>9</option>
+    //              </select>
+    //            </form>
+    //            <button type="button" class="mt-5 btn btn-primary" id="btn-panier" data-toggle="modal" data-target="#BtnFenetreModal">Ajouter au panier</button>
+    //            <div class="modal fade" id="BtnFenetreModal" tabindex="-1" aria-labelledby="BtnFenetreModalLabel" style="display: none;" aria-hidden="true">
+    //              <div class="modal-dialog" role="document">
+    //                <div class="modal-content">
+    //                   <div class="modal-header">
+    //                      <h5 class="modal-title" id="BtnFenetreModalLabel">Confirmation Ajout au panier</h5>
+    //                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    //                        <span aria-hidden="true">$times</span>
+    //                      </button>
+    //                   </div>
+    //                   <div class="modal-body" id="ConfirmProdQte">
+    //                      <p id="ConfirmAjout">Confirmez l'ajout Cross Table au panier.</p>
+    //                      <p>Quantité à ajouter au panier : 2</p>
+    //                   </div>
+    //                   <div class="modal-footer">
+    //                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Abandon</button>
+    //                      <button type="button" class="btn btn-secondary" id="BtnClick" data-dismiss="modal">Confirmation</button>
+    //                   </div>
+    //                </div>
+    //              </div>
+    //            </div>
+    //        </div>
+    //     </div>
+    //   <div
+    // </div>
+    //
+    // La creation des ligne de code à intégrer dans la dom suit le process suivant
+    // Création du noeud
+    // Ajout s'il y en a des listes de class
+    // Ajout s'il y en a des id, des attributs, du texte etc..
+    // Puis ajout du noeud enfant créée au noeud parent
+    //
     // <div class="card w-75 mx-auto mt-5"></div>
     //
     let divcard = createNode('div');
@@ -209,9 +280,9 @@ loadParamApi(url).then(reponse => {
     //
     let listprodopt = selectproduit.varnish;
     //
-    // boucle de parcour de la table listprodopt
-    // pour chaque élement
-    // avec un traitement particulier sur la premier élement
+    // boucle de parcour de la table listprodopt (contient la liste des options disponible pour le produit)
+    // pour chaque élement et création de la liste des options <option>Nom option</option>
+    // avec un traitement particulier sur la premier élement, création de la structure form, label, select
     //
     for (var i =0; i < listprodopt.length; i++) {
         if (premier) { 
@@ -252,7 +323,7 @@ loadParamApi(url).then(reponse => {
         append(createcard, cardoption); 
     }
     //
-    // si click sur selection couleur récupéartion de l'option choisie par défaut option = listprodopt[0]
+    // si click sur selection couleur récupération de l'option choisie par défaut option = listprodopt[0]
     //
     let _opt;
     _opt=liste;
@@ -263,7 +334,7 @@ loadParamApi(url).then(reponse => {
         console.log(_opt);
     });
     //
-    // creation de la liste de choix pour la qte produit
+    // creation de la liste de choix pour la qte produit posibilité de choisir une qte de 1 à 9, qte à 1 par défaut
     //
     //
     // <form></form>
@@ -306,11 +377,31 @@ loadParamApi(url).then(reponse => {
         console.log(_optqte);
         //
         // Mise à jour de la qte dans la qte affichée dans la fenetre modale
+        // dans le cas ou il y a un click sur l'otion qte de maniere à afficher
+        // la bonne qte dans la fenetre (il faut donc réécrire la ligne suivant de DOM
+        // <p id="ConfirmAjoutQte">Quantité à ajouter au panier :${_optqte}</p> pour
+        // la nouvelle qte soit prise en compte. Nouveau contenu de la variable _optqte)
         //
-         var QteAModifier = document.getElementById("ConfirmAjoutQte");
-         console.log("QteAModifier",QteAModifier);
-         QteAModifier.textContent.replace=`Quantité à ajouter au panier :${_optqte}`;
-
+        // On recupère le noeud parent <div class="modal-body" id="ConfirmProdQTe">
+        //
+        const ParentItemAModifier = document.getElementById("ConfirmProdQTe");
+        //
+        // On recupere dans EnfantItemAModifier le second enfant du noeud parent 
+        // <p id="ConfirmAjoutQte">Quantité à ajouter au panier :${_optqte}</p>
+        //
+        const EnfantItemAModifier = ParentItemAModifier.children[1];
+        //
+        // On creait un nouvel élément 'p' vide
+        //
+        const textNodeAModifier = document.createElement("p");
+        //
+        //  Dans cet élement que l'on vient de créait on ajoute le contenu du texte que l'on veut afficher
+        //
+        textNodeAModifier.textContent =  `Quantité à ajouter au panier :${_optqte}`;
+        //
+        // On remplace le premier enfant du noeud parent par le nouvel élément créée
+        //
+        ParentItemAModifier.replaceChild(textNodeAModifier, EnfantItemAModifier)
 
        // PConfirmAjoutcardbtn.textContent+='Ajouter au panier';
     });
@@ -330,6 +421,7 @@ loadParamApi(url).then(reponse => {
     //
     // Création de la fenètre modale
     // <div class="modal fade" id="BtnFenetreModal" tabindex="-1" role="dialog" aria-labelledby="BtnFenetreModalLabel" aria-hidden="true">
+    //
     var divClassModalFade = createNode('div');
     divClassModalFade.classList.add("modal", "fade");
     divClassModalFade.id='BtnFenetreModal';
@@ -379,7 +471,7 @@ loadParamApi(url).then(reponse => {
     //
     var ModalSpanAriaHidden = createNode('span');
     ModalSpanAriaHidden.setAttribute('aria-hidden','true');
-    ModalSpanAriaHidden.textContent='&times';
+    ModalSpanAriaHidden.textContent='X';
     append(ModalButtonTitle, ModalSpanAriaHidden);
     //
     // <div class="modal-body" id="ConfirmProdQTe">
@@ -457,6 +549,7 @@ loadParamApi(url).then(reponse => {
     // `;
 
     // positionDivBouton.innerHTML = structureBouton;
+    // positionDivBouton.insertAdjacentHTML('afterbegin',structureBouton);
 
 
 
