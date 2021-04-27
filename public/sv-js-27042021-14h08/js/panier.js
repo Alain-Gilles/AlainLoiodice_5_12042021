@@ -1,16 +1,11 @@
-//
-// Ajout qte de une unite , mise a jour de la local storage et reaffichage de la page
-// E parametre id produit, nom, svi (indice de l'article selectionné dans le tableau), qte , et le tableau contenant le local storage article
-//
-function ajoutqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
-    console.log("id",id,"nom",nomprod,"idbtn",idbtn,"i",i,"qt",qte,"prix",prix,"svi",svi,"storage_article",storage_article);
-    console.log("ajout qte");
-    console.log("storage_article",storage_article);
-    storage_article[svi].qte++;
-    localStorage.setItem('article',JSON.stringify(storage_article));
-    location.reload();
-};
 
+// function createNode(element) {
+//     return document.createElement(element);
+// }
+
+// function append(parent, el) {
+//     return parent.appendChild(el);
+// }
 
 const section = document.getElementById('lpanier');
 //
@@ -64,7 +59,6 @@ if ("article" in localStorage) {
         //
         // <div class="card w-75 mx-auto mt-5"></div>
         //
-        let svindice = i;
         let divcard = createNode('div');
         divcard.classList.add("card","w-75","mx-auto","mt-5"); 
         append(section, divcard); 
@@ -143,52 +137,27 @@ if ("article" in localStorage) {
         pcardqte.textContent += 'Qte : '+qte;
         append(divcardbody, pcardqte);
         //
-        // Boutons augmenter la quantité, diminuer la quantité et supprimer 
+        // Boutons augmenter la quantité et diminuer la quantité
         //
-        // <button type="button" class="btn btn-primary" id="btnAjoutQte+ID"><span>+</span></button>
-        // id="btnAjoutQte+ID"  concaténation de btnAjoutQte + _id produit de façon à rendre l'id unique
+        // <button type="button" class="btn btn-primary" id="btnAjoutQte"><span>+</span></button>
         //
         const btnAjoutQP = createNode('button');
         btnAjoutQP.classList.add("btn","btn-primary");
-        let idBtn ="btnAjoutQte"+_id;
-        //btnAjoutQP.id='btnAjoutQte';//
-        btnAjoutQP.id=idBtn;
+        btnAjoutQP.id='btnAjoutQte';
         append(divcardbody, btnAjoutQP);
         const btnAjoutQPSpan = createNode('span');
         btnAjoutQPSpan.textContent += '+';
         append(btnAjoutQP,btnAjoutQPSpan);
         //
-        // detection du clic sur "+" ajouter qte
+        // <button type="button" class="btn btn-primary ml-2" id="btnMoinsQte"><span>-</span></button>
         //
-        document.getElementById(idBtn).addEventListener("click", function() {
-            ajoutqte(_id,_nomprod,idBtn,i,qte,prix,svindice,storage_article);
-        });
-        //
-        // <button type="button" class="btn btn-primary ml-2" id="btnMoinsQte+ID"><span>-</span></button>
-        //
-        const btnMoinsQP = createNode('button');
-        btnMoinsQP.classList.add("btn","btn-primary","ml-2");
-        idBtn = "btnMoinsQte"+_id;
-        //btnMoinsQP.id='btnMoinsQte';//
-        btnMoinsQP.id=idBtn;
-        append(divcardbody, btnMoinsQP);
-        const btnMoinsQPSpan = createNode('span');
-        btnMoinsQPSpan.textContent += '-';
-        append(btnMoinsQP,btnMoinsQPSpan);
-        //
-        // <button type="button" class="btn btn-danger ml-2" id="btnSupprQte+ID"><span>Supprimer</span></button>
-        //
-        const btnSupprQP = createNode('button');
-        btnSupprQP.classList.add("btn","btn-danger","ml-2");
-        idBtn = "btnSupprQte"+_id;
-        //btnSupprQP.id='btnSupprQte';
-        btnSupprQP.id=idBtn;
-        append(divcardbody, btnSupprQP);
-        const btnSupprQPSpan = createNode('span');
-        btnSupprQPSpan.textContent += 'Supprimer';
-        append(btnSupprQP,btnSupprQPSpan);
-
-
+        const btnAjoutQM = createNode('button');
+        btnAjoutQM.classList.add("btn","btn-primary","ml-2");
+        btnAjoutQM.id='btnMoinsQte';
+        append(divcardbody, btnAjoutQM);
+        const btnAjoutQMSpan = createNode('span');
+        btnAjoutQMSpan.textContent += '-';
+        append(btnAjoutQM,btnAjoutQMSpan);
         //
         // On affiche le bouton vider le panier on supprime la classe d-none et on ajoute la classe d-flex dans le div
         // <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">

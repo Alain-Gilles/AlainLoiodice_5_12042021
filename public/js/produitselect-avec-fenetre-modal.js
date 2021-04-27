@@ -50,14 +50,7 @@ loadParamApi(url,getpost).then(reponse => {
     // on met la reponse parse dans selectproduit et on traite la réponse 
     //
     let selectproduit = JSON.parse(reponse);
-
-    //
-    // Si présence d'un article dans la local storage
-    //
-    //
-    // Mise a jour indication panier dans entete page index affichage de " panier vide" ou de "achats à valider"
-    //
-    MajLibPanier(); 
+    console.log('selectproduit',selectproduit);
     //
     // On génère dans le DOM le code suivant
     //
@@ -97,7 +90,27 @@ loadParamApi(url,getpost).then(reponse => {
     //                 <option>9</option>
     //              </select>
     //            </form>
-    //            <button type="button" class="mt-5 btn btn-primary" id="BtnClick">Ajouter au panier</button>
+    //            <button type="button" class="mt-5 btn btn-primary" id="btn-panier" data-toggle="modal" data-target="#BtnFenetreModal">Ajouter au panier</button>
+    //            <div class="modal fade" id="BtnFenetreModal" tabindex="-1" aria-labelledby="BtnFenetreModalLabel" style="display: none;" aria-hidden="true">
+    //              <div class="modal-dialog" role="document">
+    //                <div class="modal-content">
+    //                   <div class="modal-header">
+    //                      <h5 class="modal-title" id="BtnFenetreModalLabel">Confirmation Ajout au panier</h5>
+    //                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    //                        <span aria-hidden="true">$times</span>
+    //                      </button>
+    //                   </div>
+    //                   <div class="modal-body" id="ConfirmProdQte">
+    //                      <p id="ConfirmAjout">Confirmez l'ajout Cross Table au panier.</p>
+    //                      <p>Quantité à ajouter au panier : 2</p>
+    //                   </div>
+    //                   <div class="modal-footer">
+    //                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Abandon</button>
+    //                      <button type="button" class="btn btn-secondary" id="BtnClick" data-dismiss="modal">Confirmation</button>
+    //                   </div>
+    //                </div>
+    //              </div>
+    //            </div>
     //        </div>
     //     </div>
     //   <div
@@ -237,7 +250,7 @@ loadParamApi(url,getpost).then(reponse => {
         console.log(_opt);
     });
     //
-    // creation de la liste de choix pour la qte produit possibilité de choisir une qte de 1 à 9, qte à 1 par défaut
+    // creation de la liste de choix pour la qte produit posibilité de choisir une qte de 1 à 9, qte à 1 par défaut
     //
     //
     // <form></form>
@@ -277,6 +290,7 @@ loadParamApi(url,getpost).then(reponse => {
         texteqte=listeqte.options[optionqte.selectedIndex].text;
         _optqte=texteqte;
         _optqte=parseInt(_optqte);
+        console.log(_optqte);
         //
         // Mise à jour de la qte dans la qte affichée dans la fenetre modale
         // dans le cas ou il y a un click sur l'otion qte de maniere à afficher
@@ -309,17 +323,160 @@ loadParamApi(url,getpost).then(reponse => {
     });
     //
     // Creation du bouton ajouter au panier
-    // <button type="button" class="btn btn-primary" id="BtnClick">Ajouter au panier</button>
+    // <button type="button" class="btn btn-primary" id="btn-panier" data-toggle="modal" data-target="#BtnFenetreModal">Launch demo modal</button>
     //
+    
     var cardbtn = createNode('button');  
     cardbtn.type='button';
     cardbtn.classList.add("mt-5","btn","btn-primary");
-    cardbtn.id='BtnClick';
+    cardbtn.id='btn-panier';
+    cardbtn.setAttribute('data-toggle','modal');
+    cardbtn.setAttribute('data-target','#BtnFenetreModal');
     cardbtn.textContent+='Ajouter au panier';
     append(divcardbody, cardbtn);
     //
+    // Création de la fenètre modale
+    // <div class="modal fade" id="BtnFenetreModal" tabindex="-1" role="dialog" aria-labelledby="BtnFenetreModalLabel" aria-hidden="true">
+    //
+    var divClassModalFade = createNode('div');
+    divClassModalFade.classList.add("modal", "fade");
+    divClassModalFade.id='BtnFenetreModal';
+    divClassModalFade.setAttribute('tabindex','-1');
+    divClassModalFade.setAttribute('role','dialog');
+    divClassModalFade.setAttribute('aria-labelledby','BtnFenetreModalLabel');
+    divClassModalFade.setAttribute('aria-hidden','true');
+    append(divcardbody,divClassModalFade);
+    //
+    // <div class="modal-dialog" role="document">
+    // 
+    var divClassModalDialog = createNode('div');
+    divClassModalDialog.classList.add("modal-dialog");
+    divClassModalDialog.setAttribute('role','document');
+    append(divClassModalFade,divClassModalDialog);
+    //
+    // <div class="modal-content">
+    //
+    var divClassModalContent = createNode('div');
+    divClassModalContent.classList.add("modal-content");
+    append(divClassModalDialog,divClassModalContent);
+    //
+    // <div class="modal-header">
+    //
+    var divClassModalHeader = createNode('div');
+    divClassModalHeader.classList.add("modal-header");
+    append(divClassModalContent,divClassModalHeader);
+    //
+    //  <h5 class="modal-title" id="BtnFenetreModalLabel">Confirmation Ajout au panier</h5>
+    //
+    var divClassModalTitle = createNode('h5');
+    divClassModalTitle.classList.add("modal-title");
+    divClassModalTitle.id+='BtnFenetreModalLabel';
+    divClassModalTitle.textContent='Confirmation Ajout au panier ';
+    append(divClassModalHeader,divClassModalTitle);
+    //
+    // <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    //
+    var ModalButtonTitle = createNode('button');  
+    ModalButtonTitle.type='button';
+    ModalButtonTitle.classList.add("close");
+    ModalButtonTitle.setAttribute('data-dismiss','modal');
+    ModalButtonTitle.setAttribute('aria-label','Close');
+    append(divClassModalHeader, ModalButtonTitle);
+    //
+    //  <span aria-hidden="true">&times;</span>
+    //
+    var ModalSpanAriaHidden = createNode('span');
+    ModalSpanAriaHidden.setAttribute('aria-hidden','true');
+    ModalSpanAriaHidden.textContent='X';
+    append(ModalButtonTitle, ModalSpanAriaHidden);
+    //
+    // <div class="modal-body" id="ConfirmProdQTe">
+    //
+    var Modalbody = createNode('div');
+    Modalbody.classList.add("modal-body");
+    Modalbody.id+='ConfirmProdQTe';
+    append(divClassModalContent, Modalbody);
+    //
+    // <p id="ConfirmAjout">Confirmez l'ajout ${_nomprod} au panier.</p>
+    //
+    var ModalConfirmAjout = createNode('p');
+    ModalConfirmAjout.id+='ConfirmAjout';
+    ModalConfirmAjout.textContent=`Confirmez l'ajout ${_nomprod} au panier.`;
+    append(Modalbody, ModalConfirmAjout);
+    //
+    // <p id="ConfirmAjoutQte">Quantité à ajouter au panier :<span>${_optqte}</span></p>
+    //
+    var ModalConfirmAjoutQte = createNode('p');
+    ModalConfirmAjoutQte.id+='ConfirmAjoutQte';
+    ModalConfirmAjoutQte.textContent=`Quantité à ajouter au panier :${_optqte}`;
+    append(Modalbody, ModalConfirmAjoutQte);
+    //
+    // <div class="modal-footer">
+    //
+    var Modalfooter = createNode('div');
+    Modalfooter.classList.add("modal-footer");
+    append(divClassModalContent, Modalfooter);
+    //
+    // <button type="button" class="btn btn-secondary" data-dismiss="modal">Abandon</button>
+    //
+    var ModalButtonFooterAbandon = createNode('button');  
+    ModalButtonFooterAbandon.type='button';
+    ModalButtonFooterAbandon.classList.add("btn","btn-secondary");
+    ModalButtonFooterAbandon.setAttribute('data-dismiss','modal');
+    ModalButtonFooterAbandon.textContent="Abandon";
+    append(Modalfooter, ModalButtonFooterAbandon);
+    //
+    // <button type="button" class="btn btn-primary" id="BtnClick" data-dismiss="modal">Confirmation</button>
+    //
+    var ModalButtonFooterConfirm = createNode('button');  
+    ModalButtonFooterConfirm.type='button';
+    ModalButtonFooterConfirm.classList.add("btn","btn-secondary");
+    ModalButtonFooterConfirm.id+='BtnClick';
+    ModalButtonFooterConfirm.setAttribute('data-dismiss','modal');
+    ModalButtonFooterConfirm.textContent="Confirmation";
+    append(Modalfooter, ModalButtonFooterConfirm);
+    //
+    // Ajout directement dans le code HTML du contenu de la constante structureBouton
+    // Remarque le caractere ` s'obtient en tapant ALTGR + 7 + espace  
+    //
+    // const positionDivBouton = document.getElementById('BtnFenetreModal');
+    // const structureBouton = `
+    
+    // <!-- Modal -->
+    //     <div class="modal-dialog" role="document">
+    //         <div class="modal-content">
+    //             <div class="modal-header">
+    //                 <h5 class="modal-title" id="BtnFenetreModalLabel">Confirmation Ajout au panier</h5>
+    //                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    //                     <span aria-hidden="true">&times;</span>
+    //                 </button>
+    //             </div>
+    //             <div class="modal-body" id="ConfirmProdQTe">
+    //                 <p id="ConfirmAjout">Confirmez l'ajout ${_nomprod} au panier.</p>
+    //                 <p id="ConfirmAjoutQte">Quantité à ajouter au panier :${_optqte}</p>
+    //                 ...
+    //             </div>
+    //             <div class="modal-footer">
+    //             <button type="button" class="btn btn-secondary" data-dismiss="modal">Abandon</button>
+    //             <button type="button" class="btn btn-primary" id="BtnClick" data-dismiss="modal">Confirmation</button>
+    //             </div>
+    //         </div>
+    //     </div>
+    // `;
+
+    // positionDivBouton.innerHTML = structureBouton;
+    // positionDivBouton.insertAdjacentHTML('afterbegin',structureBouton);
+
+
+
+    /////////
+    /////////
+
+
+    //
     // si click sur bouton ajouter au panier
     //
+    //document.getElementById("btn-panier").addEventListener("click", function() {
     document.getElementById("BtnClick").addEventListener("click", function() {
         console.log('traitement panier');
         //
@@ -343,7 +500,9 @@ loadParamApi(url,getpost).then(reponse => {
                 var creation = true;
                 storage_article=JSON.parse(localStorage.getItem('article'));
                 indice_article=storage_article.length;
+                console.log(indice_article);
 
+            //
             for (var i =0; i < indice_article; i++) {
                 console.log("storage_article[i].id",storage_article[i].id,"id",_id)
                 if (storage_article[i].id == _id) {
@@ -354,7 +513,7 @@ loadParamApi(url,getpost).then(reponse => {
                     break
                 }
             }
-            
+            //
             console.log("creation:",creation);
             if (creation) { 
                 console.log("article dans local storage mais id inexistant => creation article");
@@ -375,20 +534,31 @@ loadParamApi(url,getpost).then(reponse => {
                 storage_article[indice_article]= newarticle;
                 localStorage.setItem("article",JSON.stringify(storage_article));
             }
-        alert("L'article a été ajouté")
-        //
-        // ouvrir une URL
-        // window.location.href permet une redirection de la page en cours vers l’URL précisée en paramètre
-        // window.location.href="http://votre_url"
-        // par exemple si vous souhaitez que la redirection se fasse lorsque l’utilisateur clique sur une image, faites ceci :
-        // <img src='lien_vers_image' onClick=’window.location.href=”http://votre_url"'>
-        //
-        window.location.href="index.html";
-             
+        console.log(newarticle);
+        console.log(indice_article);
+        alert("L'article a été ajouté")//
+        
+        //localStorage.setItem("article",JSON.stringify(storage_article));
+        // const prodselection = {
+        //     idart: _id,
+        //     nomart: _nomprod,
+        //     descart: _decrprod,
+        //     prixart: prix,
+        //     imgart: _img,
+        //     optart: _opt
+        // }
+        // console.log(prodselection);
+        // localStorage.setItem("article",JSON.stringify(prodselection));
     });
 
+    //////////////////////////////////////////
+    //////////////////////////////////////////
 })
 .catch(erreur => {
     // On traite l'erreur
     console.log('erreur : ',erreur);
 })    
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+//
+//
