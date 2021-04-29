@@ -333,16 +333,16 @@ loadParamApi(url,getpost).then(reponse => {
         //    on récupère l'indice du tableau (sachant que le tableau commence à index 0, on aura pas besoin
         //    d'incrémenter l'index pour créer un nouvel élément dans le tableau)
         //    Création du nouvel article par appel de la fonction const_article
-        //    Mise à jour du tableau storage_article pour l'index indice_article avec les données de l'article créait
+        //    Mise à jour du tableau storage_article pour l'index indice_article avec les données de l'article créé
         //    et enfin mise à jour de la localstorage
         //    
         //
         if ("article" in localStorage) {
             console.log("article dans local storage");
-                var storage_article=new Array();
-                var creation = true;
-                storage_article=JSON.parse(localStorage.getItem('article'));
-                indice_article=storage_article.length;
+            var storage_article=new Array();
+            var creation = true;
+            storage_article=JSON.parse(localStorage.getItem('article'));
+            indice_article=storage_article.length;
 
             for (var i =0; i < indice_article; i++) {
                 console.log("storage_article[i].id",storage_article[i].id,"id",_id)
