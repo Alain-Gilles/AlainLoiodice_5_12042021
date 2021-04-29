@@ -1,6 +1,6 @@
 //
-// Ajout qte de une unite , mise a jour de la local storage et reaffichage de la page
-// E parametre id produit, nom, svi (indice de l'article selectionné dans le tableau), qte , et le tableau contenant le local storage article
+// Ajout qte de une unite dans storage_article indice par svi , mise a jour de la local storage et reaffichage de la page location.reload
+// En parametre id produit, nom, svi (indice de l'article selectionné dans le tableau), qte , et le tableau contenant le local storage article
 //
 function ajoutqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
     console.log("id",id,"nom",nomprod,"idbtn",idbtn,"i",i,"qt",qte,"prix",prix,"svi",svi,"storage_article",storage_article);
@@ -158,7 +158,9 @@ if ("article" in localStorage) {
         btnAjoutQPSpan.textContent += '+';
         append(btnAjoutQP,btnAjoutQPSpan);
         //
-        // detection du clic sur "+" ajouter qte
+        // detection du clic sur "+" => ajouter 1 dans qte
+        // appel fonction ajoutqte avec parametre id, nomprod, #id html, svindice sauv de indice de parcours du tableau des storage_article
+        // tableau storage_article
         //
         document.getElementById(idBtn).addEventListener("click", function() {
             ajoutqte(_id,_nomprod,idBtn,i,qte,prix,svindice,storage_article);
