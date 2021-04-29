@@ -113,28 +113,34 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
                 var it=0;
                 //storage_article=JSON.parse(localStorage.getItem('article'));
                 indice_article=storage_article.length;
-                console.log("indice_article",indice_article);
                 //
-                // Plusieurs articles dont article à supprimer car qte égal à 1
+                // Plusieurs articles dans local storage dont l'article à supprimer car qte égal à 1 (soit 0 après avoir diminuer la qte de 1)
                 //
                 if (indice_article>1) {
-                     console.log("storage_newarticle",storage_newarticle,"createNewArticle",createNewArticle,"indice_article",indice_article)
+                    //
+                    // on parcours le tableau storgae_article de indice 0 jusqu'au dernier indice (storage_article.length)
+                    // si id du tableau est différent id de l'article dont on veut diminuer la qte alors on copie l'article dans 
+                    // storage_article. 
+                    // En fait on créait un nouveau tableau qui part de indice 0 et qui va contenir tous les articles présent dans
+                    // storage_article sauf l'article qui est égale à l'ID à supprimer.
+                    //
                      for (var i =0; i < indice_article; i++) {
-                         console.log("storage_article[i].id",storage_article[i].id,"i",i,"id",id)
                          if (storage_article[i].id != id) {
                              storage_newarticle[it] = storage_article[i];
                              it++;
                              createNewArticle = true;
                             }
                         }
-                     console.log("createNewArticle",createNewArticle);
-                     console.log("storage_newarticle",storage_newarticle);
+                    //
+                    // Si on a écrit au moins un article dans storage_newarticle, on supprime la cle article de la local storage
+                    // on recréait une clé article avec storage_newarticle
+                    //
                      if (createNewArticle) {
                         localStorage.removeItem("article");
                         localStorage.setItem("article",JSON.stringify(storage_newarticle)); 
-                            //
-                            //  supression des enfants de section id lpanier dans le code htmlet appel de majpagehtml() pour recharger la page
-                            //
+                        //
+                        //  supression des enfants de section id lpanier dans le code html et appel de majpagehtml() pour recharger la page
+                        //
                         var element = document.getElementById("lpanier");
                         while (element.firstChild) {
                             element.removeChild(element.firstChild);
@@ -168,13 +174,24 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
 }
 //////////////////////////////////////////////////////////////////////////////////////
 //
-// Suppression de la carte Article si Bouton supprimer 
+// Suppression de la carte Article si Bouton supprimer  
 //
 function supprCartArt(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
+    // 
+    // Appel de la fonction supprqte en lui passant en paramètre 1 comme qte de l'article qui doit-etre supprimé
+    // de cette façon la fonction supprqte considèrera que quelque soit la quantité réelle de l'article devant être supprimé
+    // cette qte devra être traitée comme si elle était égale à 1 ce qui implique création et envoi de la fenètre modale de confirmation
+    // si confirmation s'il y a plusieurs articles pésent dans la page panier suppression de l'article à supprimer et réaffichage de la page
+    // voir traitement dans fonction supprqte, sinon suppression de la clé article dans la locale storage (suppression du panier par appel de la fonction 
+    // supprPanier())
+    //
+    let qteforce = 1;
+    console.log("qteforce",qteforce);
+    supprqte(id,nomprod,idbtn,i,qteforce,prix,svi,storage_article);
 }
 
-
 const section = document.getElementById('lpanier');
+
 //
 // Si clic sur le bouton suppression du panier
 // vérificaction qu'il y a une cle article dans la local storage
@@ -308,6 +325,7 @@ function majpagehtml() {
             //
             // Boutons augmenter la quantité, diminuer la quantité et supprimer 
             //
+            // Augmenter la qte de 1
             // <button type="button" class="btn btn-primary" id="btnAjoutQte+ID"><span>+</span></button>
             // id="btnAjoutQte+ID"  concaténation de btnAjoutQte + _id produit de façon à rendre l'id unique
             //
@@ -329,6 +347,7 @@ function majpagehtml() {
                 ajoutqte(_id,_nomprod,idBtn,i,qte,prix,svindice,storage_article);
             });
             //
+            // Diminuer la qte de 1
             // <button type="button" class="btn btn-primary ml-2" id="btnMoinsQte+ID"><span>-</span></button>
             //
             const btnMoinsQP = createNode('button');
@@ -349,6 +368,7 @@ function majpagehtml() {
                 supprqte(_id,_nomprod,idBtn,i,qte,prix,svindice,storage_article);
             });
             //
+            // Supprimer l'article du panier
             // <button type="button" class="btn btn-danger ml-2" id="btnSupprQte+ID"><span>Supprimer</span></button>
             //
             const btnSupprQP = createNode('button');
