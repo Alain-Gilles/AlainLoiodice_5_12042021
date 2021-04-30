@@ -368,22 +368,61 @@ loadParamApi(url,getpost).then(reponse => {
             // mise à jour du tableau storage_article pour l'index 0 avec l'article que l'on vient de créer
             // mise à jour de la localStorage
             //
-            } else {
+        } else {
                 indice_article=0;
                 var storage_article=new Array();
                 var newarticle = new const_article(_id,_nomprod,_decrprod,prix,_img,_opt,_optqte);
                 storage_article[indice_article]= newarticle;
                 localStorage.setItem("article",JSON.stringify(storage_article));
+        }
+        //
+        // boite alerte standard remplacée par boite alertte personnalisée
+        // alert("L'article a été ajouté")
+        //
+        // création d'une boite alerte customisée 
+        //
+        var modalContainer = document.createElement('div');
+        modalContainer.setAttribute('id', 'modal-produitselect');
+
+        var customBox = document.createElement('div');
+        customBox.className = 'custom-box-produitselect';
+        //
+        // Affichage boîte d'alerte
+        //
+        customBox.innerHTML = '<p>"L\'article à bien été ajouté au panier !"</p>';
+        customBox.innerHTML += '<button id="modal-close-produitselect">OK</button>';
+        console.log("customBox.innerHTML",customBox.innerHTML);
+        modalShow();
+
+        function modalShow() {
+            modalContainer.appendChild(customBox);
+            document.body.appendChild(modalContainer);
+            document.getElementById('modal-close-produitselect').addEventListener('click', function() {
+                modalClose();
+            });
+        }
+        
+        function modalClose() {
+
+            while (modalContainer.hasChildNodes()) {
+                modalContainer.removeChild(modalContainer.firstChild);
             }
-        alert("L'article a été ajouté")
+            document.body.removeChild(modalContainer);
+            //
+            // ouvrir une URL
+            // window.location.href permet une redirection de la page en cours vers l’URL précisée en paramètre
+            // window.location.href="http://votre_url"
+            // par exemple si vous souhaitez que la redirection se fasse lorsque l’utilisateur clique sur une image, faites ceci :
+            // <img src='lien_vers_image' onClick=’window.location.href=”http://votre_url"'>
+            //
+            window.location.href="index.html";
+        }
+
         //
-        // ouvrir une URL
-        // window.location.href permet une redirection de la page en cours vers l’URL précisée en paramètre
-        // window.location.href="http://votre_url"
-        // par exemple si vous souhaitez que la redirection se fasse lorsque l’utilisateur clique sur une image, faites ceci :
-        // <img src='lien_vers_image' onClick=’window.location.href=”http://votre_url"'>
+        // Si boite alerte standard le window.location se fait ici, alors que dans
+        // boite alerte personnalisée le windows location se fait dans la fonctio modalClose
         //
-        window.location.href="index.html";
+        // window.location.href="index.html";
              
     });
 

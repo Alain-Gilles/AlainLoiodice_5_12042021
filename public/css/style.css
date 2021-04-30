@@ -63,6 +63,31 @@ body {
   color: white;
 }
 
+.custom-box-produitselect {
+  border: 2px solid grey;
+  text-align: center;
+  padding: 10px;
+  width: fit-content;
+  background-color: antiquewhite;
+  margin: auto;
+}
+
+#modal-produitselect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* fond complètement transparent dernier paramètre à 0, si dernier paramètre à 0.5 fond gris mi transparent */
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#modal-close-produitselect {
+  background-color: #007BFF;
+  color: white;
+}
+
 /*       */
 
 /*# sourceMappingURL=style.css.map */

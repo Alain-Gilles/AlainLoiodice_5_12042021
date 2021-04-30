@@ -73,6 +73,7 @@
             <!--<div class="d-flex justify-content-center mt-5 mb-5">
               <button type="button" id="razbtn" class="btn btn-warning">Vider le panier</button>
             </div>-->
+            <h5 id="prix-total-cde" class="d-flex justify-content-center mt-5 mb-5"></h5>
 
             <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ViderPanierModal">
@@ -81,11 +82,12 @@
                           
               <!-- Modal -->
               <div class="modal fade" id="ViderPanierModal" tabindex="-1" role="dialog" aria-labelledby="ViderPanierModalLabel" aria-hidden="true">
+                  <h5 class="modal-title">Vider la totalité du panier</h5>
                   <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h5 class="modal-title" id="ViderPanierModalLabel">Vider la totalité du panier</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title">Vider la totalité du panier</h5>
+                              <button type="button" class="close" id="bouton-vider-panier" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                               </button>
                           </div>

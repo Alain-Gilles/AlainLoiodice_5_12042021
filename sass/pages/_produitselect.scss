@@ -1,4 +1,4 @@
-.custom-box {
+.custom-box-produitselect {
     border: 2px solid grey;
     text-align: center;
     padding: 10px;
@@ -7,7 +7,7 @@
     margin: auto;
 }
 
-#modal {
+#modal-produitselect {
     position: absolute;
     top: 0;
     left: 0;
@@ -18,14 +18,8 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
-#modal-confirm {
-    margin-right: 15px;
-    background-color:#DC3545;
-    color:white;
-}
 
-#modal-close {
+#modal-close-produitselect {
     background-color:#007BFF;
     color:white;
 }
-

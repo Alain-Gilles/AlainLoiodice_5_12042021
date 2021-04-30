@@ -28,6 +28,11 @@ function supprPanier() {
 function ajoutqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
     storage_article[svi].qte++;
     localStorage.setItem('article',JSON.stringify(storage_article));
+    //
+    // maj du prix du panier et du prix de la ligne (augmentation qte de 1 unité par clic)
+    //
+    prixpanier=prixpanier+prix;
+    prixarticle=prixarticle+prix;
     location.reload();
 };
 //
@@ -37,7 +42,8 @@ function ajoutqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
 function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
     
     if (qte == 1 ) {
-
+        let confirmsuppr = false;
+        console.log("confirmsuppr",confirmsuppr);
         //
         // création des éléments suivants dans les variables modalContainer et customBox juste avant </body>
         // <div id="modal">
@@ -64,7 +70,7 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
         customBox.innerHTML = '<p>Attention vous allez supprimer cet article du panier! <br> Si vous souhaitez confirmer la suppression appuyer sur Confirmer<br></p>';
         customBox.innerHTML += '<button id="modal-confirm">Confirmer</button>';
         customBox.innerHTML += '<button id="modal-close">Annuler</button>';
-        modalShow(id,svi,storage_article);
+        modalShow(id,svi,storage_article,qte,prix);
 
     } else {
         //
@@ -72,6 +78,11 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
         //
         storage_article[svi].qte--;
         localStorage.setItem('article',JSON.stringify(storage_article));
+        //
+        // maj du prix du panier et du prix de la ligne (diminution qte de 1 unité par clic)
+        //
+        prixpanier=prixpanier-prix;
+        prixarticle=prixarticle-prix;
         location.reload();
     }
 
@@ -90,7 +101,7 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
     // Ajout d'une ecoute sur le bouton confirmer id modal-confirm sur evenement click
     // traitement de la suppression de l'article
     //
-    function modalShow(id,svi,storage_article) {
+    function modalShow(id,svi,storage_article,qte,prix) {
         modalContainer.appendChild(customBox);
         document.body.appendChild(modalContainer);
         //
@@ -98,6 +109,8 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
         //
         document.getElementById('modal-close').addEventListener('click', function() {
             modalClose();
+            confirmsuppr = false;
+            console.log("confirmsuppr",confirmsuppr);
         });
         //
         // Si clic sur confirmation confirmation 
@@ -111,6 +124,9 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
                 var storage_newarticle=new Array();
                 var createNewArticle = false;
                 var it=0;
+                confirmsuppr = true;
+                console.log("confirmsuppr",confirmsuppr);
+
                 //storage_article=JSON.parse(localStorage.getItem('article'));
                 indice_article=storage_article.length;
                 //
@@ -118,7 +134,7 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
                 //
                 if (indice_article>1) {
                     //
-                    // on parcours le tableau storgae_article de indice 0 jusqu'au dernier indice (storage_article.length)
+                    // on parcours le tableau storage_article de indice 0 jusqu'au dernier indice (storage_article.length)
                     // si id du tableau est différent id de l'article dont on veut diminuer la qte alors on copie l'article dans 
                     // storage_article. 
                     // En fait on créait un nouveau tableau qui part de indice 0 et qui va contenir tous les articles présent dans
@@ -145,6 +161,14 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
                         while (element.firstChild) {
                             element.removeChild(element.firstChild);
                         }
+                        //
+                        // On met a jour le montat du panier
+                        //
+                        //prixpanier = prixpanier - prix;
+                        //prixarticle = prixarticle - prix;
+                        prixpanier = 0;
+                        prixarticle =0;
+                        //
                         majpagehtml();
                         }
                  //
@@ -181,7 +205,7 @@ function supprCartArt(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
     // Appel de la fonction supprqte en lui passant en paramètre 1 comme qte de l'article qui doit-etre supprimé
     // de cette façon la fonction supprqte considèrera que quelque soit la quantité réelle de l'article devant être supprimé
     // cette qte devra être traitée comme si elle était égale à 1 ce qui implique création et envoi de la fenètre modale de confirmation
-    // si confirmation s'il y a plusieurs articles pésent dans la page panier suppression de l'article à supprimer et réaffichage de la page
+    // si confirmation s'il y a plusieurs articles présents dans la page panier suppression de l'article à supprimer et réaffichage de la page
     // voir traitement dans fonction supprqte, sinon suppression de la clé article dans la locale storage (suppression du panier par appel de la fonction 
     // supprPanier())
     //
@@ -191,6 +215,7 @@ function supprCartArt(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
 }
 
 const section = document.getElementById('lpanier');
+
 
 //
 // Si clic sur le bouton suppression du panier
@@ -394,8 +419,26 @@ function majpagehtml() {
             let PositDivBtnPanier = document.getElementById("BtnVidePanier");
             PositDivBtnPanier.classList.remove("d-none");
             PositDivBtnPanier.classList.add("d-flex");
-            
             //
+            // Affichage prix total de l'article = Qte * Prix unitaire
+            //
+            prixarticle = qte * prix;
+            let h5cardprixarticle = createNode('h5');
+            h5cardprixarticle.classList.add("card-title","mt-5");
+            // \u0020 represente un caractère " "
+            h5cardprixarticle.textContent +="Prix ligne article :\u0020" + prixarticle + "€";
+            append(divcardbody, h5cardprixarticle);
+            //
+            // prix du panier
+            //
+            prixpanier = prixpanier + prixarticle;
+            //
+            // On créait la ligne Prix total du panier entre les balises <h5 id="prix-total-cde"></h5>
+            //
+            let MajPrixTotPanier = document.getElementById("prix-total-cde");
+            MajPrixTotPanier.textContent=`Prix total du panier \u0020` + prixpanier +"€";
+            MajPrixTotPanier.classList.remove("d-none");
+            MajPrixTotPanier.classList.add("d-flex");
         }
     //
     // Il n'y avait pas de cle article dans la local storage
@@ -416,6 +459,10 @@ function majpagehtml() {
         PositDivBtnPanier = document.getElementById("BtnVidePanier");
         PositDivBtnPanier.classList.remove("d-flex");
         PositDivBtnPanier.classList.add("d-none");
+        MajPrixTotPanier = document.getElementById("prix-total-cde");
+        MajPrixTotPanier.textContent=`Prix total du panier \u0020` + 0 +"€";
+        MajPrixTotPanier.classList.remove("d-flex");
+        MajPrixTotPanier.classList.add("d-none");
         
     
     }
@@ -428,5 +475,6 @@ function majpagehtml() {
 // soit avec les cartes produits presentes dans la local storage
 // soit avec le message Il n'y a pas d'articles dans le panier
 //
-
+var prixpanier = 0;
+var prixarticle = 0;
 majpagehtml()
