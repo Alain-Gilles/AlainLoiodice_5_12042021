@@ -21,7 +21,8 @@ function append(parent, el) {
 //*************************************************************************************************************************//
 //                                                                                                                         //
 // Mise a jour libelle panier dans entete avec A valider si présence de article dans local storage ou vide si pas article  //
-// dans la local storage  fonction appele par index.js produitselect.js                                                    //
+// dans la local storage  fonction appele par index.js produitselect.js  panier.js                                         //
+// Appelle la fonction globale  SomQteArt()                                                                                //
 //                                                                                                                         //
 //*************************************************************************************************************************//
 //
