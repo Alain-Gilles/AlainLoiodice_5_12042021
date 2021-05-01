@@ -18,8 +18,12 @@ function append(parent, el) {
     return parent.appendChild(el);
 };
 //
-// Mise a jour libelle panier dans entete avec A valider si présence de article dans local storage ou vide si pas article
-// dans la local storage
+//*************************************************************************************************************************//
+//                                                                                                                         //
+// Mise a jour libelle panier dans entete avec A valider si présence de article dans local storage ou vide si pas article  //
+// dans la local storage  fonction appele par index.js produitselect.js                                                    //
+//                                                                                                                         //
+//*************************************************************************************************************************//
 //
 function MajLibPanier() {
     //
@@ -46,7 +50,8 @@ function MajLibPanier() {
         //
         //  Dans cet élement que l'on vient de créait on ajoute le contenu du texte que l'on veut afficher
         //
-        textNodeAm.textContent += "A valider";
+        //textNodeAm.textContent += "A valider";/
+        textNodeAm.textContent += `Qte :\u0020`+ SomQteArt();
         textNodeAm.id = "infoPanier";
         //
         // On remplace le premier enfant du noeud parent par le nouvel élément créée
@@ -135,4 +140,24 @@ async function loadParamApi (url,getpost) {
         request.send(null);    
     });
 };
-//********************************************************
+//********************************************************//
+//                                                        //
+// Somme des quantités article dans local storage         //
+// Fonction appelée par fonction globale MajLibPanier     //
+//                                                        //
+//********************************************************//
+//
+function SomQteArt() {
+
+    let qteLocalStorage =0;
+
+    if ("article" in localStorage) {
+        var storage_article=new Array();
+        storage_article=JSON.parse(localStorage.getItem('article'));
+
+        for (var i =0; i < storage_article.length; i++) {
+            qteLocalStorage= qteLocalStorage + storage_article[i].qte;
+        }
+    } 
+    return qteLocalStorage;   
+}

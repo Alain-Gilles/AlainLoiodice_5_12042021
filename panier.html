@@ -25,7 +25,7 @@
             <div class="bg-dark">
                 <div class="row">
                     <nav class="col navbar navbar-expand-md navbar-dark">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand ml-2" href="index.html">
                             <img  src="public/img/logo-orinoco.png" width="150" height="60" alt="logo orinoco"/>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,11 +42,12 @@
                               </li>
                             </ul>
                             <!-- Right -->
-                            <!-- <ul class="navbar-nav ml-auto">
-                                <li class="nav-link">
-                                    <button class="button" class="btn bg-light "><i class="fa fa-shopping-cart text-primary fa-2x"></i></button>
-                                </li>
-                            </ul> -->
+                            <ul class="navbar-nav ml-auto">
+                              <li class="nav-link" id="EntBtn">
+                                  <button class="button" class="btn bg-light"onclick="window.location.href='panier.html'"><i class="fa fa-shopping-cart text-primary fa-2x"></i></button>
+                                  <p id="infoPanier"></p>
+                              </li>
+                          </ul>
                         </div>   
                     </nav>
                 </div>
@@ -56,24 +57,22 @@
 
         <div class="row">
             <div class="col-md">
-              <div class="jumbotron">
-                 <h1><span class="fa fa-user"></span>&nbsp Panier achat</h1>
+              <div class="jumbotron pt-3 pb-3">
+                 <div class="w-75 mx-auto">
+                  <!--"fa fa-user" "fa fa-shopping-bag" "fa fa-shopping-basket" -->
+                  <h1><span class="fa fa-shopping-basket"></span>&nbsp Panier achat</h1>
+                 </div> 
               </div>
-              <!--<div class="d-flex justify-content-center mt-5 mb-5">
-                <button type="button" id="razbtn" class="btn btn-warning">Vider le panier</button>
-              </div>-->
             </div>
-          </div>
+        </div>
 
         <main>
             <section id="lpanier">
                
             </section>
-            <!-- Bouton Vider le panier avec fenetre modale -->
-            <!--<div class="d-flex justify-content-center mt-5 mb-5">
-              <button type="button" id="razbtn" class="btn btn-warning">Vider le panier</button>
-            </div>-->
-            <h5 id="prix-total-cde" class="d-flex justify-content-center mt-5 mb-5"></h5>
+
+            <h5 id="prix-total-cde" class="d-flex justify-content-center mt-5 mb-2"></h5>
+            <h5 id="qte-total-cde" class="d-flex justify-content-center mt-1 mb-5"></h5>
 
             <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ViderPanierModal">
@@ -104,11 +103,59 @@
               </div>
             </div>
 
-
-
-
-
         </main>
+
+        <div id="coordonnees">
+          <div class="row">
+            <div class="col-md">
+              <div class="jumbotron pt-3 pb-3">
+                <div class="w-75 mx-auto">
+                  <h1><span class="fa fa-user"></span>&nbspPassez votre commande </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row no-gutters w-75 mx-auto mt-2" id="formulaire">
+            <div class="col-md">
+                <!-- fileset permet de regrouper des ensemble de champs et d'associer une légende-->
+                <!-- remarque on peur désactiver un élément <fieldset></fieldset> et par conséquence de l'ensemble
+                  de ses éléments en rajoutant disabled  <fieldset disabled>-->
+                <fieldset class="border p-2">
+                  <legend class="w-auto">Entrez vos coordonnées</legend>
+                  <form>
+                    <div class="form-group">
+                      <label for="nom">Nom : </label>
+                      <input id="nom" type="text" class="form-control" placeholder="votre nom" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="prenom">Prenom : </label>
+                      <input id="prenom" type="text" class="form-control" placeholder="votre prénom" required>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="cp">Code Postal : </label>
+                          <input id="cp" type="text" class="form-control" placeholder="Code Postal" required>
+                        </div>
+                        <div class="col-md-9">
+                          <label for="adresse">Adresse : </label>
+                          <input id="adresse" type="text" class="form-control" placeholder="votre adresse" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">E-mail : </label>
+                      <input id="email" type="text" class="form-control" placeholder="e-mail" required>
+                    </div>
+
+                    <button class="btn btn-danger" >Envoyer</button>
+                  </form>
+                </fieldset>
+            </div>
+          </div>
+        </div>
+
         <footer>
 
         </footer>

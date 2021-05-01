@@ -33,6 +33,7 @@ function ajoutqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
     //
     prixpanier=prixpanier+prix;
     prixarticle=prixarticle+prix;
+    qtepanier=qtepanier++;
     location.reload();
 };
 //
@@ -82,6 +83,7 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
         // maj du prix du panier et du prix de la ligne (diminution qte de 1 unité par clic)
         //
         prixpanier=prixpanier-prix;
+        qtepanier--;
         prixarticle=prixarticle-prix;
         location.reload();
     }
@@ -162,12 +164,13 @@ function supprqte(id,nomprod,idbtn,i,qte,prix,svi,storage_article) {
                             element.removeChild(element.firstChild);
                         }
                         //
-                        // On met a jour le montat du panier
+                        // On met a jour le montant du panier
                         //
                         //prixpanier = prixpanier - prix;
                         //prixarticle = prixarticle - prix;
                         prixpanier = 0;
                         prixarticle =0;
+                        qtepanier =0;
                         //
                         majpagehtml();
                         }
@@ -432,6 +435,7 @@ function majpagehtml() {
             // prix du panier
             //
             prixpanier = prixpanier + prixarticle;
+            qtepanier = qtepanier + qte;
             //
             // On créait la ligne Prix total du panier entre les balises <h5 id="prix-total-cde"></h5>
             //
@@ -439,6 +443,10 @@ function majpagehtml() {
             MajPrixTotPanier.textContent=`Prix total du panier \u0020` + prixpanier +"€";
             MajPrixTotPanier.classList.remove("d-none");
             MajPrixTotPanier.classList.add("d-flex");
+            let MajQteTotPanier = document.getElementById("qte-total-cde");
+            MajQteTotPanier.textContent=`\u000A \u0020 Nombre articles :\u0020` + qtepanier;
+            MajQteTotPanier.classList.remove("d-none");
+            MajQteTotPanier.classList.add("d-flex");
         }
     //
     // Il n'y avait pas de cle article dans la local storage
@@ -463,9 +471,15 @@ function majpagehtml() {
         MajPrixTotPanier.textContent=`Prix total du panier \u0020` + 0 +"€";
         MajPrixTotPanier.classList.remove("d-flex");
         MajPrixTotPanier.classList.add("d-none");
+        MajQteTotPanier = document.getElementById("qte-total-cde");
+        MajQteTotPanier.textContent=`Nombre articles :\u0020` + 0;
+        MajQteTotPanier.classList.remove("d-flex");
+        MajQteTotPanier.classList.add("d-none");
         
     
     }
+
+    MajLibPanier(); 
 
 }
 
@@ -477,4 +491,5 @@ function majpagehtml() {
 //
 var prixpanier = 0;
 var prixarticle = 0;
+var qtepanier =0;
 majpagehtml()
