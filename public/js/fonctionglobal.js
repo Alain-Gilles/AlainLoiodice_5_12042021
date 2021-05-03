@@ -162,3 +162,6 @@ function SomQteArt() {
     } 
     return qteLocalStorage;   
 }
+//
+//
+//

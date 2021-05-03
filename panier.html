@@ -105,7 +105,7 @@
 
         </main>
 
-        <div id="coordonnees">
+        <div id="coordonnees" class="d-block">
           <div class="row">
             <div class="col-md">
               <div class="jumbotron pt-3 pb-3">
@@ -123,40 +123,71 @@
                   de ses éléments en rajoutant disabled  <fieldset disabled>-->
                 <fieldset class="border p-2">
                   <legend class="w-auto">Entrez vos coordonnées</legend>
-                  <form>
+
+                    <form name="ValidForm" action="validation.html"  onSubmit="return verification()" method="get" class="validF">  
                     <div class="form-group">
-                      <label for="nom">Nom : </label>
-                      <input id="nom" type="text" class="form-control" placeholder="votre nom" required>
+                      <label for="idNom">Nom  <span class="text-danger">*</span></label>
+                      <input id="idNom" name="idNom" type="text" class="form-control" placeholder="votre nom" required>
                     </div>
                     <div class="form-group">
-                      <label for="prenom">Prenom : </label>
-                      <input id="prenom" type="text" class="form-control" placeholder="votre prénom" required>
+                      <label for="idPrenom">Prenom</label>
+                      <input id="idPrenom" name="idPrenom" type="text" class="form-control" placeholder="votre prénom" required>
                     </div>
                     <div class="form-group">
                       <div class="row">
                         <div class="col-md-3">
-                          <label for="cp">Code Postal : </label>
-                          <input id="cp" type="text" class="form-control" placeholder="Code Postal" required>
+                          <label for="idCp">Code Postal<span class="text-danger">*</span></label>
+                          <input id="idCp" name="idCp" type="text" class="form-control" placeholder="Code Postal" required>
                         </div>
                         <div class="col-md-9">
-                          <label for="adresse">Adresse : </label>
-                          <input id="adresse" type="text" class="form-control" placeholder="votre adresse" required>
+                          <label for="idAdresse">Adresse<span class="text-danger">*</span></label>
+                          <input id="idAdresse" name="idAdresse" type="text" class="form-control" placeholder="votre adresse" required>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="email">E-mail : </label>
-                      <input id="email" type="text" class="form-control" placeholder="e-mail" required>
+                      <label for="idEmail">E-mail <span class="text-danger">*</span></label>
+                      <input id="idEmail" name="idEmail" type="text" class="form-control" placeholder="e-mail" required>
                     </div>
 
-                    <button class="btn btn-danger" >Envoyer</button>
+                    <input type="submit" value="Envoyer" name="Valider">
+                    <input type="reset" value="Réinitialiser" name="Réinitialiser">
+                    <!--<button class="btn btn-danger" >Envoyer</button>-->
                   </form>
+
                 </fieldset>
             </div>
           </div>
         </div>
 
         <footer>
+
+          <div class="row">
+            <div class="col-md">
+                <div class="jumbotron mt-5 pt-3 pb-3">
+                    <div class="row w-75 mx-auto">
+                        <div class="col-md-3">
+                            <a href="#" class="btn btn-dark" role="button">A propos</a>
+                            <!-- Left -->  
+                            <!-- <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">A propos</a>
+                                </li>
+                            </ul> -->
+                        </div>
+                        <div class="col-md-3 ml-auto">
+                            <a href="#" class="btn btn-dark" role="button">Contact</a>
+                            <!-- Right -->
+                            <!-- <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Contact</a>
+                                </li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         </footer>
     </div>

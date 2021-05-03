@@ -1,4 +1,60 @@
 //
+// vérification saisie formulaire validation
+//
+function verification() {
+    var name = document.forms["ValidForm"]["idNom"];
+    var forname = document.forms["ValidForm"]["idPrenom"];
+    var cp = document.forms["ValidForm"]["idCp"];
+    var adresse =  document.forms["ValidForm"]["idAdresse"];             
+    var email = document.forms["ValidForm"]["idEmail"];  
+
+    if (name.value == "")                                  
+    { 
+        alert("votre nom est obligatoire"); 
+        name.focus(); 
+        return false; 
+    }
+
+    if (forname.value == "")                                  
+    { 
+        alert("entrer votre prénom"); 
+        name.focus(); 
+        return false; 
+    }
+    
+    if (cp.value == "")                                  
+    { 
+        alert("il faut renseigner le code postal"); 
+        name.focus(); 
+        return false; 
+    }
+
+    if (email.value == "")                                   
+          { 
+              alert("Mettez une adresse email valide."); 
+              email.focus(); 
+              return false; 
+          }
+
+    if (email.value.indexOf("@", 0) < 0)                 
+    { 
+        alert("Mettez une adresse email valide."); 
+        email.focus(); 
+        return false; 
+    } 
+
+    if (email.value.indexOf(".", 0) < 0)                 
+    { 
+        alert("Mettez une adresse email valide."); 
+        email.focus(); 
+        return false; 
+    }          
+    
+    return true; 
+    
+}
+
+//
 // fonction suppression d'un article
 //
 function supprPanier() {
@@ -6,7 +62,7 @@ function supprPanier() {
         //
         // supression de la cle dans le local storage
         //
-         localStorage.removeItem("article");
+        localStorage.removeItem("article");
         //
         // supression des enfants de section id lpanier dans le code html (supression des cartes de produit affichées)
         //
@@ -423,6 +479,12 @@ function majpagehtml() {
             PositDivBtnPanier.classList.remove("d-none");
             PositDivBtnPanier.classList.add("d-flex");
             //
+            // On fait apparaitre le formumaire
+            //
+            let PositFormulaire = document.getElementById("coordonnees");
+            PositFormulaire.classList.remove("d-none");
+            PositFormulaire.classList.add("d-block");
+            //
             // Affichage prix total de l'article = Qte * Prix unitaire
             //
             prixarticle = qte * prix;
@@ -447,6 +509,12 @@ function majpagehtml() {
             MajQteTotPanier.textContent=`\u000A \u0020 Nombre articles :\u0020` + qtepanier;
             MajQteTotPanier.classList.remove("d-none");
             MajQteTotPanier.classList.add("d-flex");
+            //
+            // On fait apparaitre le formumaire
+            //
+            PositFormulaire = document.getElementById("coordonnees");
+            PositFormulaire.classList.remove("d-none");
+            PositFormulaire.classList.add("d-block");
         }
     //
     // Il n'y avait pas de cle article dans la local storage
@@ -475,6 +543,12 @@ function majpagehtml() {
         MajQteTotPanier.textContent=`Nombre articles :\u0020` + 0;
         MajQteTotPanier.classList.remove("d-flex");
         MajQteTotPanier.classList.add("d-none");
+        //
+        // On cache le formumaire
+        //
+        PositFormulaire = document.getElementById("coordonnees");
+        PositFormulaire.classList.remove("d-block");
+        PositFormulaire.classList.add("d-none");
         
     
     }
