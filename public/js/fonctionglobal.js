@@ -1,3 +1,19 @@
+//*********************************************************************************************************/
+// Test validité e-mail                                                                                   */                             
+// La méthode test() vérifie s'il y a une correspondance entre un texte et une expression rationnelle.    */
+// Elle retourne true en cas de succès et false dans le cas contraire.                                    */
+//                                                                                                        */
+// Le constructeur RegExp crée un objet expression rationnelle pour la reconnaissance                     */
+// d'un modèle dans un texte.  (regx ou expression régulière)                                             */
+// permet de vérifier le contenu d'une chaine de caractères                                               */
+// 
+// définition de l'expression régulière d'une adresse email   
+//                                                                                                */
+   function isEmail (email) {
+      var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$','i'); 
+      return regEmail.test(email);
+ };
+//
 //***********************************************************************************************************/
 // Fonction de création d'un Noeud
 // Dans un document HTML, la méthode document.createElement() 

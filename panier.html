@@ -124,7 +124,8 @@
                 <fieldset class="border p-2">
                   <legend class="w-auto">Entrez vos coordonnées</legend>
 
-                    <form name="ValidForm" action="validation.html"  onSubmit="return verification()" method="get" class="validF">  
+                    <!--<form name="ValidForm" action="validation.html"  onSubmit="return verification()" method="get" class="validF">-->
+                    <form name="ValidForm" id="contactForm">     
                     <div class="form-group">
                       <label for="idNom">Nom  <span class="text-danger">*</span></label>
                       <input id="idNom" name="idNom" type="text" class="form-control" placeholder="votre nom" required>
@@ -135,13 +136,13 @@
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <div class="col-md-3">
-                          <label for="idCp">Code Postal<span class="text-danger">*</span></label>
-                          <input id="idCp" name="idCp" type="text" class="form-control" placeholder="Code Postal" required>
-                        </div>
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                           <label for="idAdresse">Adresse<span class="text-danger">*</span></label>
                           <input id="idAdresse" name="idAdresse" type="text" class="form-control" placeholder="votre adresse" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="idVille">Ville<span class="text-danger">*</span></label>
+                          <input id="idVille" name="idVille" type="text" class="form-control" placeholder="Ville" required>
                         </div>
                       </div>
                     </div>
@@ -150,9 +151,9 @@
                       <input id="idEmail" name="idEmail" type="text" class="form-control" placeholder="e-mail" required>
                     </div>
 
-                    <input type="submit" value="Envoyer" name="Valider">
-                    <input type="reset" value="Réinitialiser" name="Réinitialiser">
-                    <!--<button class="btn btn-danger" >Envoyer</button>-->
+                    <!--<input type="submit" value="Envoyer" name="Valider">-->
+                    <input type="button" class="btn btn-danger" id="btn-valid" value="Validez votre commande" name="Valider">
+                    <input type="reset" class="btn btn-primary" value="Réinitialiser" name="Réinitialiser">
                   </form>
 
                 </fieldset>

@@ -1,57 +1,106 @@
+let v_nom="";
+let v_prenom="";
+let v_adresse="";
+let v_ville="";
+let v_email="";
+//
+// Création de la classe produits
+//
+class produits {
+    constructor(idcde, qtecde) {
+    this.produitid=idcde;
+    this.produitqte=qtecde;
+    }
+}
+//
+// Création du tableau des cdes
+//
+var produitsCde=new Array();
 //
 // vérification saisie formulaire validation
 //
 function verification() {
     var name = document.forms["ValidForm"]["idNom"];
     var forname = document.forms["ValidForm"]["idPrenom"];
-    var cp = document.forms["ValidForm"]["idCp"];
+    var ville = document.forms["ValidForm"]["idVille"];
     var adresse =  document.forms["ValidForm"]["idAdresse"];             
     var email = document.forms["ValidForm"]["idEmail"];  
+    var result = true;
 
     if (name.value == "")                                  
     { 
         alert("votre nom est obligatoire"); 
         name.focus(); 
-        return false; 
+        result=false;
+        return result; 
     }
 
     if (forname.value == "")                                  
     { 
         alert("entrer votre prénom"); 
-        name.focus(); 
-        return false; 
+        forname.focus(); 
+        result=false;
+        return result;  
+    }
+
+    if (adresse.value == "")                                  
+    { 
+        alert("il faut renseigner votre adresse"); 
+        adresse.focus(); 
+        result=false;
+        return result; 
     }
     
-    if (cp.value == "")                                  
+    if (ville.value == "")                                  
     { 
-        alert("il faut renseigner le code postal"); 
-        name.focus(); 
-        return false; 
+        alert("il faut renseigner la ville"); 
+        ville.focus(); 
+        result=false;
+        return result; 
     }
 
     if (email.value == "")                                   
-          { 
-              alert("Mettez une adresse email valide."); 
-              email.focus(); 
-              return false; 
-          }
-
+    { 
+        alert("Entrez une adresse email valide."); 
+        email.focus(); 
+        result=false;
+        return result;
+    }
+    //
+    // La methode indexOf() renvoie l'indice de la première occurence de la valeur cherchée au sein de la
+    // chaîne courante (à partir de indexDébut). Elle renvoie -1 si la valeur cherchée n'est pas trouvée.    
+    // 
     if (email.value.indexOf("@", 0) < 0)                 
     { 
-        alert("Mettez une adresse email valide."); 
+        alert("Entrer une adresse email valide."); 
         email.focus(); 
-        return false; 
+        result=false;
+        return result; 
     } 
 
     if (email.value.indexOf(".", 0) < 0)                 
     { 
-        alert("Mettez une adresse email valide."); 
+        alert("Entrer une adresse email valide."); 
         email.focus(); 
-        return false; 
+        result=false;
+        return result;
     }          
     
-    return true; 
-    
+    if (!isEmail(email.value)) 
+    {
+        alert("Entrer une adresse email valide."); 
+        email.focus(); 
+        result=false;
+        return result;
+    }
+    v_nom=name.value;
+    console.log("v-nom",v_nom);
+    v_prenom=forname.value;
+    v_ville=ville.value;
+    v_adresse=adresse.value;
+    v_email=email.value;
+    return result;
+
 }
 
 //
@@ -319,12 +368,16 @@ function majpagehtml() {
 // storage_article.length)
 // Pour chaque élément on créait les élement html dans le DOM en utilisant les fonctions createNode et append
 //
+    //
+    // Remise à zéro du tableu des produits commandés produitsCde
+    //       
+    produitsCde.length = 0;
+    //
     if ("article" in localStorage) {
         var storage_article=new Array();
         storage_article=JSON.parse(localStorage.getItem('article'));
-
+        
         for (var i =0; i < storage_article.length; i++) {
-            //
             //
             // <div class="card w-75 mx-auto mt-5"></div>
             //
@@ -364,7 +417,7 @@ function majpagehtml() {
             divcardbody.classList.add("card-body");
             append(divcol7, divcardbody);
             //
-            // recuperatio id produit
+            // recuperation id produit
             //
             let _id = storage_article[i].id;
             let h5cardtitle = createNode('h5');
@@ -481,9 +534,9 @@ function majpagehtml() {
             //
             // On fait apparaitre le formumaire
             //
-            let PositFormulaire = document.getElementById("coordonnees");
-            PositFormulaire.classList.remove("d-none");
-            PositFormulaire.classList.add("d-block");
+            // let PositFormulaire = document.getElementById("coordonnees");
+            // PositFormulaire.classList.remove("d-none");
+            // PositFormulaire.classList.add("d-block");
             //
             // Affichage prix total de l'article = Qte * Prix unitaire
             //
@@ -512,9 +565,88 @@ function majpagehtml() {
             //
             // On fait apparaitre le formumaire
             //
-            PositFormulaire = document.getElementById("coordonnees");
+            let PositFormulaire = document.getElementById("coordonnees");
             PositFormulaire.classList.remove("d-none");
             PositFormulaire.classList.add("d-block");
+            //
+            // On ajoute un event listener sur le bouton submit du formulaire
+            //
+            document.getElementById("btn-valid").addEventListener('click',function() {
+                   
+                let validOk = verification();
+
+                if (validOk) {
+                    //
+                    // création de,la classe contact
+                    //
+                    class contact {
+                        constructor(_nom, _prenom, _adresse, _ville, _email) {
+                        this.firstName=_nom;
+                        this.lastName=_prenom;
+                        this.address=_adresse;
+                        this.city=_ville;
+                        this.email=_email;
+                        }
+                    }
+                    //
+                    // Création d'un nouveau contact
+                    //
+                    let newcontact = new contact(v_nom,v_prenom,v_ville,v_adresse,v_email);
+                    console.log('newcontact',newcontact);
+                    //
+                    // mise à jour ou création de contact dans local storage avec les données du formulaire
+                    //
+                    if ("contact" in localStorage) {
+
+                        var storage_contact=new Array();
+                        storage_contact=JSON.parse(localStorage.getItem('contact'));
+                        indice_contact=0;
+                        storage_contact[indice_contact]= newcontact;
+                        localStorage.setItem("contact",JSON.stringify(storage_contact));
+                        console.log(localStorage);       
+
+                    }else{
+                        indice_contact=0;
+                        storage_contact=new Array();
+                        storage_contact[indice_contact]= newcontact;
+                        localStorage.setItem("contact",JSON.stringify(storage_contact));
+                        console.log(localStorage);
+                    }
+                    //
+                    // Mise à jour produit
+                    //
+                    // Boucle de lecture de la local storage avec cle article
+                    // 
+                    if ("article" in localStorage) {
+                        var storage_article_cde=new Array();
+                        storage_article_cde=JSON.parse(localStorage.getItem('article'));
+                        
+                        for (var i =0; i < storage_article_cde.length; i++) {
+                             newproduit = new produits(storage_article_cde[i].id,parseFloat(storage_article[i].qte));
+                             produitsCde[i]=newproduit; 
+                        }
+                        console.log("produitCde",produitsCde);
+                    }
+                    //
+                    // Mise à jour du serveur par methode POST en envoyant requete JSON contenant un objet de contact
+                    // newcontact et un tableau de produits ( id et qte ) produitCde
+                    // POST retourne l'objet contact, le tableau produits et order_id (string)
+                    //
+
+
+                    //
+                    // Creation local storage numero_cde avec order_id
+                    //
+
+
+                    //
+                    // liens vers validation.html qui ira recuperer dans la loca storage le order_id et les infos du contact
+                    //
+
+
+                }
+                    
+            })
         }
     //
     // Il n'y avait pas de cle article dans la local storage
@@ -552,7 +684,6 @@ function majpagehtml() {
         
     
     }
-
     MajLibPanier(); 
 
 }
