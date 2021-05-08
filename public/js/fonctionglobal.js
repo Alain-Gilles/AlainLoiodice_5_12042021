@@ -101,6 +101,10 @@ function MajLibPanier() {
 //***********************************************************************************/
 async function loadParamApi(url, getpost, contactProduit) {
   //
+  // var status = 200;
+  //
+  var status = 200;
+  //
   // elle retourne une promesse avec deux variables en paramètres  resolve en cas de succès et reject si echec
   //
   return new Promise(function (resolve, reject) {
@@ -122,7 +126,8 @@ async function loadParamApi(url, getpost, contactProduit) {
         // Si le traitement est un succès
         // status contient le statut de l'objet XMLHttpRequest ( 200 : OK ,  403 : interdit , 404 : page non trouvee ..)
         //
-        if (request.status == 200) {
+        //if (request.status == 200) {
+        if (request.status == status) {
           //
           // On résous la promesse et on renvoie la réponse
           //
@@ -159,6 +164,7 @@ async function loadParamApi(url, getpost, contactProduit) {
       request.send(null);
     } else {
       //request.open("POST", url, true);
+      status = 201;
       request.open("POST", url, true);
       //
       // Les deux types d'envoi les plus populaire sont l'envoi sous forme URL formatée : "Content-type", "application/x-www-form-urlencoded"
@@ -170,10 +176,9 @@ async function loadParamApi(url, getpost, contactProduit) {
       // ou  pour envoyer des données avec le type de contenu JSON:
       // request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       //
-      request.setRequestHeader(
-        "Content-type",
-        "application/application/json;charset=UTF-8"
-      );
+      // "application/application/json;charset=UTF-8"
+      //
+      request.setRequestHeader("Content-Type", "application/json");
       console.log("contactProduit", contactProduit);
       console.log(
         "JSON.stringify(contactProduit)",

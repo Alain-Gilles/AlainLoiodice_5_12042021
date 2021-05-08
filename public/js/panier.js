@@ -641,12 +641,7 @@ function majpagehtml() {
               storage_article_cde = JSON.parse(localStorage.getItem("article"));
 
               for (var i = 0; i < storage_article_cde.length; i++) {
-                //newproduit = new produits(
-                //storage_article_cde[i].id,
-                //parseFloat(storage_article[i].qte)
-                //);
-                //produitsCde[i] = newproduit;
-                produitsCde[i] = storage_article_cde[i].id;
+                produitsCde[i] = storage_article_cde[i].id.toString();
                 console.log("i,produitsCde[i]", i, produitsCde[i]);
               }
               console.log("produitCde", produitsCde);
@@ -658,13 +653,12 @@ function majpagehtml() {
             //
             const url = "http://localhost:3000/api/furniture/order";
             let getpost = "POST";
+            console.log(newcontact);
+            console.log(produitsCde);
             let newenvoidonnees = new EnvoiDonnees(newcontact, produitsCde);
-            console.log("newenvoidonnees", newenvoidonnees);
-            console.log("newenvoidonnees.contact", newenvoidonnees.contact);
-            console.log(
-              "newenvoidonnees.products[0]",
-              newenvoidonnees.products[0]
-            );
+            console.log(newenvoidonnees);
+            console.log(newenvoidonnees.contact);
+            console.log(newenvoidonnees.products);
             //
             // On demande une connection à URL pour envoyer dans le corps de la demande une requête JSON contenant un objet de contact
             // et un tableau de produits, l'API nous retourne l'objet contact, le tableau produits et order_id (string)
@@ -683,6 +677,13 @@ function majpagehtml() {
                 //
                 console.log(retourApi);
                 //
+                // Creation local storage numero_cde avec order_id
+                //
+
+                //
+                // liens vers validation.html qui ira recuperer dans la loca storage le order_id et les infos du contact
+                //
+                //
               })
               .catch((erreur) => {
                 // On traite l'erreur
@@ -691,14 +692,6 @@ function majpagehtml() {
                 );
                 console.log("erreur : ", erreur);
               });
-
-            //
-            // Creation local storage numero_cde avec order_id
-            //
-
-            //
-            // liens vers validation.html qui ira recuperer dans la loca storage le order_id et les infos du contact
-            //
           }
         });
     }
