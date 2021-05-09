@@ -179,15 +179,10 @@ async function loadParamApi(url, getpost, contactProduit) {
       // "application/application/json;charset=UTF-8"
       //
       request.setRequestHeader("Content-Type", "application/json");
-      console.log("contactProduit", contactProduit);
-      console.log(
-        "JSON.stringify(contactProduit)",
-        JSON.stringify(contactProduit)
-      );
+
       //  Contact produit contient un objet contact (nom, prenom, adresse, ville, email) + un baleau des id des produits commandés dans le panier
       request.send(JSON.stringify(contactProduit)); //
     }
-    //request.send(null);
   });
 }
 //********************************************************//

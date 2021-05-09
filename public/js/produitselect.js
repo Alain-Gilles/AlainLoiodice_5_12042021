@@ -239,7 +239,6 @@ loadParamApi(url, getpost, contactProduit)
         liste = document.getElementById("optionform");
         texte = liste.options[optionform.selectedIndex].text;
         _opt = texte;
-        console.log(_opt);
       });
     //
     // creation de la liste de choix pour la qte produit possibilité de choisir une qte de 1 à 9, qte à 1 par défaut
@@ -326,7 +325,6 @@ loadParamApi(url, getpost, contactProduit)
     // si click sur bouton ajouter au panier
     //
     document.getElementById("BtnClick").addEventListener("click", function () {
-      console.log("traitement panier");
       //
       // mise à jour de la local storage avec les données de la page
       //
@@ -343,21 +341,13 @@ loadParamApi(url, getpost, contactProduit)
       //
       //
       if ("article" in localStorage) {
-        console.log("article dans local storage");
         var storage_article = new Array();
         var creation = true;
         storage_article = JSON.parse(localStorage.getItem("article"));
         indice_article = storage_article.length;
 
         for (var i = 0; i < indice_article; i++) {
-          console.log(
-            "storage_article[i].id",
-            storage_article[i].id,
-            "id",
-            _id
-          );
           if (storage_article[i].id == _id) {
-            console.log("article existant maj qte");
             storage_article[i].qte = storage_article[i].qte + _optqte;
             creation = false;
             localStorage.setItem("article", JSON.stringify(storage_article));
@@ -365,11 +355,7 @@ loadParamApi(url, getpost, contactProduit)
           }
         }
 
-        console.log("creation:", creation);
         if (creation) {
-          console.log(
-            "article dans local storage mais id inexistant => creation article"
-          );
           newarticle = new const_article(
             _id,
             _nomprod,
@@ -420,7 +406,6 @@ loadParamApi(url, getpost, contactProduit)
       customBox.innerHTML = '<p>"L\'article à bien été ajouté au panier !"</p>';
       customBox.innerHTML +=
         '<button id="modal-close-produitselect">OK</button>';
-      console.log("customBox.innerHTML", customBox.innerHTML);
       modalShow();
 
       function modalShow() {

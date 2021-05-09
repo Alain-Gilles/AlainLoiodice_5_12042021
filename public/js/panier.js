@@ -77,7 +77,6 @@ function verification() {
     return result;
   }
   v_nom = name.value;
-  console.log("v-nom", v_nom);
   v_prenom = forname.value;
   v_ville = ville.value;
   v_adresse = adresse.value;
@@ -130,7 +129,6 @@ function ajoutqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
 function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   if (qte == 1) {
     let confirmsuppr = false;
-    console.log("confirmsuppr", confirmsuppr);
     //
     // création des éléments suivants dans les variables modalContainer et customBox juste avant </body>
     // <div id="modal">
@@ -199,7 +197,6 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
       .addEventListener("click", function () {
         modalClose();
         confirmsuppr = false;
-        console.log("confirmsuppr", confirmsuppr);
       });
     //
     // Si clic sur confirmation confirmation
@@ -208,7 +205,6 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
       document
         .getElementById("modal-confirm")
         .addEventListener("click", function () {
-          console.log("id", id, "svi", svi, "storage_article", storage_article);
           //
           // Suppression de l'article
           //
@@ -216,7 +212,6 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
           var createNewArticle = false;
           var it = 0;
           confirmsuppr = true;
-          console.log("confirmsuppr", confirmsuppr);
 
           //storage_article=JSON.parse(localStorage.getItem('article'));
           indice_article = storage_article.length;
@@ -305,7 +300,6 @@ function supprCartArt(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   // supprPanier())
   //
   let qteforce = 1;
-  console.log("qteforce", qteforce);
   supprqte(id, nomprod, idbtn, i, qteforce, prix, svi, storage_article);
 }
 
@@ -602,11 +596,10 @@ function majpagehtml() {
             let newcontact = new Contact(
               v_nom,
               v_prenom,
-              v_ville,
               v_adresse,
+              v_ville,
               v_email
             );
-            console.log("newcontact", newcontact);
             //
             // mise à jour ou création de contact dans local storage avec les données du formulaire
             //
@@ -615,21 +608,15 @@ function majpagehtml() {
               storage_contact = JSON.parse(localStorage.getItem("contact"));
               indice_contact = 0;
               storage_contact[indice_contact] = newcontact;
-              console.log(
-                "storage_contact[indice_contact]",
-                storage_contact[indice_contact]
-              );
               //
               // Mise à jour de la local storage
               //
               localStorage.setItem("contact", JSON.stringify(storage_contact));
-              console.log(localStorage);
             } else {
               indice_contact = 0;
               storage_contact = new Array();
               storage_contact[indice_contact] = newcontact;
               localStorage.setItem("contact", JSON.stringify(storage_contact));
-              console.log(localStorage);
             }
             //
             // Mise à jour produit
@@ -642,7 +629,6 @@ function majpagehtml() {
 
               for (var i = 0; i < storage_article_cde.length; i++) {
                 produitsCde[i] = storage_article_cde[i].id.toString();
-                console.log("i,produitsCde[i]", i, produitsCde[i]);
               }
               console.log("produitCde", produitsCde);
             }
@@ -653,8 +639,6 @@ function majpagehtml() {
             //
             const url = "http://localhost:3000/api/furniture/order";
             let getpost = "POST";
-            console.log(newcontact);
-            console.log(produitsCde);
             let newenvoidonnees = new EnvoiDonnees(newcontact, produitsCde);
             console.log(newenvoidonnees);
             console.log(newenvoidonnees.contact);
@@ -679,10 +663,22 @@ function majpagehtml() {
                 //
                 // Creation local storage numero_cde avec order_id
                 //
-
+                console.log(retourApi.orderId);
+                localStorage.setItem(
+                  "numeroCde",
+                  JSON.stringify(retourApi.orderId)
+                );
+                console.log(localStorage);
                 //
-                // liens vers validation.html qui ira recuperer dans la loca storage le order_id et les infos du contact
+                // liens vers page validation.html qui ira recuperer dans la loca storage le order_id et les infos du contact
                 //
+                // ouvrir une URL
+                // window.location.href permet une redirection de la page en cours vers l’URL précisée en paramètre
+                // window.location.href="http://votre_url"
+                // par exemple si vous souhaitez que la redirection se fasse lorsque l’utilisateur clique sur une image, faites ceci :
+                // <img src='lien_vers_image' onClick=’window.location.href=”http://votre_url"'>
+                //
+                window.location.href = "validation.html";
                 //
               })
               .catch((erreur) => {

@@ -1,22 +1,7 @@
 //
-// Récupération des paramètres de l'url
-// exemple récupération id produit et nom de
-// file:///C:/op_projet5/AlainLoiodice_5_12042021/validation.html?idNom=Alain&idPrenom=Gilles&idville=38&idAdresse=rue+des+chiens+errants&idEmail=alaingilles%40wanadoo.fr&Valider=Envoyer
-// par propriété searchParams de l'interface URL qui retourne un objet
-// URLSearchParams permettant d'accéder aux arguments décodés de la requête GET
-// contenu dans l'URL ici _id et name
+// création de la classe contact
 //
-let params = new URL(document.location).searchParams;
-let nom = params.get("idNom");
-let prenom = params.get("idPrenom");
-let ville = params.get("idVille");
-let adresse = params.get("idAdresse");
-let email = params.get("idEmail");
-
-//
-// création de,la classe contact
-//
-class contact {
+class Contact {
   constructor(_nom, _prenom, _adresse, _ville, _email) {
     this.firstName = _nom;
     this.lastName = _prenom;
@@ -26,17 +11,37 @@ class contact {
   }
 }
 //
-// creation de l'objet contact avec les paramètres récupérés dans l'url
+// Initialisations
 //
-let newcontact = new contact(nom, prenom, ville, adresse, email);
-console.log(newcontact);
-
-console.log("nom", nom);
-console.log("prenom", prenom);
-console.log("ville", ville);
-console.log("adresse", adresse);
-console.log("email", email);
-
+let nom = "";
+let prenom = "";
+let ville = "";
+let adresse = "";
+let email = "";
+//
+// Initialisation storage_contact qui contiendra "contact" de local storage
+//
+var storage_contact = new Array();
+//
+// mise à jour ou création de contact dans local storage avec les données du formulaire
+//
+if ("contact" in localStorage) {
+  storage_contact = JSON.parse(localStorage.getItem("contact"));
+  indice_contact = 0;
+  nom = storage_contact[0].firstName;
+  prenom = storage_contact[0].lastName;
+  ville = storage_contact[0].city;
+  adresse = storage_contact[0].address;
+  email = storage_contact[0].email;
+}
+//
+// Récupération dans la local storage du numéro de cde généré par l'API
+//
+//
+numValidCde = "";
+if ("numeroCde" in localStorage) {
+  var numValidCde = JSON.parse(localStorage.getItem("numeroCde"));
+}
 //
 // Ajout directement dans le code HTML du contenu de la constante remerciement
 // Remarque le caractere ` s'obtient en tapant ALTGR + 7 + espace
@@ -47,9 +52,9 @@ const structure = `
     <div class="col-md">
         <div class="w-75 mx-auto">
             <h2>${nom}\u0020${prenom}</h2>
-            <h4>Votre commande est en préparation</h4>
+            <h4>Votre commande référence :\u0020<b>${numValidCde}</b>\u0020est en préparation</h4>
             <p>Dès qu'elle sera prette a être expédié à l'adresse suivante</p>
-            <p><b>${ville}\u0020${adresse}</b></p>
+            <p><b>${ville}\u0020,\u0020${adresse}</b></p>
             <p>un e-mail vous sera envoyé à <b>${email}</b></p>
             <h2>Récapitulatif de votre commande</h2>
         </div>
@@ -64,11 +69,9 @@ positionRemerciement.insertAdjacentHTML("afterbegin", structure); //
 const section = document.getElementById("lrecapcde");
 let nbart = 0;
 let mtcde = 0;
-console.log(section);
 
 var storage_article = new Array();
 storage_article = JSON.parse(localStorage.getItem("article"));
-console.log(storage_article);
 
 for (var i = 0; i < storage_article.length; i++) {
   //
@@ -136,7 +139,6 @@ for (var i = 0; i < storage_article.length; i++) {
   // Recuperation prix produit
   //
   let prix = parseFloat(storage_article[i].prix);
-  mtcde = mtcde + prix;
   //
   // <p class="card-text">Prix : prix</p>
   //
@@ -153,6 +155,10 @@ for (var i = 0; i < storage_article.length; i++) {
   pcardqte.classList.add("card-text");
   pcardqte.textContent += "Qte : " + qte;
   append(divcardbody, pcardqte);
+  //
+  // Mise à jour montant cde = prix * qte
+  //
+  mtcde = mtcde + prix * qte;
 }
 //
 // supression de la cle dans le local storage
