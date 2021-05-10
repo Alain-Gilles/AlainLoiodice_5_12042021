@@ -72,6 +72,9 @@ let mtcde = 0;
 
 var storage_article = new Array();
 storage_article = JSON.parse(localStorage.getItem("article"));
+//
+// Pour chaque article dans le panier
+//
 
 for (var i = 0; i < storage_article.length; i++) {
   //
@@ -112,7 +115,7 @@ for (var i = 0; i < storage_article.length; i++) {
   divcardbody.classList.add("card-body");
   append(divcol7, divcardbody);
   //
-  // recuperatio id produit
+  // recuperation id produit
   //
   let _id = storage_article[i].id;
   let h5cardtitle = createNode("h5");
@@ -161,13 +164,6 @@ for (var i = 0; i < storage_article.length; i++) {
   mtcde = mtcde + prix * qte;
 }
 //
-// supression de la cle dans le local storage
-//
-//    localStorage.removeItem("article");
-//
-//
-
-//
 // Ajout directement dans le code HTML des infos qte globale et prix total
 // Remarque le caractere ` s'obtient en tapant ALTGR + 7 + espace
 //
@@ -182,5 +178,13 @@ const structure2 = `
     </div>
 </div>
 `;
+//
 //positionPrixQte.innerHTML = structure2;
+//
 positionPrixQte.insertAdjacentHTML("afterbegin", structure2); //
+//
+// supression de la cle dans le local storage
+//
+localStorage.removeItem("article");
+//
+//
