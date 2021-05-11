@@ -52,6 +52,7 @@ loadParamApi(url, getpost, contactProduit)
       // Ajout du noeud (div) à la fin de la liste des enfants sur le noeud parent (section)
       //
       let divcard = createNode("div");
+      //divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
       divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
       append(section, divcard);
       //
@@ -114,8 +115,10 @@ loadParamApi(url, getpost, contactProduit)
       //
       let prix = parseFloat(produit.price);
       prix = prix / 100;
-      //
       // <a href="produit.html?idproduit=_id&name=nameproduit" class="btn btn-primary strtched-link btnlienart couleur-btn-1"></a>
+      //
+      // la classe strtched-link : sert à rendre clicable le bloc contenant le lien
+      //
       // CSS class .couleur-btn-1 background-color: #8f5bfe; border: none;   couleur-btn-1:hover { background-color: #e58a0c; border: none; }
       //
       let alien = createNode("a");
@@ -130,7 +133,9 @@ loadParamApi(url, getpost, contactProduit)
       alien.classList.add(
         "btn",
         "btn-primary",
-        "stretched-link",
+        //
+        // si on rajoute la classe stretched-link => la carte est clicable et non seulement le lien, en l'enlevant sul le lien devient clicable
+        //"stretched-link",
         "btnlienart",
         "couleur-btn-1"
       );

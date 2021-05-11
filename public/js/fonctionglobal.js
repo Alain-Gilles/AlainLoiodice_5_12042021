@@ -78,7 +78,8 @@ function MajLibPanier() {
     //
     ParentZm.replaceChild(textNodeAm, EnfantZm);
   } else {
-    textNodeAm.textContent += "Vide";
+    //textNodeAm.textContent += "Vide";
+    textNodeAm.textContent += "Qte : 0";
     textNodeAm.id = "infoPanier";
     //
     // On remplace le premier enfant du noeud parent par le nouvel élément créée

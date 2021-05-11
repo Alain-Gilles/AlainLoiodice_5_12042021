@@ -1,27 +1,27 @@
 /**,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-}
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}*/
 
-html {
+/*html {
     font-size: 62.5%;
-}
+}*/
 
 body {
-    box-sizing: border-box;
-    background: $color-fondblanc;
-    max-width: 1590px;
-    min-width: 299px;
-    width:100%;
-    margin:auto;
+  box-sizing: border-box;
+  background: $color-fondblanc;
+  max-width: 1590px;
+  min-width: 299px;
+  width: 100%;
+  margin: auto;
 }
 
-.wrapper {
-    width:100%;
-    margin:0 auto;
+/*.wrapper {
+  width: 100%;
+  margin: 0 auto;
 }*/
 
 /*img {

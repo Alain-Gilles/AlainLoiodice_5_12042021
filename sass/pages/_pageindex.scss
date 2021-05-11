@@ -3,6 +3,17 @@
   width: 20%;
 }
 
+#EntBtn {
+  color: #8f5bfe;
+  font-weight: bold;
+  background-color: white;
+  margin-right: 10px;
+}
+
+#infoPanier {
+  margin-bottom: 0px;
+}
+
 .hauteur-div {
   height: 390px;
 }
@@ -33,3 +44,7 @@
 //   background-color: #e58a0c;
 //   border: none;
 // }
+
+.colorIconePanier {
+  color: #8f5bfe !important;
+}
