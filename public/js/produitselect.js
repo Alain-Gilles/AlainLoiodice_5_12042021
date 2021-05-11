@@ -113,9 +113,10 @@ loadParamApi(url, getpost, contactProduit)
     // Puis ajout du noeud enfant créée au noeud parent
     //
     // <div class="card w-75 mx-auto mt-5"></div>
+    // <div class="card w-75 mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
     //
     let divcard = createNode("div");
-    divcard.classList.add("card", "w-75", "mx-auto", "mt-5");
+    divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
     append(section, divcard);
     //
     // <div class="row no-gutters"></div>
@@ -135,7 +136,7 @@ loadParamApi(url, getpost, contactProduit)
     let image = createNode("img");
     let _img = selectproduit.imageUrl;
     image.src = selectproduit.imageUrl;
-    image.classList.add("card-img-top", "h-100");
+    image.classList.add("card-img-top", "h-100", "img-bord-arrondi");
     append(divcol5, image);
     //
     // <div class="col-md7"></div>
@@ -313,13 +314,13 @@ loadParamApi(url, getpost, contactProduit)
     });
     //
     // Creation du bouton ajouter au panier
-    // <button type="button" class="btn btn-primary" id="BtnClick">Ajouter au panier</button>
+    // <button type="button" class="btn btn-primary couleur-btn-1" id="BtnClick">Ajouter au panier</button>
     //
     var cardbtn = createNode("button");
     cardbtn.type = "button";
-    cardbtn.classList.add("mt-5", "btn", "btn-primary");
+    cardbtn.classList.add("mt-5", "btn", "btn-primary", "couleur-btn-1");
     cardbtn.id = "BtnClick";
-    cardbtn.textContent += "Ajouter au panier";
+    cardbtn.textContent += "Ajouter";
     append(divcardbody, cardbtn);
     //
     // si click sur bouton ajouter au panier

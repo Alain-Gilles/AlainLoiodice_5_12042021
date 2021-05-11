@@ -96,7 +96,9 @@ function MajLibPanier() {
 // (le « main thread » en anglais) ait terminé ses opérations.
 // Elles ne bloquent donc pas l’exécution du reste du code JavaScript.
 //
-// En parametre url de l'PAI et methode ( pour l'instant uniquement GET de traité )
+// En parametre url de l'API et methode ( GET ou POST ), ainsi que contactProduit
+// qui n'est utilisé que pour une requete en mode POST et contient les coordonnées du contact
+// et la liste des id des articles du panier d'achat.
 //
 //***********************************************************************************/
 async function loadParamApi(url, getpost, contactProduit) {
@@ -152,18 +154,18 @@ async function loadParamApi(url, getpost, contactProduit) {
       reject(error);
     };
     //
-    // La méthode open() de XMLHttpRequest instancie une nouvelle requête ou réinitialise un déjà existante.
+    // La méthode open() de XMLHttpRequest instancie une nouvelle requête ou réinitialise une déjà existante.
     // XMLHttpRequest.open(method, url) ou XMLHttpRequest.open(method, url, async) ou XMLHttpRequest.open(method, url, async, user, password)
     //
     // La méthode  XMLHttpRequest send() envoie la requête au serveur.  Si la requête est asynchrone (elle l'est par défaut),
-    // la méthode envoie un retour dés que la requête est partie et le résultat est intégré en utilisant les évènements.
+    // la méthode envoie un retour dès que la requête est partie et le résultat est intégré en utilisant les évènements.
     //
     //request.open("GET", url, true);
     if (getpost == "GET") {
       request.open("GET", url, true);
       request.send(null);
     } else {
-      //request.open("POST", url, true);
+      //request.open("POST", url, true);    true (mode asynchrone, false mode synchrone)
       status = 201;
       request.open("POST", url, true);
       //
@@ -171,7 +173,7 @@ async function loadParamApi(url, getpost, contactProduit) {
       // et l'envoi sous forme de données JSON "Content-Type", "application/json;charset=UTF-8"
       //
       // Définissez maintenant le type de contenu urlencoded en utilisant la méthode setRequestHeader pour des envois de chaine de caractères
-      // comme pae exemple request.send("username=minaki536&password=Ak5K#h@l-Q9");
+      // comme par exemple request.send("username=minaki536&password=Ak5K#h@l-Q9");
       // request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       // ou  pour envoyer des données avec le type de contenu JSON:
       // request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");

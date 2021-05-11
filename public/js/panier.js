@@ -359,11 +359,11 @@ function majpagehtml() {
 
     for (var i = 0; i < storage_article.length; i++) {
       //
-      // <div class="card w-75 mx-auto mt-5"></div>
+      // <div class="card w-75 mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
       //
       let svindice = i;
       let divcard = createNode("div");
-      divcard.classList.add("card", "w-75", "mx-auto", "mt-5");
+      divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
       append(section, divcard);
       //
       // <div class="row no-gutters"></div>
@@ -373,16 +373,22 @@ function majpagehtml() {
       append(divcard, divrow);
       //
       // <div class="col-md-5"></div>
+      // <div class="col-md-5 hauteur-div"></div>  // css class .hauteur-div => height: 390px; border-top-left-radius: 20px; border-bottom-left-radius: 20px;
       //
       let divcol5 = createNode("div");
-      divcol5.classList.add("col-md-5");
+      divcol5.classList.add("col-md-5", "hauteur-div");
       append(divrow, divcol5);
       //
-      // <img src="http://localhost:3000/images/oak_2.jpg" class="card-img-top h-100">
+      // <img src="http://localhost:3000/images/oak_1.jpg" class="card-img-top h-100 img-cover"></img> //  css class .img-cover => object-fit:cover;
       //
       let image = createNode("img");
       image.src = storage_article[i].img;
-      image.classList.add("card-img-top", "h-100");
+      image.classList.add(
+        "card-img-top",
+        "h-100",
+        "img-cover",
+        "img-bord-arrondi"
+      );
       append(divcol5, image);
       //
       // <div class="col-md7"></div>
@@ -443,11 +449,11 @@ function majpagehtml() {
       // Boutons augmenter la quantité, diminuer la quantité et supprimer
       //
       // Augmenter la qte de 1
-      // <button type="button" class="btn btn-primary" id="btnAjoutQte+ID"><span>+</span></button>
+      // <button type="button" class="btn btn-primary couleur-btn-1" id="btnAjoutQte+ID"><span>+</span></button>
       // id="btnAjoutQte+ID"  concaténation de btnAjoutQte + _id produit de façon à rendre l'id unique
       //
       const btnAjoutQP = createNode("button");
-      btnAjoutQP.classList.add("btn", "btn-primary");
+      btnAjoutQP.classList.add("btn", "btn-primary", "couleur-btn-1");
       let idBtn = "btnAjoutQte" + _id;
       //btnAjoutQP.id='btnAjoutQte';//
       btnAjoutQP.id = idBtn;
@@ -465,10 +471,10 @@ function majpagehtml() {
       });
       //
       // Diminuer la qte de 1
-      // <button type="button" class="btn btn-primary ml-2" id="btnMoinsQte+ID"><span>-</span></button>
+      // <button type="button" class="btn btn-primary ml-2 couleur-btn-1" id="btnMoinsQte+ID"><span>-</span></button>
       //
       const btnMoinsQP = createNode("button");
-      btnMoinsQP.classList.add("btn", "btn-primary", "ml-2");
+      btnMoinsQP.classList.add("btn", "btn-primary", "ml-2", "couleur-btn-1");
       idBtn = "btnMoinsQte" + _id;
       //btnMoinsQP.id='btnMoinsQte';//
       btnMoinsQP.id = idBtn;

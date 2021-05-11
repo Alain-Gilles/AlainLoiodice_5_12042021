@@ -32,6 +32,30 @@ body {
   width: 20%;
 }
 
+.hauteur-div {
+  height: 390px;
+}
+
+.img-cover {
+  object-fit: cover;
+}
+
+.img-bord-arrondi {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.bord-arrondi {
+  border: solid 2px #343a40;
+  border-radius: 20px;
+  box-shadow: 1px 1.5px #e0e0e0;
+}
+
+.couleur-btn-1 {
+  background-color: #8f5bfe;
+  border: none;
+}
+
 .custom-box {
   border: 2px solid grey;
   text-align: center;

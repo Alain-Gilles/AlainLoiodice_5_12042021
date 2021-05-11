@@ -1,199 +1,323 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="OpenClassrooms orinoco panier achat"/>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="OpenClassrooms orinoco panier achat" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
     <!-- Fichier Style CSS -->
-    <link rel="stylesheet" href="public/css/style.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="public/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
     <!-- Fichier JS -->
-    <script src='public/js/fonctionglobal.js' async></script>
-    <script src='public/js/panier.js' async></script>
+    <script src="public/js/fonctionglobal.js" async></script>
+    <script src="public/js/panier.js" async></script>
 
     <title>Panier achat</title>
-    </head>
-<body>
+  </head>
+  <body>
     <div class="wrapper">
-        <header>
-
-            <div class="bg-dark">
-                <div class="row">
-                    <nav class="col navbar navbar-expand-md navbar-dark">
-                        <a class="navbar-brand ml-2" href="index.html">
-                            <img  src="public/img/logo-orinoco.png" width="150" height="60" alt="logo orinoco"/>
-                        </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div id="navbarContent" class="collapse navbar-collapse">
-                            <!-- Left -->
-                            <ul class="navbar-nav mr-auto">
-                              <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Accueil</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
-                              </li>
-                            </ul>
-                            <!-- Right -->
-                            <ul class="navbar-nav ml-auto">
-                              <li class="nav-link" id="EntBtn">
-                                  <button class="button" class="btn bg-light"onclick="window.location.href='panier.html'"><i class="fa fa-shopping-cart text-primary fa-2x"></i></button>
-                                  <p id="infoPanier"></p>
-                              </li>
-                          </ul>
-                        </div>   
-                    </nav>
-                </div>
-            </div>
-                        
-        </header>
-
-        <div class="row">
-            <div class="col-md">
-              <div class="jumbotron pt-3 pb-3">
-                 <div class="w-75 mx-auto">
-                  <!--"fa fa-user" "fa fa-shopping-bag" "fa fa-shopping-basket" -->
-                  <h1><span class="fa fa-shopping-basket"></span>&nbsp Panier achat</h1>
-                 </div> 
-              </div>
-            </div>
-        </div>
-
-        <main>
-            <section id="lpanier">
-               
-            </section>
-
-            <h5 id="prix-total-cde" class="d-flex justify-content-center mt-5 mb-2"></h5>
-            <h5 id="qte-total-cde" class="d-flex justify-content-center mt-1 mb-5"></h5>
-
-            <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ViderPanierModal">
-                Vider le Panier
+      <header>
+        <div class="bg-dark">
+          <div class="row">
+            <nav class="col navbar navbar-expand-md navbar-dark">
+              <a class="navbar-brand ml-2" href="index.html">
+                <img
+                  src="public/img/logo-orinoco.png"
+                  width="150"
+                  height="60"
+                  alt="logo orinoco"
+                />
+              </a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
               </button>
-                          
-              <!-- Modal -->
-              <div class="modal fade" id="ViderPanierModal" tabindex="-1" role="dialog" aria-labelledby="ViderPanierModalLabel" aria-hidden="true">
-                  <h5 class="modal-title">Vider la totalité du panier</h5>
-                  <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">Vider la totalité du panier</h5>
-                              <button type="button" class="close" id="bouton-vider-panier" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>
-                          <div class="modal-body">
-                              <p>Confirmez l'action de vider le panier.</p>
-                              ...
-                          </div>
-                          <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abandon</button>
-                          <button type="button" class="btn btn-primary" id="razbtn" data-dismiss="modal">Confirmation</button>
-                          </div>
-                      </div>
-                  </div>
+              <div id="navbarContent" class="collapse navbar-collapse">
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Accueil</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                  </li>
+                </ul>
+                <!-- Right -->
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-link" id="EntBtn">
+                    <button
+                      class="button"
+                      class="btn bg-light"
+                      onclick="window.location.href='panier.html'"
+                    >
+                      <i class="fa fa-shopping-cart text-primary fa-2x"></i>
+                    </button>
+                    <p id="infoPanier"></p>
+                  </li>
+                </ul>
               </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <div class="row">
+        <div class="col-md">
+          <div class="jumbotron pt-3 pb-3">
+            <div class="w-75 mx-auto">
+              <!--"fa fa-user" "fa fa-shopping-bag" "fa fa-shopping-basket" -->
+              <h1>
+                <span class="fa fa-shopping-basket"></span>&nbsp Panier achat
+              </h1>
             </div>
+          </div>
+        </div>
+      </div>
 
-        </main>
+      <main>
+        <section id="lpanier"></section>
 
-        <div id="coordonnees" class="d-block">
-          <div class="row">
-            <div class="col-md">
-              <div class="jumbotron pt-3 pb-3">
-                <div class="w-75 mx-auto">
-                  <h1><span class="fa fa-user"></span>&nbspPassez votre commande </h1>
+        <h5
+          id="prix-total-cde"
+          class="d-flex justify-content-center mt-5 mb-2"
+        ></h5>
+        <h5
+          id="qte-total-cde"
+          class="d-flex justify-content-center mt-1 mb-5"
+        ></h5>
+
+        <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-toggle="modal"
+            data-target="#ViderPanierModal"
+          >
+            Vider le Panier
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="ViderPanierModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="ViderPanierModalLabel"
+            aria-hidden="true"
+          >
+            <h5 class="modal-title">Vider la totalité du panier</h5>
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Vider la totalité du panier</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    id="bouton-vider-panier"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Confirmez l'action de vider le panier.</p>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Abandon
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="razbtn"
+                    data-dismiss="modal"
+                  >
+                    Confirmation
+                  </button>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </main>
 
-          <div class="row no-gutters w-75 mx-auto mt-2" id="formulaire">
-            <div class="col-md">
-                <!-- fileset permet de regrouper des ensemble de champs et d'associer une légende-->
-                <!-- remarque on peur désactiver un élément <fieldset></fieldset> et par conséquence de l'ensemble
-                  de ses éléments en rajoutant disabled  <fieldset disabled>-->
-                <fieldset class="border p-2">
-                  <legend class="w-auto">Entrez vos coordonnées</legend>
-
-                    <!--<form name="ValidForm" action="validation.html"  onSubmit="return verification()" method="get" class="validF">-->
-                    <form name="ValidForm" id="contactForm">     
-                    <div class="form-group">
-                      <label for="idNom">Nom  <span class="text-danger">*</span></label>
-                      <input id="idNom" name="idNom" type="text" class="form-control" placeholder="votre nom" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="idPrenom">Prenom</label>
-                      <input id="idPrenom" name="idPrenom" type="text" class="form-control" placeholder="votre prénom" required>
-                    </div>
-                    <div class="form-group">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <label for="idAdresse">Adresse<span class="text-danger">*</span></label>
-                          <input id="idAdresse" name="idAdresse" type="text" class="form-control" placeholder="votre adresse" required>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="idVille">Ville<span class="text-danger">*</span></label>
-                          <input id="idVille" name="idVille" type="text" class="form-control" placeholder="Ville" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="idEmail">E-mail <span class="text-danger">*</span></label>
-                      <input id="idEmail" name="idEmail" type="text" class="form-control" placeholder="e-mail" required>
-                    </div>
-
-                    <!--<input type="submit" value="Envoyer" name="Valider">-->
-                    <input type="button" class="btn btn-danger" id="btn-valid" value="Validez votre commande" name="Valider">
-                    <input type="reset" class="btn btn-primary" value="Réinitialiser" name="Réinitialiser">
-                  </form>
-
-                </fieldset>
+      <div id="coordonnees" class="d-block">
+        <div class="row">
+          <div class="col-md">
+            <div class="jumbotron pt-3 pb-3">
+              <div class="w-75 mx-auto">
+                <h1>
+                  <span class="fa fa-user"></span>&nbspPassez votre commande
+                </h1>
+              </div>
             </div>
           </div>
         </div>
 
-        <footer>
+        <div class="row no-gutters w-75 mx-auto mt-2" id="formulaire">
+          <div class="col-md">
+            <!-- fileset permet de regrouper des ensemble de champs et d'associer une légende-->
+            <!-- remarque on peur désactiver un élément <fieldset></fieldset> et par conséquence de l'ensemble
+                  de ses éléments en rajoutant disabled  <fieldset disabled>-->
+            <fieldset class="border p-2">
+              <legend class="w-auto">Entrez vos coordonnées</legend>
 
-          <div class="row">
-            <div class="col-md">
-                <div class="jumbotron mt-5 pt-3 pb-3">
-                    <div class="row w-75 mx-auto">
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-dark" role="button">A propos</a>
-                            <!-- Left -->  
-                            <!-- <ul class="nav">
+              <!--<form name="ValidForm" action="validation.html"  onSubmit="return verification()" method="get" class="validF">-->
+              <form name="ValidForm" id="contactForm">
+                <div class="form-group">
+                  <label for="idNom"
+                    >Nom <span class="text-danger">*</span></label
+                  >
+                  <input
+                    id="idNom"
+                    name="idNom"
+                    type="text"
+                    class="form-control"
+                    placeholder="votre nom"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="idPrenom">Prenom</label>
+                  <input
+                    id="idPrenom"
+                    name="idPrenom"
+                    type="text"
+                    class="form-control"
+                    placeholder="votre prénom"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="idAdresse"
+                        >Adresse<span class="text-danger">*</span></label
+                      >
+                      <input
+                        id="idAdresse"
+                        name="idAdresse"
+                        type="text"
+                        class="form-control"
+                        placeholder="votre adresse"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="idVille"
+                        >Ville<span class="text-danger">*</span></label
+                      >
+                      <input
+                        id="idVille"
+                        name="idVille"
+                        type="text"
+                        class="form-control"
+                        placeholder="Ville"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="idEmail"
+                    >E-mail <span class="text-danger">*</span></label
+                  >
+                  <input
+                    id="idEmail"
+                    name="idEmail"
+                    type="text"
+                    class="form-control"
+                    placeholder="e-mail"
+                    required
+                  />
+                </div>
+
+                <!--<input type="submit" value="Envoyer" name="Valider">-->
+                <input
+                  type="button"
+                  class="btn btn-primary couleur-btn-1"
+                  id="btn-valid"
+                  value="Validez"
+                  name="Valider"
+                />
+                <input
+                  type="reset"
+                  class="btn btn-danger"
+                  value="Réinitialiser"
+                  name="Réinitialiser"
+                />
+              </form>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="row">
+          <div class="col-md">
+            <div class="jumbotron mt-5 pt-3 pb-3">
+              <div class="row w-75 mx-auto">
+                <div class="col-md-3">
+                  <a href="#" class="btn btn-dark" role="button">A propos</a>
+                  <!-- Left -->
+                  <!-- <ul class="nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">A propos</a>
                                 </li>
                             </ul> -->
-                        </div>
-                        <div class="col-md-3 ml-auto">
-                            <a href="#" class="btn btn-dark" role="button">Contact</a>
-                            <!-- Right -->
-                            <!-- <ul class="nav">
+                </div>
+                <div class="col-md-3 ml-auto">
+                  <a href="#" class="btn btn-dark" role="button">Contact</a>
+                  <!-- Right -->
+                  <!-- <ul class="nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Contact</a>
                                 </li>
                             </ul> -->
-                        </div>
-                    </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-
-        </footer>
+      </footer>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

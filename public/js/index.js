@@ -4,10 +4,10 @@ let getpost = "GET";
 let contactProduit = "";
 
 //
-// On demande une connection à URL pour récupérer les données de l'API
-// par appel de la fonction loadParamApi en lui passant en paramètre l'url de connection
+// On demande une connexion à URL pour récupérer les données de l'API
+// par appel de la fonction loadParamApi en lui passant en paramètre l'url de connexion
 // et le mode de connection ("GET") ainsi que le parametre contactProduit à "", parametre contenant le contact et les id produits du panier,
-// utiliser par la methode post en validation (panier.js) pour mettre à jour l'API sur serveur et récupérer le numero de commande.
+// contactproduit est utilisé par la methode post en validation (panier.js) pour mettre à jour l'API sur serveur et récupérer le numero de commande.
 // Pour exploiter les résultats de la promesse on utilise la méthode "then" qui va gérer
 // la réussite de l'appel et la méthode catch pour gérer l'échec.
 //
@@ -46,13 +46,13 @@ loadParamApi(url, getpost, contactProduit)
     //
     return listproduits.map(function (produit) {
       //
-      // <div class="card w-75 mx-auto mt-5"></div>
+      // <div class="card w-75 mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
       // Parametrage du noeud à créer
       // Ajout des class sur le noeud
       // Ajout du noeud (div) à la fin de la liste des enfants sur le noeud parent (section)
       //
       let divcard = createNode("div");
-      divcard.classList.add("card", "w-75", "mx-auto", "mt-5");
+      divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
       append(section, divcard);
       //
       // <div class="row no-gutters"></div>
@@ -61,18 +61,23 @@ loadParamApi(url, getpost, contactProduit)
       divrow.classList.add("row", "no-gutters");
       append(divcard, divrow);
       //
-      // <div class="col-md-5"></div>
+      // <div class="col-md-5 hauteur-div"></div>  // css class .hauteur-div => height: 390px; border-top-left-radius: 20px; border-bottom-left-radius: 20px;
       //
       let divcol5 = createNode("div");
-      divcol5.classList.add("col-md-5");
+      divcol5.classList.add("col-md-5", "hauteur-div");
+      //divcol5.classList.add("col-md-5");
       append(divrow, divcol5);
       //
-      // <img src="http://localhost:3000/images/oak_1.jpg" class="card-img-top h-100"></img>
+      // <img src="http://localhost:3000/images/oak_1.jpg" class="card-img-top h-100 img-cover"></img> //  css class .img-cover => object-fit:cover;
       //
       let image = createNode("img");
       image.src = produit.imageUrl;
-      //image.classList.add("card-img-top", "h-100");//
-      image.classList.add("card-img-top", "h-100");
+      image.classList.add(
+        "card-img-top",
+        "h-100",
+        "img-cover",
+        "img-bord-arrondi"
+      );
       append(divcol5, image);
       //
       // <div class="col-md-7"></div>
@@ -110,7 +115,8 @@ loadParamApi(url, getpost, contactProduit)
       let prix = parseFloat(produit.price);
       prix = prix / 100;
       //
-      // <a href="produit.html?idproduit=_id&name=nameproduit" class="btn btn-primary strtched-link btnlienart"></a>
+      // <a href="produit.html?idproduit=_id&name=nameproduit" class="btn btn-primary strtched-link btnlienart couleur-btn-1"></a>
+      // CSS class .couleur-btn-1 background-color: #8f5bfe; border: none;   couleur-btn-1:hover { background-color: #e58a0c; border: none; }
       //
       let alien = createNode("a");
       //
@@ -121,8 +127,14 @@ loadParamApi(url, getpost, contactProduit)
       //
       let appelclick = "produit.html?_id=" + _id + "&" + "name=" + produit.name;
       alien.href = appelclick;
-      alien.classList.add("btn", "btn-primary", "stretched-link", "btnlienart");
-      alien.textContent += "Détail produit....";
+      alien.classList.add(
+        "btn",
+        "btn-primary",
+        "stretched-link",
+        "btnlienart",
+        "couleur-btn-1"
+      );
+      alien.textContent += "Détail";
       append(divcardbody, alien);
       //
       // Si présence d'un article dans la local storage

@@ -78,10 +78,10 @@ storage_article = JSON.parse(localStorage.getItem("article"));
 
 for (var i = 0; i < storage_article.length; i++) {
   //
-  // <div class="card w-75 mx-auto mt-5"></div>
+  // <div class="card w-75 mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
   //
   let divcard = createNode("div");
-  divcard.classList.add("card", "w-75", "mx-auto", "mt-5");
+  divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
   append(section, divcard);
   //
   // <div class="row no-gutters"></div>
@@ -90,17 +90,17 @@ for (var i = 0; i < storage_article.length; i++) {
   divrow.classList.add("row", "no-gutters");
   append(divcard, divrow);
   //
-  // <div class="col-md-5"></div>
+  // <div class="col-md-5 hauteur-div"></div>  // css class .hauteur-div => height: 390px; border-top-left-radius: 20px; border-bottom-left-radius: 20px;
   //
   let divcol5 = createNode("div");
-  divcol5.classList.add("col-md-5");
+  divcol5.classList.add("col-md-5", "hauteur-div");
   append(divrow, divcol5);
   //
-  // <img src="http://localhost:3000/images/oak_2.jpg" class="card-img-top h-100">
+  // <img src="http://localhost:3000/images/oak_1.jpg" class="card-img-top h-100 img-cover"></img> //  css class .img-cover => object-fit:cover;
   //
   let image = createNode("img");
   image.src = storage_article[i].img;
-  image.classList.add("card-img-top", "h-100");
+  image.classList.add("card-img-top", "h-100", "img-cover", "img-bord-arrondi");
   append(divcol5, image);
   //
   // <div class="col-md7"></div>
