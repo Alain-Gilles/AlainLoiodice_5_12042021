@@ -50,8 +50,7 @@ function MajLibPanier() {
   // Si présence d'un article dans la local storage
   //
   //
-  // Mise a jour indication panier dans entete page index affichage de " panier vide" ou de "achats à valider"
-  //
+  // Mise a jour indication panier dans entete page index affichage de la quantité article dans le panier
   //
   // On recupère le noeud parent <li class="nav-link" id="EntBtn">
   //
@@ -183,7 +182,7 @@ async function loadParamApi(url, getpost, contactProduit) {
       //
       request.setRequestHeader("Content-Type", "application/json");
 
-      //  Contact produit contient un objet contact (nom, prenom, adresse, ville, email) + un baleau des id des produits commandés dans le panier
+      //  Contact produit contient un objet contact (nom, prenom, adresse, ville, email) + un taleau des id des produits commandés dans le panier
       request.send(JSON.stringify(contactProduit)); //
     }
   });

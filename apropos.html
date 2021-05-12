@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="OpenClassrooms orinoco page produits" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="OpenClassrooms orinoco" />
 
     <!-- Bootstrap CSS -->
     <link
@@ -22,13 +25,16 @@
 
     <!-- Fichier JS -->
     <script src="public/js/fonctionglobal.js" async></script>
-    <script src="public/js/produitselect.js" async></script>
+    <script src="public/js/index.js" async></script>
 
-    <title>Page produits</title>
+    <title>Projet OpenClassrooms Orinoco</title>
   </head>
   <body>
     <div class="wrapper">
       <header>
+        <!-- Barre de menu Boostrap: on affiche sur la partie droiteun logo , lien vers page Accueil, vers page Contact, sur la partie gauche un lien vers le panier -->
+        <!-- ainsi que la quantité d'articles présents dans le panier -->
+        <!-- le menu s'affiche sur une ligne à partir d'un écran de 768px sinon il se positionne en colonne-->
         <div class="bg-dark">
           <div class="row">
             <nav class="col navbar navbar-expand-md navbar-dark">
@@ -52,7 +58,6 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div id="navbarContent" class="collapse navbar-collapse">
-                <!-- Left -->
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
                     <a class="nav-link" href="index.html">Accueil</a>
@@ -61,47 +66,25 @@
                     <a class="nav-link" href="#">Contact</a>
                   </li>
                 </ul>
-                <!-- Right -->
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-link" id="EntBtn">
-                    <button
-                      class="button"
-                      class="btn bg-light"
-                      onclick="window.location.href='panier.html'"
-                    >
-                      <i
-                        class="
-                          fa fa-shopping-cart
-                          text-primary
-                          fa-2x
-                          colorIconePanier
-                        "
-                      ></i>
-                    </button>
-                    <p id="infoPanier"></p>
-                  </li>
-                </ul>
               </div>
             </nav>
           </div>
         </div>
       </header>
-
-      <div class="row">
-        <div class="col-md">
-          <div class="jumbotron pt-3 pb-3">
-            <div class="w-95P mx-auto">
-              <!--"fa fa-user" "fa fa-shopping-bag" "fa fa-shopping-basket" -->
-              <h1><span class="fa fa-user"></span>&nbsp Descriptif</h1>
+      <main>
+        <div class="card w955P mx-auto mt-5 bord-arrondi">
+          <div class="row no-gutters">
+            <div class="col-md">
+              <div class="card-body">
+                <h5 class="card-title">Qui sommes nous ?</h5>
+                <p class="card-test"><span>Orinoco </span>un site de e-commerce <span>différent !</span><br>
+                Notre objectif, <span>nous démarquer <span>des sites traditionnels de e-commerce, en créant des applications thématiques, ne vendant qu'un seul groupe de produits.<br>
+                Nous avons développé Orifurniture, site spécialisé dans la vente de mobilier destiné à la maison.<br><br>
+                Nous vous souhaitons une bonne navigation dans notre univers qui nous l'espérons deviendra le votre.</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <main>
-        <section id="ficheproduits">
-          <!--<div id="bouton"></div>-->
-        </section>
       </main>
       <footer>
         <div class="row">
@@ -109,13 +92,6 @@
             <div class="jumbotron mt-5 pt-3 pb-3">
               <div class="row w-95P mx-auto">
                 <div class="col-md-6">
-                  <a
-                    href="apropos.html"
-                    class="btn btn-link btn-link-couleur"
-                    role="button"
-                    >A propos</a
-                  >
-
                   <a
                     href="#"
                     class="btn btn-link btn-link-couleur"
@@ -137,7 +113,6 @@
         </div>
       </footer>
     </div>
-
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

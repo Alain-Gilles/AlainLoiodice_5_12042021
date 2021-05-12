@@ -65,7 +65,6 @@ loadParamApi(url, getpost, contactProduit)
       //
       let divcol5 = createNode("div");
       divcol5.classList.add("col-md-5", "hauteur-div");
-      //divcol5.classList.add("col-md-5");
       append(divrow, divcol5);
       //
       // <img src="http://localhost:3000/images/oak_1.jpg" class="card-img-top h-100 img-cover"></img> //  css class .img-cover => object-fit:cover;
@@ -133,7 +132,7 @@ loadParamApi(url, getpost, contactProduit)
         "btn",
         "btn-primary",
         //
-        // si on rajoute la classe stretched-link => la carte est clicable et non seulement le lien, en l'enlevant sul le lien devient clicable
+        // si on rajoute la classe stretched-link => la carte est clicable et non seulement le lien, en l'enlevant seul le lien devient clicable
         //"stretched-link",
         "btnlienart",
         "couleur-btn-1"
