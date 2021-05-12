@@ -50,7 +50,7 @@ const positionRemerciement = document.getElementById("lvalidcde");
 const structure = `
 <div class="row">
     <div class="col-md">
-        <div class="w-75 mx-auto">
+        <div class="w-95P mx-auto">
             <h2>${nom}\u0020${prenom}</h2>
             <h4>Votre commande référence :\u0020<b>${numValidCde}</b>\u0020est en préparation</h4>
             <p>Dès qu'elle sera prette a être expédié à l'adresse suivante</p>
@@ -78,10 +78,10 @@ storage_article = JSON.parse(localStorage.getItem("article"));
 
 for (var i = 0; i < storage_article.length; i++) {
   //
-  // <div class="card w-75 mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
+  // <div class="card w-95P mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
   //
   let divcard = createNode("div");
-  divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
+  divcard.classList.add("card", "w-95P", "mx-auto", "mt-5", "bord-arrondi");
   append(section, divcard);
   //
   // <div class="row no-gutters"></div>
@@ -171,7 +171,7 @@ const positionPrixQte = document.getElementById("lqteprix");
 const structure2 = `
 <div class="row">
     <div class="col-md mt-5">
-        <div class="w-75 mx-auto">
+        <div class="w-95P mx-auto">
             <h2>Le montant de votre commande s'élève à\u0020${mtcde}€</h2>
             <h4>Vous avez acheté\u0020${nbart}\u0020article(s)</h4>
         </div>

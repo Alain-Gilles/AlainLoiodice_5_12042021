@@ -24,7 +24,14 @@
   //border-bottom-left-radius: 20px;
 }
 
+.w-95P {
+  width: 95%;
+}
+
 .img-bord-arrondi {
+  @media only screen and (max-width: 767px) {
+    border-top-right-radius: 20px;
+  }
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
@@ -47,4 +54,9 @@
 
 .colorIconePanier {
   color: #8f5bfe !important;
+}
+
+.btn-link-couleur {
+  color: #8f5bfe;
+  font-weight: bold;
 }

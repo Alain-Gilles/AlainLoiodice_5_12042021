@@ -6,9 +6,10 @@
   padding: 0;
   box-sizing: inherit;
 }*/
-/*html {
-    font-size: 62.5%;
-}*/
+html {
+  font-size: calc(0.75em + 1vmin);
+}
+
 body {
   box-sizing: border-box;
   background: white;
@@ -49,9 +50,18 @@ body {
   object-fit: cover;
 }
 
+.w-95P {
+  width: 95%;
+}
+
 .img-bord-arrondi {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+}
+@media only screen and (max-width: 767px) {
+  .img-bord-arrondi {
+    border-top-right-radius: 20px;
+  }
 }
 
 .bord-arrondi {
@@ -67,6 +77,11 @@ body {
 
 .colorIconePanier {
   color: #8f5bfe !important;
+}
+
+.btn-link-couleur {
+  color: #8f5bfe;
+  font-weight: bold;
 }
 
 .custom-box {

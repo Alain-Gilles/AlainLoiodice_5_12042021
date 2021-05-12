@@ -46,14 +46,13 @@ loadParamApi(url, getpost, contactProduit)
     //
     return listproduits.map(function (produit) {
       //
-      // <div class="card w-75 mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
+      // <div class="card mx-auto mt-5 bord-arrondi" w-95P></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0; w-95P class width: 95%;
       // Parametrage du noeud à créer
       // Ajout des class sur le noeud
       // Ajout du noeud (div) à la fin de la liste des enfants sur le noeud parent (section)
       //
       let divcard = createNode("div");
-      //divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
-      divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
+      divcard.classList.add("card", "w-95P", "mx-auto", "mt-5", "bord-arrondi");
       append(section, divcard);
       //
       // <div class="row no-gutters"></div>

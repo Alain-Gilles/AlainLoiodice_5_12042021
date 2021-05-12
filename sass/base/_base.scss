@@ -6,9 +6,14 @@
   box-sizing: inherit;
 }*/
 
-/*html {
-    font-size: 62.5%;
-}*/
+html {
+  //font-size: 62.5%;
+  //
+  // Adaptation de la taille de la police en fonction de la largeur de l'écran
+  // texte redimensionnable sans requêtes de média queries
+  //
+  font-size: calc(0.75em + 1vmin);
+}
 
 body {
   box-sizing: border-box;

@@ -64,7 +64,7 @@ loadParamApi(url, getpost, contactProduit)
     //
     // On génère dans le DOM le code suivant
     //
-    // <div class="card w-75 mx-auto mt-5">  (card boostrap)  (width 75% de son parent)  (marge mx-auto permet de centrer horizontalement) (mt-5 margin top 5 )
+    // <div class="card w-95P mx-auto mt-5">  (card boostrap)  (width 75% de son parent)  (marge mx-auto permet de centrer horizontalement) (mt-5 margin top 5 )
     //   <div class="row no-gutters">        (création d'une ligne row sans goutières)
     //     <div class="col-md-5">            (création d'une colonne md-5 de largeur 5 sur 12 colonnes possibles pour les écrans Médium dont la largeur est >= 768px )
     //       <img src="http://localhost:3000/images/oak_1.jpg" class="card-img-top h-100">  (ajout d'une image placée image en haut de la carte image avec height 100% )
@@ -112,11 +112,11 @@ loadParamApi(url, getpost, contactProduit)
     // Ajout s'il y en a des id, des attributs, du texte etc..
     // Puis ajout du noeud enfant créée au noeud parent
     //
-    // <div class="card w-75 mx-auto mt-5"></div>
-    // <div class="card w-75 mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
+    // <div class="card w-95P mx-auto mt-5"></div>
+    // <div class="card w-95P mx-auto mt-5 bord-arrondi"></div>   // css class .bord-arrondi border: solid 2px #343a40; border-radius: 20px; box-shadow: 1px 1.5px #e0e0e0;
     //
     let divcard = createNode("div");
-    divcard.classList.add("card", "w-75", "mx-auto", "mt-5", "bord-arrondi");
+    divcard.classList.add("card", "w-95P", "mx-auto", "mt-5", "bord-arrondi");
     append(section, divcard);
     //
     // <div class="row no-gutters"></div>
