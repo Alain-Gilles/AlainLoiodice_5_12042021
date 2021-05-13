@@ -406,18 +406,24 @@ function majpagehtml() {
       // recuperation id produit
       //
       let _id = storage_article[i].id;
+
+      // let h5cardtitle = createNode("h5");
+      // h5cardtitle.classList.add("card-title");
+      // h5cardtitle.textContent += _id;
+      // append(divcardbody, h5cardtitle);
       let h5cardtitle = createNode("h5");
+      let _nomprod = storage_article[i].nom;
       h5cardtitle.classList.add("card-title");
-      h5cardtitle.textContent += _id;
+      h5cardtitle.textContent += _nomprod;
       append(divcardbody, h5cardtitle);
       //
       // <p class="card-title">selectproduit.name</p>
       //
-      let pcardnom = createNode("p");
-      let _nomprod = storage_article[i].nom;
-      pcardnom.classList.add("card-title");
-      pcardnom.textContent += _nomprod;
-      append(divcardbody, pcardnom);
+      // let pcardnom = createNode("p");
+      // let _nomprod = storage_article[i].nom;
+      // pcardnom.classList.add("card-title");
+      // pcardnom.textContent += _nomprod;
+      // append(divcardbody, pcardnom);
       //
       // <p class="card-text">"Lorem ipsum dolor sit amet,...."</p>
       //

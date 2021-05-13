@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="OpenClassrooms orinoco panier achat" />
+    <meta name="description" content="OpenClassrooms orinoco" />
 
     <!-- Bootstrap CSS -->
     <link
@@ -26,14 +26,17 @@
     <!-- Fichier JS -->
     <!--<script src="public/js/fonctionglobal.js" async></script>-->
     <script src="public/js/fonctionglobal.js" defer></script>
-    <!--<script src="public/js/panier.js" async></script>-->
-    <script src="public/js/panier.js" defer></script>
+    <!--<script src="public/js/contact.js" async></script>-->
+    <script src="public/js/contact.js" defer></script>
 
-    <title>Panier achat</title>
+    <title>Projet OpenClassrooms Orinoco</title>
   </head>
   <body>
     <div class="wrapper">
       <header>
+        <!-- Barre de menu Boostrap: on affiche sur la partie droiteun logo , lien vers page Accueil, vers page Contact, sur la partie gauche un lien vers le panier -->
+        <!-- ainsi que la quantité d'articles présents dans le panier -->
+        <!-- le menu s'affiche sur une ligne à partir d'un écran de 768px sinon il se positionne en colonne-->
         <div class="bg-dark">
           <div class="row">
             <nav class="col navbar navbar-expand-md navbar-dark">
@@ -57,33 +60,12 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div id="navbarContent" class="collapse navbar-collapse">
-                <!-- Left -->
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
                     <a class="nav-link" href="index.html">Accueil</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
-                  </li>
-                </ul>
-                <!-- Right -->
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-link ml-2" id="EntBtn">
-                    <button
-                      class="button"
-                      class="btn bg-light"
-                      onclick="window.location.href='panier.html'"
-                    >
-                      <i
-                        class="
-                          fa fa-shopping-cart
-                          text-primary
-                          fa-2x
-                          colorIconePanier
-                        "
-                      ></i>
-                    </button>
-                    <p id="infoPanier"></p>
+                    <a class="nav-link" href="#">Contact</a>
                   </li>
                 </ul>
               </div>
@@ -91,96 +73,18 @@
           </div>
         </div>
       </header>
-
-      <div class="row">
-        <div class="col-md">
-          <div class="jumbotron pt-3 pb-3">
-            <div class="w-95P mx-auto">
-              <!--"fa fa-user" "fa fa-shopping-bag" "fa fa-shopping-basket" -->
-              <h1><span class="fa fa-shopping-basket"></span>&nbsp Panier</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <main>
-        <section id="lpanier"></section>
-
-        <h5
-          id="prix-total-cde"
-          class="d-flex justify-content-center mt-5 mb-2"
-        ></h5>
-        <h5
-          id="qte-total-cde"
-          class="d-flex justify-content-center mt-1 mb-5"
-        ></h5>
-
-        <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-toggle="modal"
-            data-target="#ViderPanierModal"
-          >
-            Vider le Panier
-          </button>
-
-          <!-- Modal -->
-          <div
-            class="modal fade"
-            id="ViderPanierModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="ViderPanierModalLabel"
-            aria-hidden="true"
-          >
-            <h5 class="modal-title">Vider la totalité du panier</h5>
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Vider la totalité du panier</h5>
-                  <button
-                    type="button"
-                    class="close"
-                    id="bouton-vider-panier"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Confirmez l'action de vider le panier.</p>
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Abandon
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    id="razbtn"
-                    data-dismiss="modal"
-                  >
-                    Confirmation
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <div id="coordonnees" class="d-block">
-        <div class="row">
-          <div class="col-md">
-            <div class="jumbotron pt-3 pb-3">
-              <div class="w-95P mx-auto">
-                <h1><span class="fa fa-user"></span>&nbspValidation</h1>
+        <div class="card w-95P mx-auto mt-5 bord-arrondi">
+          <div class="row no-gutters">
+            <div class="col-md">
+              <div class="card-body">
+                <h5 class="card-title">Pour nous joindre</h5>
+                <p class="card-test">
+                  <span>Orinoco </span><br /><br />
+                  rue de la Paix<br />
+                  75000 Paris<br /><br />
+                  <span>E-mail : </span>orinoco.client@gmail.com
+                </p>
               </div>
             </div>
           </div>
@@ -192,7 +96,7 @@
             <!-- remarque on peur désactiver un élément <fieldset></fieldset> et par conséquence de l'ensemble
                   de ses éléments en rajoutant disabled  <fieldset disabled>-->
             <fieldset class="border p-2">
-              <legend class="w-auto">Entrez vos coordonnées</legend>
+              <legend class="w-auto">Formulaire de contact</legend>
 
               <!--<form name="ValidForm" action="validation.html"  onSubmit="return verification()" method="get" class="validF">-->
               <form name="ValidForm" id="contactForm">
@@ -217,24 +121,10 @@
                     type="text"
                     class="form-control"
                     placeholder="votre prénom"
-                    required
                   />
                 </div>
                 <div class="form-group">
                   <div class="row">
-                    <div class="col-md-6">
-                      <label for="idAdresse"
-                        >Adresse<span class="text-danger">*</span></label
-                      >
-                      <input
-                        id="idAdresse"
-                        name="idAdresse"
-                        type="text"
-                        class="form-control"
-                        placeholder="votre adresse"
-                        required
-                      />
-                    </div>
                     <div class="col-md-6">
                       <label for="idVille"
                         >Ville<span class="text-danger">*</span></label
@@ -264,6 +154,16 @@
                   />
                 </div>
 
+                <div class="form-group">
+                  <label for="idMsg"
+                    ><i class="fa fa-pencil prefix"></i> Message
+                    <span class="text-danger">*</span></label
+                  >
+
+                  <textarea id="idMsg" name="idMsg" class="form-control">
+                  </textarea>
+                </div>
+
                 <!--<input type="submit" value="Envoyer" name="Valider">-->
                 <input
                   type="button"
@@ -282,8 +182,7 @@
             </fieldset>
           </div>
         </div>
-      </div>
-
+      </main>
       <footer>
         <div class="row">
           <div class="col-md">
@@ -296,13 +195,6 @@
                     role="button"
                     >A propos</a
                   >
-
-                  <a
-                    href="contact.html"
-                    class="btn btn-link btn-link-couleur"
-                    role="button"
-                    >Contact</a
-                  >
                 </div>
                 <!-- <div class="col-md-2">
                   <a
@@ -311,7 +203,6 @@
                     role="button"
                     >Contact</a
                   >
-                  
                 </div> -->
               </div>
             </div>
@@ -327,7 +218,6 @@
         </div>
       </footer>
     </div>
-
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
