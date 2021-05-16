@@ -50,7 +50,6 @@
                 type="button"
                 data-toggle="collapse"
                 data-target="#navbarContent"
-                aria-controls="navbarSupportedContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               >
@@ -70,8 +69,7 @@
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-link ml-2" id="EntBtn">
                     <button
-                      class="button"
-                      class="btn bg-light"
+                      class="button btn bg-light"
                       onclick="window.location.href='panier.html'"
                     >
                       <i
@@ -97,7 +95,7 @@
           <div class="jumbotron pt-3 pb-3">
             <div class="w-95P mx-auto">
               <!--"fa fa-user" "fa fa-shopping-bag" "fa fa-shopping-basket" -->
-              <h1><span class="fa fa-shopping-basket"></span>&nbsp Panier</h1>
+              <h1><span class="fa fa-shopping-basket"></span>&nbsp;Panier</h1>
             </div>
           </div>
         </div>
@@ -126,12 +124,19 @@
           </button>
 
           <!-- Modal -->
-          <div
+          <!-- <div
             class="modal fade"
             id="ViderPanierModal"
             tabindex="-1"
             role="dialog"
             aria-labelledby="ViderPanierModalLabel"
+            aria-hidden="true"
+          > -->
+          <div
+            class="modal fade"
+            id="ViderPanierModal"
+            tabindex="-1"
+            role="dialog"
             aria-hidden="true"
           >
             <h5 class="modal-title">Vider la totalité du panier</h5>
@@ -180,7 +185,7 @@
           <div class="col-md">
             <div class="jumbotron pt-3 pb-3">
               <div class="w-95P mx-auto">
-                <h1><span class="fa fa-user"></span>&nbspValidation</h1>
+                <h1><span class="fa fa-user"></span>&nbsp;Validation</h1>
               </div>
             </div>
           </div>

@@ -53,7 +53,6 @@
                 type="button"
                 data-toggle="collapse"
                 data-target="#navbarContent"
-                aria-controls="navbarSupportedContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               >
@@ -83,7 +82,7 @@
                   <span>Orinoco </span><br /><br />
                   rue de la Paix<br />
                   75000 Paris<br /><br />
-                  <span>E-mail : </span>orinoco.client@gmail.com
+                  <span>E-mail : </span>orinoco.contact@gmail.com
                 </p>
               </div>
             </div>
@@ -153,15 +152,12 @@
                     required
                   />
                 </div>
-
+                <!-- Attention les balises ouverture et de fermeture de textarea doivent-etre sur la memem ligne -->
+                <!-- sinon la zone de saisie contient un caractère de nouvelle ligne -->
                 <div class="form-group">
-                  <label for="idMsg"
-                    ><i class="fa fa-pencil prefix"></i> Message
-                    <span class="text-danger">*</span></label
-                  >
+                  <label for="idMsg"></label>Message <span class="text-danger">*</span></label>
 
-                  <textarea id="idMsg" name="idMsg" class="form-control">
-                  </textarea>
+                  <textarea id="idMsg" name="idMsg" class="form-control" rows="5" placeholder="Entrez votre message ici..."></textarea>
                 </div>
 
                 <!--<input type="submit" value="Envoyer" name="Valider">-->

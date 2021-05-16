@@ -38,7 +38,7 @@ const url = "http://localhost:3000/api/furniture" + "/" + idproduit;
 //
 const section = document.getElementById("ficheproduits");
 //
-// On demande une connection à URL pour récupérer les données de l'API
+// On demande une connexion à URL pour récupérer les données de l'API
 // par appel de la fonction loadParamApi en lui passant en paramètre l'url de connection
 // et le mode de connection "GET" ainsi que contactProduit à "" (coordonnées client + tableau des id produits du panier achat), utilisé par méthode POST et renseigne dans panier.js.
 // Pour exploiter les résultats de la promesse on utilise la méthode "then" qui va gérer
@@ -58,7 +58,7 @@ loadParamApi(url, getpost, contactProduit)
     // Si présence d'un article dans la local storage
     //
     //
-    // Mise a jour indication panier dans entete page index affichage de " panier vide" ou de "achats à valider"
+    // Mise a jour indication panier dans entete page index affichage du cumul de la quantité des articles présents dans le panier
     //
     MajLibPanier();
     //
@@ -103,7 +103,7 @@ loadParamApi(url, getpost, contactProduit)
     //            <button type="button" class="mt-5 btn btn-primary" id="BtnClick">Ajouter au panier</button>
     //        </div>
     //     </div>
-    //   <div
+    //   </div>
     // </div>
     //
     // La creation des ligne de code à intégrer dans la dom suit le process suivant
@@ -156,7 +156,7 @@ loadParamApi(url, getpost, contactProduit)
     let _id = selectproduit._id;
     let h5cardtitle = createNode("h5");
     //
-    // <5h class="card-title">selectproduit.name</h5>
+    // <h5 class="card-title">selectproduit.name</h5>
     //
     let _nomprod = selectproduit.name;
     h5cardtitle.classList.add("card-title");
@@ -259,7 +259,7 @@ loadParamApi(url, getpost, contactProduit)
     append(cardformqte, cardlabelqte);
 
     //
-    // <select name="optionform" id="optionform" size="1"></select>
+    // <select name="optionqte" id="optionqte" size="1"></select>
     //
     let cardselectqte = createNode("select");
     createcardqte = cardselectqte;
@@ -283,34 +283,6 @@ loadParamApi(url, getpost, contactProduit)
       _optqte = texteqte;
       _optqte = parseInt(_optqte);
       //
-      // Mise à jour de la qte dans la qte affichée dans la fenetre modale
-      // dans le cas ou il y a un click sur l'otion qte de maniere à afficher
-      // la bonne qte dans la fenetre (il faut donc réécrire la ligne suivant de DOM
-      // <p id="ConfirmAjoutQte">Quantité à ajouter au panier :${_optqte}</p> pour
-      // la nouvelle qte soit prise en compte. Nouveau contenu de la variable _optqte)
-      //
-      // On recupère le noeud parent <div class="modal-body" id="ConfirmProdQTe">
-      //
-      const ParentItemAModifier = document.getElementById("ConfirmProdQTe");
-      //
-      // On recupere dans EnfantItemAModifier le second enfant du noeud parent
-      // <p id="ConfirmAjoutQte">Quantité à ajouter au panier :${_optqte}</p>
-      //
-      const EnfantItemAModifier = ParentItemAModifier.children[1];
-      //
-      // On creait un nouvel élément 'p' vide
-      //
-      const textNodeAModifier = document.createElement("p");
-      //
-      //  Dans cet élement que l'on vient de créait on ajoute le contenu du texte que l'on veut afficher
-      //
-      textNodeAModifier.textContent = `Quantité à ajouter au panier :${_optqte}`;
-      //
-      // On remplace le premier enfant du noeud parent par le nouvel élément créée
-      //
-      ParentItemAModifier.replaceChild(textNodeAModifier, EnfantItemAModifier);
-
-      // PConfirmAjoutcardbtn.textContent+='Ajouter au panier';
     });
     //
     // Creation du bouton ajouter au panier
@@ -394,7 +366,14 @@ loadParamApi(url, getpost, contactProduit)
       // boite alerte standard remplacée par boite alertte personnalisée
       // alert("L'article a été ajouté")
       //
-      // création d'une boite alerte customisée
+      // création d'une boite alerte customisée en fin de body
+      //
+      // <div id="modal-produitselect">
+      //    <div class="custum-box-produitselect">
+      //       <p>"L'article a bien été ajouté au panier !"</p>
+      //       <button id="modal-close-produitselect">OK</button>
+      //    </div>
+      // </div>
       //
       var modalContainer = document.createElement("div");
       modalContainer.setAttribute("id", "modal-produitselect");
@@ -404,11 +383,22 @@ loadParamApi(url, getpost, contactProduit)
       //
       // Affichage boîte d'alerte
       //
-      customBox.innerHTML = '<p>"L\'article à bien été ajouté au panier !"</p>';
+      customBox.innerHTML = '<p>"L\'article a bien été ajouté au panier !"</p>';
       customBox.innerHTML +=
         '<button id="modal-close-produitselect">OK</button>';
       modalShow();
-
+      //
+      // parent.appendChild(HTMLElement enfant))
+      //
+      // Ajoute l'élément HTML enfant en dernière position de l'élément parent.
+      // L'élément enfant peut se créer avec createElement()
+      // La méthode opposée removeChild() retire l'élément enfant de parent.
+      // La méthode insertBefore() permet d'ajouter un nouvel élément dans un élément parent à une position donnée dans la hiérarchie des noeuds enfants.
+      // Ici élément parent objet document donc insertion aura lien en fin de document soit en fin de body
+      //
+      // Ensuite on ajoute un addEventListener sur l'id "modal-close-produitselect" qui correspond au bouton si l'utilisateur clic sur le bouton OK
+      // suppression des lignes de code html créées auparavant par la méthode removeChild
+      //
       function modalShow() {
         modalContainer.appendChild(customBox);
         document.body.appendChild(modalContainer);

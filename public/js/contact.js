@@ -12,6 +12,8 @@ class Resultat {
   }
 }
 
+const mailSite = "orinoco.contact@gmail.com";
+
 document.getElementById("btn-valid").addEventListener("click", function () {
   reponse = verifFormMSg();
   console.log(reponse);
@@ -19,14 +21,17 @@ document.getElementById("btn-valid").addEventListener("click", function () {
     console.log("controle ok");
     window.open(
       "mailto:" +
-        reponse.email +
+        mailSite +
         "?Subject=" +
         "contact site orinoco " +
+        "nom : " +
         reponse.nom +
-        " " +
+        " prenom : " +
         reponse.prenom +
-        " " +
+        " e-mail : " +
+        reponse.email +
         "&body=" +
+        "message : " +
         reponse.msg
     );
     window.location.href = "index.html";
@@ -40,9 +45,6 @@ function verifFormMSg() {
   let forname = document.forms["ValidForm"]["idPrenom"];
   let ville = document.forms["ValidForm"]["idVille"];
   let msg = document.querySelector("textarea");
-  console.log(ville);
-  console.log(msg);
-  console.log(msg.value);
   let email = document.forms["ValidForm"]["idEmail"];
 
   result = new Resultat(false, "", "", "", "", "");

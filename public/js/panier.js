@@ -85,7 +85,7 @@ function verification() {
 }
 
 //
-// fonction suppression d'un article
+// fonction suppression du panier
 //
 function supprPanier() {
   if ("article" in localStorage) {
@@ -130,14 +130,14 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   if (qte == 1) {
     let confirmsuppr = false;
     //
-    // création des éléments suivants dans les variables modalContainer et customBox juste avant </body>
+    // création de la fenetre modale
     // <div id="modal">
     //    <div class="custom-box">
     //        <p>
     //           "Attention vous allez supprimer cet article du panier!"
     //           <br>
     //           " Si vous souhaitez confirmer la suppression appuyer sur Confirmer"
-    //           <br
+    //           <br>
     //        </p>
     //        <button id="modal-confirm">Confirmer</button>
     //        <button id="modal-close">Annuler</button>
@@ -176,7 +176,7 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   //
   // traitement supression article si qte  = 1
   //
-  // Ajout à la Dom HTML du contenu de customBox et de modalContainer
+  // Ajout à la Dom HTML du contenu de customBox et de modalContainer (fenetre modale)
   // La méthode Node.appendChild() ajoute un noeud à la fin de la liste des enfants d'un noeud parent spécifié.
   // document.body.appendChild ajoute l'élément à la fin du corps du document
   //
@@ -184,7 +184,7 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   // si clik sur annuler on appelle la fonction modalClose qui va enlever du DOM le code html créée plus tôt
   //
   // Ajout d'une ecoute sur le bouton confirmer id modal-confirm sur evenement click
-  // traitement de la suppression de l'article
+  // traitement de la suppression de l'article si confirmation
   //
   function modalShow(id, svi, storage_article, qte, prix) {
     modalContainer.appendChild(customBox);
@@ -344,7 +344,7 @@ function majpagehtml() {
   // et ce tableau est rempli avec le contenu du tableau article de la local storage (ce contenu est transformé en code JS
   // grace à la fonction JSON.parse)
   //
-  // Ensuite on fait une boucle de lecture du tableau localStorage (la valeur de l'indice du tableau est récupérée par
+  // Ensuite on fait une boucle de lecture du tableau storage_article (la valeur de l'indice du tableau est récupérée par
   // storage_article.length)
   // Pour chaque élément on créait les élement html dans le DOM en utilisant les fonctions createNode et append
   //
@@ -372,7 +372,6 @@ function majpagehtml() {
       divrow.classList.add("row", "no-gutters");
       append(divcard, divrow);
       //
-      // <div class="col-md-5"></div>
       // <div class="col-md-5 hauteur-div"></div>  // css class .hauteur-div => height: 390px; border-top-left-radius: 20px; border-bottom-left-radius: 20px;
       //
       let divcol5 = createNode("div");
@@ -417,7 +416,7 @@ function majpagehtml() {
       h5cardtitle.textContent += _nomprod;
       append(divcardbody, h5cardtitle);
       //
-      // <p class="card-title">selectproduit.name</p>
+      // <h5 class="card-title">selectproduit.name</h5>
       //
       // let pcardnom = createNode("p");
       // let _nomprod = storage_article[i].nom;
@@ -455,7 +454,7 @@ function majpagehtml() {
       // Boutons augmenter la quantité, diminuer la quantité et supprimer
       //
       // Augmenter la qte de 1
-      // <button type="button" class="btn btn-primary couleur-btn-1" id="btnAjoutQte+ID"><span>+</span></button>
+      // <button class="btn btn-primary couleur-btn-1" id="btnAjoutQte+ID"><span>+</span></button>
       // id="btnAjoutQte+ID"  concaténation de btnAjoutQte + _id produit de façon à rendre l'id unique
       //
       const btnAjoutQP = createNode("button");
@@ -470,7 +469,6 @@ function majpagehtml() {
       //
       // detection du clic sur "+" => ajouter 1 dans qte
       // appel fonction ajoutqte avec parametre id, nomprod, #id html, svindice sauv de indice de parcours du tableau des storage_article
-      // tableau storage_article
       //
       document.getElementById(idBtn).addEventListener("click", function () {
         ajoutqte(_id, _nomprod, idBtn, i, qte, prix, svindice, storage_article);
@@ -631,9 +629,10 @@ function majpagehtml() {
               localStorage.setItem("contact", JSON.stringify(storage_contact));
             }
             //
-            // Mise à jour produit
+            // Mise à jour du tableau contenant les id des produits du panier produit
             //
-            // Boucle de lecture de la local storage avec cle article
+            // Recuperation de la local storage avec cle article dans un tableau storage_article_cde, puis boucle de lecture du tableau
+            // pour recuperer dans le tableau produitCde les id ,transformés en chaine de caractères, des articles du panier achat
             //
             if ("article" in localStorage) {
               var storage_article_cde = new Array();
@@ -642,23 +641,19 @@ function majpagehtml() {
               for (var i = 0; i < storage_article_cde.length; i++) {
                 produitsCde[i] = storage_article_cde[i].id.toString();
               }
-              console.log("produitCde", produitsCde);
             }
             //
             // Mise à jour du serveur par methode POST en envoyant requete JSON contenant un objet de contact
-            // newcontact et un tableau de produits ( id et qte ) produitCde
+            // newcontact et un tableau d'id de produits produitCde
             // POST retourne l'objet contact, le tableau produits et order_id (string)
             //
             const url = "http://localhost:3000/api/furniture/order";
             let getpost = "POST";
             let newenvoidonnees = new EnvoiDonnees(newcontact, produitsCde);
-            console.log(newenvoidonnees);
-            console.log(newenvoidonnees.contact);
-            console.log(newenvoidonnees.products);
             //
             // On demande une connection à URL pour envoyer dans le corps de la demande une requête JSON contenant un objet de contact
             // et un tableau de produits, l'API nous retourne l'objet contact, le tableau produits et order_id (string)
-            // La connection sefait par appel de la fonction loadParamApi en lui passant en paramètre l'url de connection
+            // La connection se fait par appel de la fonction loadParamApi en lui passant en paramètre l'url de connection
             // et le mode de connection ("POST") et newenvoidonnees (objet contact + tableau des id de produits du panier).
             // Pour exploiter les résultats de la promesse on utilise la méthode "then" qui va gérer
             // la réussite de l'appel et la méthode catch pour gérer l'échec.
@@ -671,18 +666,14 @@ function majpagehtml() {
                 // La réponse est l'objet contact, le tableau produits et order_id (string)
                 let retourApi = JSON.parse(reponse);
                 //
-                console.log(retourApi);
-                //
                 // Creation local storage numero_cde avec order_id
                 //
-                console.log(retourApi.orderId);
                 localStorage.setItem(
                   "numeroCde",
                   JSON.stringify(retourApi.orderId)
                 );
-                console.log(localStorage);
                 //
-                // liens vers page validation.html qui ira recuperer dans la loca storage le order_id et les infos du contact
+                // liens vers page validation.html qui ira recuperer dans la local storage le order_id et les infos du contact
                 //
                 // ouvrir une URL
                 // window.location.href permet une redirection de la page en cours vers l’URL précisée en paramètre
@@ -717,7 +708,7 @@ function majpagehtml() {
     //
     // On cache le bouton vider le panier en supprimant la classe d-flex de la div
     // <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
-    // et en rajoutant la classe d-none ( pas affichage de la div)
+    // en rajoutant la classe d-none ( pas affichage de la div)
     //
     PositDivBtnPanier = document.getElementById("BtnVidePanier");
     PositDivBtnPanier.classList.remove("d-flex");
@@ -731,7 +722,7 @@ function majpagehtml() {
     MajQteTotPanier.classList.remove("d-flex");
     MajQteTotPanier.classList.add("d-none");
     //
-    // On cache le formumaire
+    // On cache le formulaire
     //
     PositFormulaire = document.getElementById("coordonnees");
     PositFormulaire.classList.remove("d-block");

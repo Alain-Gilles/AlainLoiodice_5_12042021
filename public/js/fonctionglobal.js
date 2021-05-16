@@ -69,7 +69,7 @@ function MajLibPanier() {
     //
     //  Dans cet élement que l'on vient de créait on ajoute le contenu du texte que l'on veut afficher
     //
-    //textNodeAm.textContent += "A valider";/
+    //textNodeAm.textContent += qte cumulée;/
     textNodeAm.textContent += `Qte :\u0020` + SomQteArt();
     textNodeAm.id = "infoPanier";
     //
@@ -77,7 +77,7 @@ function MajLibPanier() {
     //
     ParentZm.replaceChild(textNodeAm, EnfantZm);
   } else {
-    //textNodeAm.textContent += "Vide";
+    //textNodeAm.textContent += "Qte : 0";
     textNodeAm.textContent += "Qte : 0";
     textNodeAm.id = "infoPanier";
     //
