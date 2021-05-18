@@ -49,12 +49,13 @@ function verifFormMSg() {
 
   result = new Resultat(false, "", "", "", "", "");
 
-  if (name.value == "") {
+  if (!/\w/.test(name.value)) {
     alert("votre nom est obligatoire");
     name.focus();
     result.status = false;
     return result;
   }
+
   /* La méthode test() vérifie s'il y a une correspondance entre un texte et une expression rationnelle. */
   /* Elle retourne true en cas de succès et false dans le cas contraire.*/
   /* /\w/  enleve le cas du retour à la ligne; pour vérifier qu'il existe un caractère non blanc dans le textarea */
@@ -67,7 +68,7 @@ function verifFormMSg() {
     return result;
   }
 
-  if (ville.value == "") {
+  if (!/\w/.test(ville.value)) {
     alert("il faut renseigner la ville");
     ville.focus();
     result.status = false;
@@ -80,6 +81,7 @@ function verifFormMSg() {
     result.status = false;
     return result;
   }
+
   //
   // La methode indexOf() renvoie l'indice de la première occurence de la valeur cherchée au sein de la
   // chaîne courante (à partir de indexDébut). Elle renvoie -1 si la valeur cherchée n'est pas trouvée.

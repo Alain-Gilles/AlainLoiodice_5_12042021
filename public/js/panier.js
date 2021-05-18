@@ -16,30 +16,33 @@ function verification() {
   var ville = document.forms["ValidForm"]["idVille"];
   var adresse = document.forms["ValidForm"]["idAdresse"];
   var email = document.forms["ValidForm"]["idEmail"];
-  var result = true;
+  var result = false;
 
-  if (name.value == "") {
+  /* expression régulière \w signifie tous les caractères alphanumériques minuscules ou majuscules */
+  /* si la chaine de caractères ne contient que des blancs il y a une erreur */
+
+  if (!/\w/.test(name.value)) {
     alert("votre nom est obligatoire");
     name.focus();
     result = false;
     return result;
   }
 
-  if (forname.value == "") {
+  if (!/\w/.test(forname.value)) {
     alert("entrer votre prénom");
     forname.focus();
     result = false;
     return result;
   }
 
-  if (adresse.value == "") {
+  if (!/\w/.test(adresse.value)) {
     alert("il faut renseigner votre adresse");
     adresse.focus();
     result = false;
     return result;
   }
 
-  if (ville.value == "") {
+  if (!/\w/.test(ville.value)) {
     alert("il faut renseigner la ville");
     ville.focus();
     result = false;
@@ -81,6 +84,7 @@ function verification() {
   v_ville = ville.value;
   v_adresse = adresse.value;
   v_email = email.value;
+  result = true;
   return result;
 }
 

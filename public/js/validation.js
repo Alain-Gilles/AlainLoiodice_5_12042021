@@ -35,7 +35,7 @@ if ("contact" in localStorage) {
   email = storage_contact[0].email;
 }
 //
-// Récupération dans la local storage du numéro de cde généré par l'API
+// Récupération dans la local storage cle numeroCde du numéro de cde généré par l'API
 //
 //
 numValidCde = "";
@@ -51,12 +51,12 @@ const structure = `
 <div class="row">
     <div class="col-md">
         <div class="w-95P mx-auto">
-            <h2>${nom}\u0020${prenom}</h2>
-            <h4>Votre commande référence :\u0020<b>${numValidCde}</b>\u0020est en préparation</h4>
-            <p>Dès qu'elle sera prette a être expédié à l'adresse suivante</p>
-            <p><b>${ville}\u0020,\u0020${adresse}</b></p>
-            <p>un e-mail vous sera envoyé à <b>${email}</b></p>
-            <h2>Récapitulatif de votre commande</h2>
+            <h2 class="text-center">${nom}\u0020${prenom}</h2>
+            <h4 class="text-center">Votre commande référence :\u0020<b>${numValidCde}</b>\u0020est en préparation</h4>
+            <p class="text-center">Dès qu'elle sera prette a être expédié à l'adresse suivante</p>
+            <p class="text-center"><b>${ville}\u0020,\u0020${adresse}</b></p>
+            <p class="text-center">un e-mail vous sera envoyé à <b>${email}</b></p>
+            <h2 class="text-center colorIconePanier">Récapitulatif</h2>
         </div>
     </div>
 </div>
@@ -178,9 +178,8 @@ const positionPrixQte = document.getElementById("lqteprix");
 const structure2 = `
 <div class="row">
     <div class="col-md mt-5">
-        <div class="w-95P mx-auto">
-            <h2>Le montant de votre commande s'élève à\u0020${mtcde}€</h2>
-            <h4>Vous avez acheté\u0020${nbart}\u0020article(s)</h4>
+        <div class="w-95P mx-auto mb-5 colorIconePanier">
+            <h2 class="text-center">\u0020${nbart}\u0020article(s) \u0020${mtcde}€ ttc</h2>
         </div>
     </div>
 </div>
