@@ -9,6 +9,9 @@
 //
 // définition de l'expression régulière d'une adresse email
 //                                                                                                */
+// ^ debut chiffres ou lettres majuscules ou minuscules . _- suivi d'un @ d'au mons 2 chiffres ou lettres */
+//   majuscules ou minuscules de . ou - de un . et de 2 à 5 letteres minuscules   $ fin de chaine
+
 function isEmail(email) {
   var regEmail = new RegExp(
     "^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$",

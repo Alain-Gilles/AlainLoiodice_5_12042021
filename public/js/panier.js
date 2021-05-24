@@ -203,7 +203,7 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
         confirmsuppr = false;
       });
     //
-    // Si clic sur confirmation confirmation
+    // Si clic sur confirmation suppression
     //
     if (document.getElementById("modal-confirm")) {
       document
