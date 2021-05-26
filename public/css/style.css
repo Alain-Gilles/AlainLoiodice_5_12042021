@@ -93,6 +93,7 @@ body {
   margin: auto;
 }
 
+/**/
 #modal {
   position: absolute;
   top: 0;
@@ -106,15 +107,16 @@ body {
 
 #modal-confirm {
   margin-right: 15px;
-  background-color: #DC3545;
+  background-color: #dc3545;
   color: white;
 }
 
 #modal-close {
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
 }
 
+/**/
 .custom-box-produitselect {
   border: 2px solid grey;
   text-align: center;

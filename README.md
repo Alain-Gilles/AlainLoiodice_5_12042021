@@ -2,7 +2,20 @@
 Openclassrooms projet 5 Orinoco
 
 
-Consignes pour installer environnement de test du projet orinoco sur un server local
+## Consignes pour installer environnement de test du projet orinoco sur un server local
+
+
+******************************************************************************************
+************                       Prérequis                                  ************
+******************************************************************************************
+
+Remarque cette documentation part du principe que nodejs est installé sur votre ordinateur.
+Vous pouvez que node et npm sont installés en tapant les commandes suivantes à partir de votre terminal
+$ npm -v doit afficher la version du pgm
+$ node -v doit afficher la version du pgm
+Si les programmes ne sont pas installés : 
+Aller sur https://nodejs.org et télécharger la dernière version stable : version LTS (installe entre autre Node.js, npm package manager..)
+
 
 ********************************************************
 * Première étape cloner le front-end du projet orinoco *
@@ -86,13 +99,3 @@ Puis entrer la commande $ node server pour lancer le server sur le port 3000
 Ensuite ouvrir votre navigateur et entrer l'adresse 
 c:/orinoco/frontend/index.html
 
-******************************************************************************************
-************                       Note importante                            ************
-******************************************************************************************
-
-Remarque cette documentation part du principe que nodejs est installé sur votre ordinateur.
-Vous pouvez que node et npm sont installés en tapant les commandes suivantes à partir de votre terminal
-$ npm -v doit afficher la version du pgm
-$ node -v doit afficher la version du pgm
-Si les programmes ne sont pas installés : 
-Aller sur https://nodejs.org et télécharger la dernière version stable : version LTS (installe entre autre Node.js, npm package manager..)

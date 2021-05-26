@@ -94,7 +94,6 @@
         <div class="col-md">
           <div class="jumbotron pt-3 pb-3">
             <div class="w-95P mx-auto">
-              <!--"fa fa-user" "fa fa-shopping-bag" "fa fa-shopping-basket" -->
               <h1><span class="fa fa-shopping-basket"></span>&nbsp;Panier</h1>
             </div>
           </div>
@@ -124,14 +123,7 @@
           </button>
 
           <!-- Modal -->
-          <!-- <div
-            class="modal fade"
-            id="ViderPanierModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="ViderPanierModalLabel"
-            aria-hidden="true"
-          > -->
+
           <div
             class="modal fade"
             id="ViderPanierModal"
@@ -155,23 +147,23 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>Confirmez l'action de vider le panier.</p>
+                  <p>Attention, si vous confirmez le panier sera vidé!</p>
                 </div>
                 <div class="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Abandon
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
+                    class="btn btn-danger"
                     id="razbtn"
                     data-dismiss="modal"
                   >
                     Confirmation
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                  >
+                    Abandon
                   </button>
                 </div>
               </div>
@@ -274,7 +266,7 @@
                   type="button"
                   class="btn btn-primary couleur-btn-1"
                   id="btn-valid"
-                  value="Validez"
+                  value="Valider"
                   name="Valider"
                 />
                 <input
@@ -324,6 +316,38 @@
           </div>
         </div>
       </footer>
+    </div>
+
+    <!-- Fenêtre modale avertissemnt suppression article-->
+
+    <div id="insertModal">
+      <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                Attention suppression article du panier
+              </h5>
+            </div>
+            <div class="modal-body">
+              <p>Si vous confirmez, cet article sera supprimé du panier</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="modal-confirm" class="btn btn-danger">
+                Confirmer
+              </button>
+              <button
+                type="button"
+                id="modal-close"
+                class="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script

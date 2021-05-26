@@ -1,31 +1,31 @@
 .custom-box {
-    border: 2px solid grey;
-    text-align: center;
-    padding: 10px;
-    width: fit-content;
-    background-color: antiquewhite;
-    margin: auto;
+  border: 2px solid grey;
+  text-align: center;
+  padding: 10px;
+  width: fit-content;
+  background-color: antiquewhite;
+  margin: auto;
 }
-
+/**/
 #modal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    /* fond complètement transparent dernier paramètre à 0, si dernier paramètre à 0.5 fond gris mi transparent */
-    background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* fond complètement transparent dernier paramètre à 0, si dernier paramètre à 0.5 fond gris mi transparent */
+  background-color: rgba(0, 0, 0, 0);
 }
 
 #modal-confirm {
-    margin-right: 15px;
-    background-color:#DC3545;
-    color:white;
+  margin-right: 15px;
+  background-color: #dc3545;
+  color: white;
 }
 
 #modal-close {
-    background-color:#007BFF;
-    color:white;
+  background-color: #007bff;
+  color: white;
 }
-
+/**/

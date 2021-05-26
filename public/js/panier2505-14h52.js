@@ -18,8 +18,8 @@ function verification() {
   var email = document.forms["ValidForm"]["idEmail"];
   var result = false;
 
-  //* expression régulière \w signifie tous les caractères alphanumériques minuscules ou majuscules *//
-  //* si la chaine de caractères ne contient que des blancs il y a une erreur *//
+  /* expression régulière \w signifie tous les caractères alphanumériques minuscules ou majuscules */
+  /* si la chaine de caractères ne contient que des blancs il y a une erreur */
 
   if (!/\w/.test(name.value)) {
     alert("votre nom est obligatoire");
@@ -134,8 +134,32 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   if (qte == 1) {
     let confirmsuppr = false;
     //
+    // création de la fenetre modale
+    // <div id="modal">
+    //    <div class="custom-box">
+    //        <p>
+    //           "Attention vous allez supprimer cet article du panier!"
+    //           <br>
+    //           " Si vous souhaitez confirmer la suppression appuyer sur Confirmer"
+    //           <br>
+    //        </p>
+    //        <button id="modal-confirm">Confirmer</button>
+    //        <button id="modal-close">Annuler</button>
+    //   </div>
+    // </div>
+    // ajout de code HTML dans customBox
     // appel de la fonction modalShow qui va gérer l'affichage et la réponse
     //
+    var modalContainer = document.createElement("div");
+    modalContainer.setAttribute("id", "modal");
+
+    var customBox = document.createElement("div");
+    customBox.className = "custom-box";
+
+    customBox.innerHTML =
+      "<p>Attention vous allez supprimer cet article du panier! <br> Si vous souhaitez confirmer la suppression appuyer sur Confirmer<br></p>";
+    customBox.innerHTML += '<button id="modal-confirm">Confirmer</button>';
+    customBox.innerHTML += '<button id="modal-close">Annuler</button>';
     modalShow(id, svi, storage_article, qte, prix);
   } else {
     //
@@ -156,17 +180,19 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   //
   // traitement supression article si qte  = 1
   //
-  // Affichage de la  fenetre modale
+  // Ajout à la Dom HTML du contenu de customBox et de modalContainer (fenetre modale)
+  // La méthode Node.appendChild() ajoute un noeud à la fin de la liste des enfants d'un noeud parent spécifié.
+  // document.body.appendChild ajoute l'élément à la fin du corps du document
   //
   // Ajout d'une ecoute sur bouton Annuler id "modal-close" sur evenement click
-  // si clik sur annuler on appelle la fonction modalClose qui va fermer la fenetre modale
+  // si clik sur annuler on appelle la fonction modalClose qui va enlever du DOM le code html créée plus tôt
   //
   // Ajout d'une ecoute sur le bouton confirmer id modal-confirm sur evenement click
   // traitement de la suppression de l'article si confirmation
   //
   function modalShow(id, svi, storage_article, qte, prix) {
-    // Affichage fenetre modale
-    $("#myModal").modal("show");
+    modalContainer.appendChild(customBox);
+    document.body.appendChild(modalContainer);
     //
     // Si clic sur abandon
     //
@@ -251,14 +277,17 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
           //
           //
           //
+          console.log("Confirmé !");
           modalClose();
         });
     }
   }
 
   function modalClose() {
-    // fermeture de la fenetre modale
-    $("#myModal").modal("hide");
+    while (modalContainer.hasChildNodes()) {
+      modalContainer.removeChild(modalContainer.firstChild);
+    }
+    document.body.removeChild(modalContainer);
   }
 }
 //////////////////////////////////////////////////////////////////////////////////////
@@ -499,6 +528,19 @@ function majpagehtml() {
       });
 
       //
+      // On affiche le bouton vider le panier on supprime la classe d-none et on ajoute la classe d-flex dans le div
+      // <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
+      //
+      let PositDivBtnPanier = document.getElementById("BtnVidePanier");
+      PositDivBtnPanier.classList.remove("d-none");
+      PositDivBtnPanier.classList.add("d-flex");
+      //
+      // On fait apparaitre le formumaire
+      //
+      // let PositFormulaire = document.getElementById("coordonnees");
+      // PositFormulaire.classList.remove("d-none");
+      // PositFormulaire.classList.add("d-block");
+      //
       // Affichage prix total de l'article = Qte * Prix unitaire
       //
       prixarticle = qte * prix;
@@ -509,178 +551,164 @@ function majpagehtml() {
         "Prix ligne article :\u0020" + prixarticle + "€";
       append(divcardbody, h5cardprixarticle);
       //
-      // cumul prix du panier et qte du panier
+      // prix du panier
       //
       prixpanier = prixpanier + prixarticle;
       qtepanier = qtepanier + qte;
+      //
+      // On créait la ligne Prix total du panier entre les balises <h5 id="prix-total-cde"></h5>
+      //
+      let MajPrixTotPanier = document.getElementById("prix-total-cde");
+      MajPrixTotPanier.textContent =
+        `Prix total du panier \u0020` + prixpanier + "€";
+      MajPrixTotPanier.classList.remove("d-none");
+      MajPrixTotPanier.classList.add("d-flex");
+      let MajQteTotPanier = document.getElementById("qte-total-cde");
+      MajQteTotPanier.textContent =
+        `\u000A \u0020 Nombre articles :\u0020` + qtepanier;
+      MajQteTotPanier.classList.remove("d-none");
+      MajQteTotPanier.classList.add("d-flex");
+      //
+      // On fait apparaitre le formumaire
+      //
+      let PositFormulaire = document.getElementById("coordonnees");
+      PositFormulaire.classList.remove("d-none");
+      PositFormulaire.classList.add("d-block");
+      //
+      // On ajoute un event listener sur le bouton submit du formulaire
+      //
+      document
+        .getElementById("btn-valid")
+        .addEventListener("click", function () {
+          let validOk = verification();
 
-      // Fin de la boucle For //
+          if (validOk) {
+            //
+            // Création de la classe EnvoiDonnees
+            //
+            class EnvoiDonnees {
+              constructor(envcontact, envidprod) {
+                this.contact = envcontact;
+                this.products = envidprod;
+              }
+            }
+            //
+            // création de la classe contact
+            //
+            class Contact {
+              constructor(_nom, _prenom, _adresse, _ville, _email) {
+                this.firstName = _nom;
+                this.lastName = _prenom;
+                this.address = _adresse;
+                this.city = _ville;
+                this.email = _email;
+              }
+            }
+            //
+            // Création d'un nouveau contact
+            //
+            let newcontact = new Contact(
+              v_nom,
+              v_prenom,
+              v_adresse,
+              v_ville,
+              v_email
+            );
+            //
+            // mise à jour ou création de contact dans local storage avec les données du formulaire
+            //
+            if ("contact" in localStorage) {
+              var storage_contact = new Array();
+              storage_contact = JSON.parse(localStorage.getItem("contact"));
+              indice_contact = 0;
+              storage_contact[indice_contact] = newcontact;
+              //
+              // Mise à jour de la local storage
+              //
+              localStorage.setItem("contact", JSON.stringify(storage_contact));
+            } else {
+              indice_contact = 0;
+              storage_contact = new Array();
+              storage_contact[indice_contact] = newcontact;
+              localStorage.setItem("contact", JSON.stringify(storage_contact));
+            }
+            //
+            // Mise à jour du tableau contenant les id des produits du panier produit
+            //
+            // Recuperation de la local storage avec cle article dans un tableau storage_article_cde, puis boucle de lecture du tableau
+            // pour recuperer dans le tableau produitCde les id ,transformés en chaine de caractères, des articles du panier achat
+            //
+            if ("article" in localStorage) {
+              var storage_article_cde = new Array();
+              storage_article_cde = JSON.parse(localStorage.getItem("article"));
+
+              for (var i = 0; i < storage_article_cde.length; i++) {
+                produitsCde[i] = storage_article_cde[i].id.toString();
+              }
+            }
+            //
+            // Mise à jour du serveur par methode POST en envoyant requete JSON contenant un objet de contact
+            // newcontact et un tableau d'id de produits produitCde
+            // POST retourne l'objet contact, le tableau produits et order_id (string)
+            //
+            const url = "http://localhost:3000/api/furniture/order";
+            let getpost = "POST";
+            let newenvoidonnees = new EnvoiDonnees(newcontact, produitsCde);
+            //
+            // On demande une connection à URL pour envoyer dans le corps de la demande une requête JSON contenant un objet de contact
+            // et un tableau de produits, l'API nous retourne l'objet contact, le tableau produits et order_id (string)
+            // La connection se fait par appel de la fonction loadParamApi en lui passant en paramètre l'url de connection
+            // et le mode de connection ("POST") et newenvoidonnees (objet contact + tableau des id de produits du panier).
+            // Pour exploiter les résultats de la promesse on utilise la méthode "then" qui va gérer
+            // la réussite de l'appel et la méthode catch pour gérer l'échec.
+            //
+            loadParamApi(url, getpost, newenvoidonnees)
+              .then((reponse) => {
+                //
+                // On reçoit une réponse
+                //
+                // La réponse est l'objet contact, le tableau produits et order_id (string)
+                let retourApi = JSON.parse(reponse);
+                //
+                // Creation local storage numero_cde avec order_id
+                //
+                localStorage.setItem(
+                  "numeroCde",
+                  JSON.stringify(retourApi.orderId)
+                );
+                //
+                // liens vers page validation.html qui ira recuperer dans la local storage le order_id et les infos du contact
+                //
+                // ouvrir une URL
+                // window.location.href permet une redirection de la page en cours vers l’URL précisée en paramètre
+                // window.location.href="http://votre_url"
+                // par exemple si vous souhaitez que la redirection se fasse lorsque l’utilisateur clique sur une image, faites ceci :
+                // <img src='lien_vers_image' onClick=’window.location.href=”http://votre_url"'>
+                //
+                window.location.href = "validation.html";
+                //
+              })
+              .catch((erreur) => {
+                // On traite l'erreur
+                window.alert(
+                  "Bonjour, suite à un petit probleme de connexion, pouvez-vous raffaichir la fenêtre"
+                );
+                console.log("erreur : ", erreur);
+              });
+          }
+        });
     }
-
-    //
-    // On affiche le bouton vider le panier on supprime la classe d-none et on ajoute la classe d-flex dans le div
-    // <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
-    //
-    let PositDivBtnPanier = document.getElementById("BtnVidePanier");
-    PositDivBtnPanier.classList.remove("d-none");
-    PositDivBtnPanier.classList.add("d-flex");
-    //
-    // On créait la ligne Prix total du panier entre les balises <h5 id="prix-total-cde"></h5>
-    //
-    let MajPrixTotPanier = document.getElementById("prix-total-cde");
-    MajPrixTotPanier.textContent =
-      `Prix total du panier \u0020` + prixpanier + "€";
-    MajPrixTotPanier.classList.remove("d-none");
-    MajPrixTotPanier.classList.add("d-flex");
-    let MajQteTotPanier = document.getElementById("qte-total-cde");
-    MajQteTotPanier.textContent =
-      `\u000A \u0020 Nombre articles :\u0020` + qtepanier;
-    MajQteTotPanier.classList.remove("d-none");
-    MajQteTotPanier.classList.add("d-flex");
-    //
-    // On fait apparaitre le formumaire
-    //
-    let PositFormulaire = document.getElementById("coordonnees");
-    PositFormulaire.classList.remove("d-none");
-    PositFormulaire.classList.add("d-block");
-    //
-    // On ajoute un event listener sur le bouton submit du formulaire
-    //
-    document.getElementById("btn-valid").addEventListener("click", function () {
-      // On test les données du formulaire //
-      let validOk = verification();
-
-      if (validOk) {
-        //
-        // Création de la classe EnvoiDonnees
-        //
-        class EnvoiDonnees {
-          constructor(envcontact, envidprod) {
-            this.contact = envcontact;
-            this.products = envidprod;
-          }
-        }
-        //
-        // création de la classe contact
-        //
-        class Contact {
-          constructor(_nom, _prenom, _adresse, _ville, _email) {
-            this.firstName = _nom;
-            this.lastName = _prenom;
-            this.address = _adresse;
-            this.city = _ville;
-            this.email = _email;
-          }
-        }
-        //
-        // Création d'un nouveau contact
-        //
-        let newcontact = new Contact(
-          v_nom,
-          v_prenom,
-          v_adresse,
-          v_ville,
-          v_email
-        );
-        //
-        // mise à jour ou création de contact dans local storage avec les données du formulaire
-        //
-        if ("contact" in localStorage) {
-          var storage_contact = new Array();
-          storage_contact = JSON.parse(localStorage.getItem("contact"));
-          indice_contact = 0;
-          storage_contact[indice_contact] = newcontact;
-          //
-          // Mise à jour de la local storage
-          //
-          localStorage.setItem("contact", JSON.stringify(storage_contact));
-        } else {
-          indice_contact = 0;
-          storage_contact = new Array();
-          storage_contact[indice_contact] = newcontact;
-          localStorage.setItem("contact", JSON.stringify(storage_contact));
-        }
-        //
-        // Mise à jour du tableau contenant les id des produits du panier produit
-        //
-        // Recuperation de la local storage avec cle article dans un tableau storage_article_cde, puis boucle de lecture du tableau
-        // pour recuperer dans le tableau produitCde les id ,transformés en chaine de caractères, des articles du panier achat
-        //
-        if ("article" in localStorage) {
-          var storage_article_cde = new Array();
-          storage_article_cde = JSON.parse(localStorage.getItem("article"));
-
-          for (var i = 0; i < storage_article_cde.length; i++) {
-            produitsCde[i] = storage_article_cde[i].id.toString();
-          }
-        }
-        //
-        // Mise à jour du serveur par methode POST en envoyant requete JSON contenant un objet de contact
-        // newcontact et un tableau d'id de produits produitCde
-        // POST retourne l'objet contact, le tableau produits et order_id (string)
-        //
-        const url = "http://localhost:3000/api/furniture/order";
-        let getpost = "POST";
-        let newenvoidonnees = new EnvoiDonnees(newcontact, produitsCde);
-        //
-        // On demande une connection à URL pour envoyer dans le corps de la demande une requête JSON contenant un objet de contact
-        // et un tableau de produits, l'API nous retourne l'objet contact, le tableau produits et order_id (string)
-        // La connection se fait par appel de la fonction loadParamApi en lui passant en paramètre l'url de connection
-        // et le mode de connection ("POST") et newenvoidonnees (objet contact + tableau des id de produits du panier).
-        // Pour exploiter les résultats de la promesse on utilise la méthode "then" qui va gérer
-        // la réussite de l'appel et la méthode catch pour gérer l'échec.
-        //
-        loadParamApi(url, getpost, newenvoidonnees)
-          .then((reponse) => {
-            //
-            // On reçoit une réponse
-            //
-            // La réponse est l'objet contact, le tableau produits et order_id (string)
-            let retourApi = JSON.parse(reponse);
-            //
-            // Creation local storage numero_cde avec order_id
-            //
-            localStorage.setItem(
-              "numeroCde",
-              JSON.stringify(retourApi.orderId)
-            );
-            //
-            // liens vers page validation.html qui ira recuperer dans la local storage le order_id et les infos du contact
-            //
-            // ouvrir une URL
-            // window.location.href permet une redirection de la page en cours vers l’URL précisée en paramètre
-            // window.location.href="http://votre_url"
-            // par exemple si vous souhaitez que la redirection se fasse lorsque l’utilisateur clique sur une image, faites ceci :
-            // <img src='lien_vers_image' onClick=’window.location.href=”http://votre_url"'>
-            //
-            window.location.href = "validation.html";
-            //
-          })
-          .catch((erreur) => {
-            // On traite l'erreur
-            window.alert(
-              "Bonjour, suite à un petit probleme de connexion, pouvez-vous raffaichir la fenêtre"
-            );
-            console.log("erreur : ", erreur);
-          });
-      }
-    });
-
     //
     // Il n'y avait pas de cle article dans la local storage
     // on créait dans le dom html le message il n'y a pas d'articles dans le panier
     //
   } else {
-    var testData = !!document.getElementById("mesvide");
-    if (testData == false) {
-      let carddiv = createNode("div");
-      append(section, carddiv);
-      let cardp = createNode("p");
-      cardp.id = "mesvide";
-      cardp.classList.add("text-center", "font-weight-bold", "text-warning");
-      cardp.textContent += "Il n'y a pas d'articles dans le panier";
-      append(carddiv, cardp);
-    }
+    let carddiv = createNode("div");
+    append(section, carddiv);
+    let cardp = createNode("p");
+    cardp.classList.add("text-center", "font-weight-bold", "text-warning");
+    cardp.textContent += "Il n'y a pas d'articles dans le panier";
+    append(carddiv, cardp);
     //
     // On cache le bouton vider le panier en supprimant la classe d-flex de la div
     // <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">

@@ -134,8 +134,32 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   if (qte == 1) {
     let confirmsuppr = false;
     //
+    // création de la fenetre modale
+    // <div id="modal">
+    //    <div class="custom-box">
+    //        <p>
+    //           "Attention vous allez supprimer cet article du panier!"
+    //           <br>
+    //           " Si vous souhaitez confirmer la suppression appuyer sur Confirmer"
+    //           <br>
+    //        </p>
+    //        <button id="modal-confirm">Confirmer</button>
+    //        <button id="modal-close">Annuler</button>
+    //   </div>
+    // </div>
+    // ajout de code HTML dans customBox
     // appel de la fonction modalShow qui va gérer l'affichage et la réponse
     //
+    var modalContainer = document.createElement("div");
+    modalContainer.setAttribute("id", "modal");
+
+    var customBox = document.createElement("div");
+    customBox.className = "custom-box";
+
+    customBox.innerHTML =
+      "<p>Attention vous allez supprimer cet article du panier! <br> Si vous souhaitez confirmer la suppression appuyer sur Confirmer<br></p>";
+    customBox.innerHTML += '<button id="modal-confirm">Confirmer</button>';
+    customBox.innerHTML += '<button id="modal-close">Annuler</button>';
     modalShow(id, svi, storage_article, qte, prix);
   } else {
     //
@@ -156,17 +180,19 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
   //
   // traitement supression article si qte  = 1
   //
-  // Affichage de la  fenetre modale
+  // Ajout à la Dom HTML du contenu de customBox et de modalContainer (fenetre modale)
+  // La méthode Node.appendChild() ajoute un noeud à la fin de la liste des enfants d'un noeud parent spécifié.
+  // document.body.appendChild ajoute l'élément à la fin du corps du document
   //
   // Ajout d'une ecoute sur bouton Annuler id "modal-close" sur evenement click
-  // si clik sur annuler on appelle la fonction modalClose qui va fermer la fenetre modale
+  // si clik sur annuler on appelle la fonction modalClose qui va enlever du DOM le code html créée plus tôt
   //
   // Ajout d'une ecoute sur le bouton confirmer id modal-confirm sur evenement click
   // traitement de la suppression de l'article si confirmation
   //
   function modalShow(id, svi, storage_article, qte, prix) {
-    // Affichage fenetre modale
-    $("#myModal").modal("show");
+    modalContainer.appendChild(customBox);
+    document.body.appendChild(modalContainer);
     //
     // Si clic sur abandon
     //
@@ -251,14 +277,17 @@ function supprqte(id, nomprod, idbtn, i, qte, prix, svi, storage_article) {
           //
           //
           //
+          console.log("Confirmé !");
           modalClose();
         });
     }
   }
 
   function modalClose() {
-    // fermeture de la fenetre modale
-    $("#myModal").modal("hide");
+    while (modalContainer.hasChildNodes()) {
+      modalContainer.removeChild(modalContainer.firstChild);
+    }
+    document.body.removeChild(modalContainer);
   }
 }
 //////////////////////////////////////////////////////////////////////////////////////
@@ -671,16 +700,12 @@ function majpagehtml() {
     // on créait dans le dom html le message il n'y a pas d'articles dans le panier
     //
   } else {
-    var testData = !!document.getElementById("mesvide");
-    if (testData == false) {
-      let carddiv = createNode("div");
-      append(section, carddiv);
-      let cardp = createNode("p");
-      cardp.id = "mesvide";
-      cardp.classList.add("text-center", "font-weight-bold", "text-warning");
-      cardp.textContent += "Il n'y a pas d'articles dans le panier";
-      append(carddiv, cardp);
-    }
+    let carddiv = createNode("div");
+    append(section, carddiv);
+    let cardp = createNode("p");
+    cardp.classList.add("text-center", "font-weight-bold", "text-warning");
+    cardp.textContent += "Il n'y a pas d'articles dans le panier";
+    append(carddiv, cardp);
     //
     // On cache le bouton vider le panier en supprimant la classe d-flex de la div
     // <div id="BtnVidePanier" class="d-flex justify-content-center mt-5 mb-5">
