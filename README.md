@@ -81,7 +81,8 @@ Le serveur est lancé sur le port 3000. Listening on port 3000
 * Sixième étape ouvrir votre navigateur           *
 ***************************************************
 
-Ouvrir votre navigateur et entrer l'adresse suivante c:/orinoco/frontend/index.html
+Ouvrir votre navigateur et entrer l'adresse suivante :  file:///C:/orinoco/frontend/index.html
+
 
 *********************************************
 * Pour finir (pour arrêter le serveur)      *
